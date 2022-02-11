@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css"; // Import css files to project
-
+import { Nav } from 'react-bootstrap';
 ReactDOM.render(
   <React.StrictMode>
+  <Nav>
+    <Nav.Item>Test</Nav.Item>
+  </Nav>
     <App />
   </React.StrictMode>,
   document.getElementById('root')

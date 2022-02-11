@@ -1,0 +1,5 @@
+.ListGroupBtn:hover {
+    background-color: lightgray;
+    color: lightcoral;
+    cursor: pointer;
+  }

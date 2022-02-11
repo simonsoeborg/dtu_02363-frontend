@@ -1,10 +1,22 @@
-import React from 'react';
 import './App.css';
+import GlobalNavbar from './Components/Global/Navigation';
+import LandingPage from './Components/LandingPage';
+import AdminPanel from './Components/AdminPanel';
+import {
+  BrowserRouter, Routes, Route
+} from "react-router-dom";
 
 const App = () => {
     return (
         <div className="App">
-            <h1>02363 Frontend with React and Mobx</h1>
+            <GlobalNavbar />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<LandingPage />} ></Route>
+                    <Route path="Login" element={<LandingPage />} ></Route>
+                    <Route path="AdminPanel" element={<AdminPanel />} ></Route>
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 }

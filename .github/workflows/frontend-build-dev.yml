@@ -17,10 +17,8 @@ jobs:
         working-directory: /home/server/02363-frontend/
 
     steps:
-    - name: Pull from Github
     - uses: actions/checkout@v2
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Pull from Github
       run: git pull
 
     - uses: actions/checkout@v2

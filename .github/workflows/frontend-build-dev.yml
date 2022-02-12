@@ -18,6 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        token: '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'
     - name: Pull from Github
       run: sudo git pull
 

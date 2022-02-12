@@ -14,16 +14,14 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: /home/server/
+        working-directory: /home/server/02363-frontend/
 
     steps:
-    - uses: actions/checkout@v2
     - name: Pull from Github
-      run: git clone https://github.com/simonsoeborg/02363-frontend.git
-
     - uses: actions/checkout@v2
-    - name: Take down allready running docker container
-      run:  docker-compose -f docker-compose-dev.yml down
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      run: git pull
 
     - uses: actions/checkout@v2
     - name: Docker compose with Dockerfile.dev

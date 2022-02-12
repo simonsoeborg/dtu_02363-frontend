@@ -19,8 +19,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Pull from Github
-      run: git pull
+      run: sudo git pull
 
     - uses: actions/checkout@v2
     - name: Docker compose with Dockerfile.dev
-      run:  docker-compose -f docker-compose-dev.yml up -d --build
+      run:  sudo docker-compose -f docker-compose-dev.yml up -d --build

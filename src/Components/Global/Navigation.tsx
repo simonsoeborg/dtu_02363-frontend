@@ -15,6 +15,9 @@ const GlobalNavbar = () => {
             <Nav.Link href="Login">Login</Nav.Link>
           </Nav.Item>
           <Nav.Item>
+            <Nav.Link href="PlaceOrder">PlaceOrder</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link href="AdminPanel">AdminPanel</Nav.Link>
           </Nav.Item>
         </Nav>

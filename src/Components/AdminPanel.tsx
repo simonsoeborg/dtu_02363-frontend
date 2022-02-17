@@ -1,7 +1,9 @@
 import { Col, Row, Container, Tab, Nav } from 'react-bootstrap';
 import AdminRestaurant from './Partials/AdminRestaurant';
 import AdminIndex from './Partials/AdminIndex';
-import AdminUser from './Partials/AdminUser';
+import AdminUser from './Partials/AdminUserList';
+import { as } from '../Stores/AdminStore';
+import { observer } from "mobx-react-lite";
 
 const AdminPanel = () => {
 
@@ -10,7 +12,7 @@ const AdminPanel = () => {
             <Container style={{ paddingTop: "2rem" }}>
                 <Row>
                     <Container>
-                        <Tab.Container id="left-tabs-example" defaultActiveKey="1">
+                        <Tab.Container id="left-tabs-example" defaultActiveKey={as.ActiveKey}>
                             <Row>
                                 <Col sm={4}>
                                     <Nav className="flex-column">
@@ -47,4 +49,4 @@ const AdminPanel = () => {
     )
 }
 
-export default AdminPanel;
+export default observer(AdminPanel);

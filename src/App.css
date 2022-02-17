@@ -8,3 +8,12 @@
   border-bottom: 2px solid black;
   cursor: pointer;
 }
+
+.CardGroupCardWithOnClick {
+  margin: 1rem;
+}
+
+.CardGroupCardWithOnClick:hover {
+  background-color: #EBEBEB;
+  cursor: pointer;
+}

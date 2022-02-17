@@ -1,4 +1,4 @@
-import { Col, Container, Row, Card } from "react-bootstrap";
+import { Container, Row, Card, CardGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { us } from '../../Stores/UserStore';
 import { as } from '../../Stores/AdminStore';
@@ -8,7 +8,9 @@ const AdminIndex = () => {
     const navigate = useNavigate();
 
     const handleOnUserCardFunction = () => {
+        console.log(as.ActiveKey);
         as.setActiveKey(3);
+        console.log(as.ActiveKey);
         navigate("/AdminPanel");
     }
 
@@ -18,16 +20,34 @@ const AdminIndex = () => {
             <Row>
 
             </Row>
-            <Col>
-            <Card onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>User Count</Card.Title>
-                    <Card.Text>
-                        We currently have { us.Users.length } users in our system!
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            </Col>
+            <Row style={{ padding: "2rem" }} className="justify-content-md-center">
+                <CardGroup>
+                    <Card className="CardGroupCardWithOnClick" onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>User Count</Card.Title>
+                            <Card.Text>
+                                We currently have { us.Users.length } users in our system!
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card className="CardGroupCardWithOnClick" onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>User Count</Card.Title>
+                            <Card.Text>
+                                We currently have { us.Users.length } users in our system!
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card className="CardGroupCardWithOnClick" onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>User Count</Card.Title>
+                            <Card.Text>
+                                We currently have { us.Users.length } users in our system!
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </CardGroup>
+            </Row>
         </Container>
     )
 }

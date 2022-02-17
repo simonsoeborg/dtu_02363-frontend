@@ -12,10 +12,10 @@ const GlobalNavbar = () => {
             <Nav.Link href="/">Home</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="Login">Login</Nav.Link>
+            <Nav.Link href="/Login">Login</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="AdminPanel">AdminPanel</Nav.Link>
+            <Nav.Link href="/AdminPanel">AdminPanel</Nav.Link>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>

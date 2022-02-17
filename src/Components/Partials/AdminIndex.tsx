@@ -23,7 +23,7 @@ const AdminIndex = () => {
                 <Card.Body>
                     <Card.Title>User Count</Card.Title>
                     <Card.Text>
-                        We currently have { us.Users.length } in our system!
+                        We currently have { us.Users.length } users in our system!
                     </Card.Text>
                 </Card.Body>
             </Card>

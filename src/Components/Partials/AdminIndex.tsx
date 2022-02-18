@@ -1,52 +1,16 @@
-import { Container, Row, Card, CardGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { us } from '../../Stores/UserStore';
-import { as } from '../../Stores/AdminStore';
+import { Container, Row } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
+import AdminIndexCards from './AdminIndexCards';
 
 const AdminIndex = () => {
-    const navigate = useNavigate();
-
-    const handleOnUserCardFunction = () => {
-        console.log(as.ActiveKey);
-        as.setActiveKey(3);
-        console.log(as.ActiveKey);
-        navigate("/AdminPanel");
-    }
 
     return (
         <Container>
-            <h1>Admin Index</h1>
-            <Row>
-
+            <Row className="justify-content-md-center">
+                <h1>Admin Index</h1>
             </Row>
-            <Row style={{ padding: "2rem" }} className="justify-content-md-center">
-                <CardGroup>
-                    <Card className="CardGroupCardWithOnClick" onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
-                        <Card.Body>
-                            <Card.Title>User Count</Card.Title>
-                            <Card.Text>
-                                We currently have { us.Users.length } users in our system!
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <Card className="CardGroupCardWithOnClick" onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
-                        <Card.Body>
-                            <Card.Title>User Count</Card.Title>
-                            <Card.Text>
-                                We currently have { us.Users.length } users in our system!
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <Card className="CardGroupCardWithOnClick" onClick={() => handleOnUserCardFunction()} style={{ width: '18rem' }}>
-                        <Card.Body>
-                            <Card.Title>User Count</Card.Title>
-                            <Card.Text>
-                                We currently have { us.Users.length } users in our system!
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </CardGroup>
+            <Row>
+                <AdminIndexCards />
             </Row>
         </Container>
     )

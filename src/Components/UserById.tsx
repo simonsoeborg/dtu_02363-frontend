@@ -24,7 +24,7 @@ const UserById = () => {
 
     const handleOnSubmitFunction = () => {
         us.setUser(us.User);
-        us.putUserAsync(us.User);
+        us.putUserAsync();
         as.setActiveKey(3);
         navigate(`/AdminPanel`)
     }

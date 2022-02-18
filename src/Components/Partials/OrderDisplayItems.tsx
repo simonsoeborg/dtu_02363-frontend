@@ -11,7 +11,7 @@ const DisplayItems = () => {
       <Container>
         <Row xs="auto" md="auto" className="g-4">
             {is.Items.map((item, index) => (
-          <Col md="auto">
+          <Col sm={4}>
               <Card
                 bg={"dark"}
                 style={{ width: "12.25rem"}}

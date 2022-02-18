@@ -9,10 +9,13 @@ const DisplayCategories = () => {
   } else {
     return (
       <Container>
-        <Nav fill variant ="tabs" defaultActiveKey="">
+        <Nav fill variant="tabs" defaultActiveKey="">
           {cs.Categories.map((category, index) => (
             <Nav.Item>
-              <Nav.Link eventKey={category.name}>{category.name}</Nav.Link>
+              <Nav.Link
+                eventKey={category.name}
+                onSelect={(eventKey) => console.log(eventKey)}
+              >{category.name}</Nav.Link>
             </Nav.Item>
           ))}
         </Nav>

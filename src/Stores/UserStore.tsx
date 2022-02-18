@@ -5,7 +5,7 @@ class UserStore {
     users: UserModel[] = [];
     user: UserModel = new UserModel();
 
-    private api = "https://localhost:44390/api";
+    private api = "http://grp2.uglyrage.com:8080/api";
 
     constructor() {
         makeAutoObservable(this);

@@ -4,7 +4,6 @@ import LandingPage from './Components/LandingPage';
 import AdminPanel from './Components/AdminPanel';
 import PlaceOrder from './Components/PlaceOrder';
 import {
-    
   BrowserRouter, Routes, Route
 } from "react-router-dom";
 

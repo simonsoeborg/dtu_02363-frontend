@@ -1,11 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 import UserModel from '../Models/UserModel';
+import { api } from './APIStore';
 
 class UserStore {
     users: UserModel[] = [];
     user: UserModel = new UserModel();
-
-    private api = "https://localhost:44390/api";
 
     constructor() {
         makeAutoObservable(this);
@@ -21,7 +20,7 @@ class UserStore {
     }
 
     getUsersAsync = async () => {
-        const response = await fetch(this.api + "/User");
+        const response = await fetch(api.api + "/User");
         const data = await response.json();
         this.users = data;
     }

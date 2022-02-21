@@ -47,6 +47,28 @@ class RestaurantStore {
         const data = await response.json();
         this.setRestaurant(data);
     }
+
+    
+    // Alters a user in the database, uses PUT HTTP Request
+    putResturantAsync = async () => {
+        const headers = new Headers();
+        headers.append("Content-type", "application/json");
+        var options = {
+            method: "PUT",
+            headers,
+            body: JSON.stringify(this.Restaurant)
+        };
+
+        const request = new Request(`${api.Api}/Restaurant/${this.Restaurant.id}`, options)
+        const response = await fetch(request);
+
+        if (response.status !== 204) {
+            console.log(response);
+        }
+
+        this.putResturantAsync();
+        return response.status;
+    }
 }
 
 export const us = new RestaurantStore();

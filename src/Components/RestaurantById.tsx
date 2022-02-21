@@ -5,9 +5,10 @@ import { observer } from "mobx-react-lite";
 import Loading from "./Partials/Loading";
 import { useState } from "react";
 import { as } from '../Stores/AdminStore';
+import Modal from "react-bootstrap/Modal";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const RestaurantById = () => {
-
     const { id } = useParams();
     const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -40,6 +41,10 @@ const RestaurantById = () => {
             <Loading />
         )
     } else {
+
+        const[show, setShow] = useState(false);
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
         return (
             <Container>
                 <Row className="justify-content-center">
@@ -68,16 +73,29 @@ const RestaurantById = () => {
                                 Confirm
                             </Button>
 
-                            <Button variant="outline-danger" type="button" onClick={() => handleDeleteFunction()}>
+                            <Button variant="outline-danger" className="deleteModalBtn" onClick={handleShow}>
                                 Delete
                             </Button>
+
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Modal heading</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                                <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleClose}>
+                                    Save Changes
+                                </Button>
+                            </Modal.Footer>
+                            </Modal>
                         </Form>
                     </Col>
                 </Row>
             </Container>
-        )
+        );
     }
-    
-}
-
+}   
 export default observer(RestaurantById);

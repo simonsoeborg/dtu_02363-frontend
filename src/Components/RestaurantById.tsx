@@ -29,6 +29,12 @@ const RestaurantById = () => {
         navigate(`/AdminPanel`)
     }
 
+    const handleDeleteFunction = () => {
+        // Todo setup Delete http call 
+        navigate(`/AdminPanel`)
+    }
+
+
     if(!us.Restaurant) {
         return (
             <Loading />
@@ -60,6 +66,10 @@ const RestaurantById = () => {
 
                             <Button variant="outline-warning" type="submit" onClick={() => handleOnSubmitFunction()}>
                                 Confirm
+                            </Button>
+
+                            <Button variant="outline-danger" type="button" onClick={() => handleDeleteFunction()}>
+                                Delete
                             </Button>
                         </Form>
                     </Col>

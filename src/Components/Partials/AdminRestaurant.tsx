@@ -39,10 +39,10 @@ const AdminRestaurant = () => {
                 <tbody>
                     {us.Restaurants.map((restaurant, index) =>( 
                         // Todo: Hover funktionalitet skal vise at man både kan  trykke på restaurant og owner navn.
-                            <tr className="tableListItem"  key={index}>
+                            <tr key={index}>
                             <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.id}</td>
-                            <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.restaurantName}</td>
-                            <td onClick={() => routeEditOwner(restaurant.ownerID)}>{restaurant.ownerName}</td>
+                            <td className="tableListItem" onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.restaurantName}</td>
+                            <td className="tableListItem"onClick={() => routeEditOwner(restaurant.ownerID)}>{restaurant.ownerName}</td>
                         </tr>
                         ))}
                 </tbody>

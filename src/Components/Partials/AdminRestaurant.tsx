@@ -14,6 +14,10 @@ const AdminRestaurant = () => {
         navigate(`/User/${ownerID}`, {replace: false})
     };
 
+    const routeEditRestaurant= (id : number) => {
+        navigate(`/Restaurant/${id}`, {replace: false})
+    };
+
     if(!us.Restaurants) {
         return (
             <Loading/>
@@ -28,16 +32,15 @@ const AdminRestaurant = () => {
                          <th>Id</th>
                          <th>Restaurant name</th>
                          <th>Owner Name</th>
-                         <th>Owner ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     {us.Restaurants.map((restaurant, index) =>( 
-                            <tr className="tableListItem" onClick={() => routeEditOwner(restaurant.ownerID)} key={index}>
-                            <td>{restaurant.id}</td>
-                            <td>{restaurant.restaurantName}</td>
-                            <td>{restaurant.ownerName}</td>
-                            <td>{restaurant.ownerID}</td>
+                        // Todo: Hover funktionalitet skal vise at man både kan  trykke på restaurant og owner navn.
+                            <tr className="tableListItem"  key={index}>
+                            <td onClick={() => routeEditRestaurant(restaurant.id)} >{restaurant.id}</td>
+                            <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.restaurantName}</td>
+                            <td onClick={() => routeEditOwner(restaurant.ownerID)}>{restaurant.ownerName}</td>
                         </tr>
                         ))}
                 </tbody>

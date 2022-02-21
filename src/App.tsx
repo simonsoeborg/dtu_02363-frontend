@@ -3,6 +3,8 @@ import GlobalNavbar from './Components/Global/Navigation';
 import LandingPage from './Components/LandingPage';
 import AdminPanel from './Components/AdminPanel';
 import UserById from './Components/UserById';
+import RestaurantById from './Components/RestaurantById';
+
 import {
   BrowserRouter, Routes, Route
 } from "react-router-dom";
@@ -17,6 +19,8 @@ const App = () => {
                     <Route path="/Login" element={<LandingPage />} ></Route>
                     <Route path="/AdminPanel" element={<AdminPanel />} ></Route>
                     <Route path="/User/:id" element={<UserById />} ></Route>
+                    <Route path="/Restaurant/:id" element={<RestaurantById/>} ></Route>
+                    
                 </Routes>
             </BrowserRouter>
         </div>

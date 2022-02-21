@@ -23,10 +23,26 @@ class RestaurantStore {
         return this.resturant;
     }
 
+    setRestaurantName = (name : string) => {
+        this.Restaurant.restaurantName = name;
+    }
+
+
+    setRestaurant = (restaurant : RestaurantModel) => {
+        this.resturant = restaurant
+    }
+
+
     getRestaurantsAsync = async () => {
         const response = await fetch(this.api + "/Restaurant");
         const data = await response.json();
         this.resturants = data;
+    }
+
+    getRestaurantByIdAsync = async (id : number) => {
+        const response = await fetch(`${this.api}/User/${id}`);
+        const data = await response.json();
+        this.setRestaurant(data);
     }
 }
 

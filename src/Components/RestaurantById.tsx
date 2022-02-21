@@ -44,14 +44,17 @@ const RestaurantById = () => {
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Restaurant name</Form.Label>
-                                <Form.Control type="text" value={us.Restaurant.restaurantName} />
+                                <Form.Control type="text" value={us.Restaurant.restaurantName}
+                                onChange={(e) => {
+                                    us.setRestaurantName(e.target.value);
+                                }} />
                             </Form.Group>
-
+                        
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Owner</Form.Label>
                                 <Form.Control type="text" defaultValue={us.Restaurant.ownerName } disabled/>
                             </Form.Group>
-                            
+
                             <Button variant="outline-warning" type="submit" onClick={() => handleOnSubmitFunction()}>
                                 Confirm
                             </Button>

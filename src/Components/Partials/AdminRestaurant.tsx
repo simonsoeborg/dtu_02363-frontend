@@ -10,6 +10,7 @@ const AdminRestaurant = () => {
 
     // Benytter pt. component UserbyID.
     const navigate = useNavigate();
+
     const routeEditOwner = (ownerID : number) => {
         navigate(`/User/${ownerID}`, {replace: false})
     };
@@ -23,6 +24,7 @@ const AdminRestaurant = () => {
             <Loading/>
         )
     } else {
+        console.log(us.Restaurants[0])
     return (
         <Container>
          <h1>List of all resturants</h1>
@@ -38,7 +40,7 @@ const AdminRestaurant = () => {
                     {us.Restaurants.map((restaurant, index) =>( 
                         // Todo: Hover funktionalitet skal vise at man både kan  trykke på restaurant og owner navn.
                             <tr className="tableListItem"  key={index}>
-                            <td onClick={() => routeEditRestaurant(restaurant.id)} >{restaurant.id}</td>
+                            <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.id}</td>
                             <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.restaurantName}</td>
                             <td onClick={() => routeEditOwner(restaurant.ownerID)}>{restaurant.ownerName}</td>
                         </tr>

@@ -1,11 +1,14 @@
 import { makeAutoObservable } from 'mobx';
 import RestaurantModel from '../Models/RestaurantModel';
-import { api } from './APIStore';
+// import { api } from './APIStore';
 
 
 class RestaurantStore {
     resturants: RestaurantModel[] = [];
     resturant: RestaurantModel = new RestaurantModel();
+
+    private api = "https://localhost:44390/api";
+
 
     constructor() {
         makeAutoObservable(this);
@@ -21,7 +24,7 @@ class RestaurantStore {
     }
 
     getRestaurantsAsync = async () => {
-        const response = await fetch(api.Api + "/Restaurant");
+        const response = await fetch(this.api + "/Restaurant");
         const data = await response.json();
         this.resturants = data;
     }

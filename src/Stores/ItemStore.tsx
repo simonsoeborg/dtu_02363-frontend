@@ -1,11 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 import ItemModel from "../Models/ItemModel";
+import { api } from './APIStore';
 
 class ItemStore {
     items: ItemModel[] = [];
     item: ItemModel = new ItemModel();
-
-    private api = "https://localhost:44390/api";
 
     constructor() {
         makeAutoObservable(this);
@@ -21,7 +20,7 @@ class ItemStore {
     }
 
     getItemsAsync = async () => {
-        const response = await fetch(this.api + "/ItemView");
+        const response = await fetch(api.api + "/ItemView");
         const data = await response.json();
         this.items = data;
         console.log(data);

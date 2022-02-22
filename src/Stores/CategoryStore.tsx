@@ -1,11 +1,11 @@
 import { makeAutoObservable } from 'mobx';
 import CategoryModel from "../Models/CategoryModel";
+import { api } from './APIStore';
 
 class CategoryStore {
     categories: CategoryModel[] = [];
     category: CategoryModel = new CategoryModel();
-
-    private api = "https://localhost:44390/api";
+    activeCategory : string = "Starters";
 
     constructor() {
         makeAutoObservable(this);
@@ -20,8 +20,17 @@ class CategoryStore {
         return this.category;
     }
 
+    get ActiveCategory() {
+        return this.activeCategory;
+    }
+    
+    setActiveCategory = (category : string) => {
+        this.activeCategory = category;
+    }
+
+
     getCategoriesAsync = async () => {
-        const response = await fetch(this.api + "/Category");
+        const response = await fetch(api.api + "/Category");
         const data = await response.json();
         this.categories = data;
         console.log(data);

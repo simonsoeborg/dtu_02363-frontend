@@ -40,7 +40,7 @@ class UserStore {
 
     // Gets all users from database uses, GET HTTP Request
     getUsersAsync = async () => {
-        const response = await fetch(api.Api + "/User");
+        const response = await fetch(api.api + "/User");
         const data = await response.json();
         this.setUsers(data)
     }

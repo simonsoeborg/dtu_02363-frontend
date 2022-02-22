@@ -21,6 +21,7 @@ const PlaceOrder = () => {
           <Row>
             <DisplayCategories />
           </Row>
+          <br></br>
           <Row>
             <OrderDisplayItems />
           </Row>

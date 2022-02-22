@@ -12,6 +12,7 @@ const OrderDisplayOverView = () => {
             <Row>
                   <h2>Order Overview</h2> 
             </Row>
+            <br></br>
         <ListGroup>
             <ListGroupItem>
                 <Row>

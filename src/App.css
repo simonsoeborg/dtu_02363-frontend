@@ -13,7 +13,17 @@
   margin: 1rem;
 }
 
+.CardGroupCard {
+  margin: 1rem;
+  border: 1px solid black !important;
+  height: 20rem;
+}
+
 .CardGroupCardWithOnClick:hover {
   background-color: #EBEBEB;
   cursor: pointer;
+}
+
+.CardGroupCard:hover {
+  background-color: #EBEBEB;
 }

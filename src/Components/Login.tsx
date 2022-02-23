@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Button, Card, Container, Form, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Button, Card, Container, Form, Image, Row } from 'react-bootstrap';
+import defaultUserImage from '../resources/default_user.jpg';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -7,6 +9,7 @@ const Login = () => {
     const [formFilled, setFormFilled ] = useState(false);
     const [emailFilled, setEmailFilled ] = useState(false);
     const [passwordFilled, setPasswordFilled ] = useState(false);
+    const navigate = useNavigate();
 
     const checkIfFormIsFilled = () => {
         if(email.length > 3) {
@@ -28,7 +31,10 @@ const Login = () => {
         }
     }
 
-    // Convert password to sha256 or something
+    const routeEditChange = () => {
+        navigate(`/Login/Register/`, {replace: false})
+    };
+
     return (
         
             <Row className="justify-content-center">
@@ -38,22 +44,30 @@ const Login = () => {
                         <Card.Title>Login</Card.Title>
                     </Card.Header>
                     <Card.Body>
-                        <Form>
-                            <Form.Group className='mb-3'>
-                                <Form.Control type='email' placeholder="Enter Email" onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
-                                    const newVal = e.currentTarget.value;
-                                    setEmail(newVal);
-                                    checkIfFormIsFilled();
-                                    }} />
-                            </Form.Group>
-                            <Form.Group className='mb-3'>
-                                <Form.Control type='password' placeholder="Enter Password" onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
-                                    const newVal = e.currentTarget.value;
-                                    setPassword(newVal);
-                                    checkIfFormIsFilled();
-                                    }} />
-                            </Form.Group>
-                        </Form>
+                        <Row className="justify-content-center">
+                            <Image style={{ maxHeight: "7.5rem", maxWidth: "7.5rem", padding: "1rem", margin: "1rem"}} fluid roundedCircle src={defaultUserImage} />
+                        </Row>
+                        <Row>
+                            <Form>
+                                <Form.Group className='mb-3'>
+                                    <Form.Control type='email' placeholder="Enter Email" onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+                                        const newVal = e.currentTarget.value;
+                                        setEmail(newVal);
+                                        checkIfFormIsFilled();
+                                        }} />
+                                </Form.Group>
+                                <Form.Group className='mb-3'>
+                                    <Form.Control type='password' placeholder="Enter Password" onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+                                        const newVal = e.currentTarget.value;
+                                        setPassword(newVal);
+                                        checkIfFormIsFilled();
+                                        }} />
+                                </Form.Group>
+                            </Form>
+                        </Row>
+                        <Row className="justify-content-center">
+                            <Button style={{ maxWidth: "6rem" }} variant="outline-primary" onClick={() => routeEditChange()}>Register</Button>
+                        </Row>
                     </Card.Body>
                     <Card.Footer style={{ textAlign: "center", padding: "1rem"}}>
                         {
@@ -62,7 +76,7 @@ const Login = () => {
                             : { checkIfFormIsFilled } && 
                             <Button style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }} variant="outline-success" disabled>Login</Button>
                         }
-                        <Button style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }} variant="outline-danger">Cancel</Button>
+                        <Button style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }} onClick={() => navigate(-1)} variant="outline-danger">Cancel</Button>
                     </Card.Footer>
                 </Card>
             </Container>

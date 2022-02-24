@@ -1,5 +1,5 @@
 import { Container, Table } from "react-bootstrap";
-import { us } from "../../Stores/RestaurantStore";
+import { rs } from "../../Stores/RestaurantStore";
 // import { usUser } from "../../Stores/UserStore";
 import Loading from '../Partials/Loading';
 import { observer } from "mobx-react-lite";

@@ -73,4 +73,4 @@ class RestaurantStore {
     }
 }
 
-export const us = new RestaurantStore();
+export const rs = new RestaurantStore();

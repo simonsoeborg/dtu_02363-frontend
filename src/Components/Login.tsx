@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Container, Form, Image, Row } from 'react-bootstrap';
 import defaultUserImage from '../resources/default_user.jpg';
+import { useAuth0 } from '@auth0/auth0-react';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -35,6 +37,7 @@ const Login = () => {
         navigate(`/Login/Register/`, {replace: false})
     };
 
+    const { loginWithPopup } = useAuth0();
     return (
         
             <Row className="justify-content-center">
@@ -46,6 +49,10 @@ const Login = () => {
                     <Card.Body>
                         <Row className="justify-content-center">
                             <Image style={{ maxHeight: "7.5rem", maxWidth: "7.5rem", padding: "1rem", margin: "1rem"}} fluid roundedCircle src={defaultUserImage} />
+                        </Row>
+                        <Row className="justify-content-center" style={{ margin: "1rem"}}>
+                            <p style={{ textAlign: "center"}}>Login with: </p>
+                            <Button style={{width: "30%"}} variant="outline-primary" onClick={() => loginWithPopup()}><GoogleIcon /> </Button>
                         </Row>
                         <Row>
                             <Form>
@@ -65,9 +72,6 @@ const Login = () => {
                                 </Form.Group>
                             </Form>
                         </Row>
-                        <Row className="justify-content-center">
-                            <Button style={{ maxWidth: "6rem" }} variant="outline-primary" onClick={() => routeEditChange()}>Register</Button>
-                        </Row>
                     </Card.Body>
                     <Card.Footer style={{ textAlign: "center", padding: "1rem"}}>
                         {
@@ -76,6 +80,7 @@ const Login = () => {
                             : { checkIfFormIsFilled } && 
                             <Button style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }} variant="outline-success" disabled>Login</Button>
                         }
+                        <Button style={{ maxWidth: "6rem" }} variant="outline-primary" onClick={() => routeEditChange()}>Register</Button>
                         <Button style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }} onClick={() => navigate(-1)} variant="outline-danger">Cancel</Button>
                     </Card.Footer>
                 </Card>

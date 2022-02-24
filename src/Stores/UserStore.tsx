@@ -93,7 +93,9 @@ class UserStore {
 
     // Posts a new user in the database, uses POST HTTP Request
     postUserAsync = async (userItem : UserPostModel) => {
-        userItem.roleId = 1
+        if(userItem.roleId === 0) {
+            userItem.roleId = 1
+        }
         const headers = new Headers();
         headers.append("Content-type", "application/json");
         var options = {

@@ -24,9 +24,9 @@ const RestaurantById = () => {
     const navigate = useNavigate();
 
     const handleOnSubmitFunction = () => {
-        /*us.setRestaurant(us.Restaurant); 
+        us.setRestaurant(us.Restaurant); 
         us.putResturantAsync();
-        as.setActiveKey(3) */ 
+        as.setActiveKey(2) 
         navigate(`/AdminPanel`)
     }
 

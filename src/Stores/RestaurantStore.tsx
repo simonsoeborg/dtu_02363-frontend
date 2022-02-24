@@ -59,6 +59,8 @@ class RestaurantStore {
             body: JSON.stringify(this.Restaurant)
         };
 
+        console.log( JSON.stringify(this.Restaurant))
+
         const request = new Request(`${api.Api}/Restaurant/${this.Restaurant.id}`, options)
         const response = await fetch(request);
 

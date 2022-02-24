@@ -3,6 +3,8 @@ import defaultUserImage from '../resources/default_user.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { us } from '../Stores/UserStore';
+import { useAuth0 } from '@auth0/auth0-react';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Register = () => {
     const [email, setEmail] = useState("");
@@ -20,6 +22,8 @@ const Register = () => {
         navigate("/", {replace: false})
     }
 
+    const { loginWithPopup } = useAuth0();
+
     return (
         
         <Row className="justify-content-center">
@@ -31,6 +35,10 @@ const Register = () => {
             <Card.Body>
                 <Row className="justify-content-center">
                     <Image style={{ maxHeight: "7.5rem", maxWidth: "7.5rem", padding: "1rem", margin: "1rem"}} fluid roundedCircle src={defaultUserImage} />
+                </Row>
+                <Row className="justify-content-center" style={{ margin: "1rem"}}>
+                    <p style={{ textAlign: "center"}}>Register using: </p>
+                    <Button style={{width: "30%"}} variant="outline-primary" onClick={() => loginWithPopup()}><GoogleIcon /> </Button>
                 </Row>
                 <Row>
                     <Form>

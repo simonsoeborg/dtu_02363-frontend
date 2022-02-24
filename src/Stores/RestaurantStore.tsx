@@ -1,54 +1,82 @@
 import { makeAutoObservable } from 'mobx';
+import RestaurantViewModel from '../Models/RestaurantViewModel';
 import RestaurantModel from '../Models/RestaurantModel';
+
 import { api } from './APIStore';
 
-
 class RestaurantStore {
-    restaurants: RestaurantModel[] = [];
-    restaurant: RestaurantModel = new RestaurantModel();
+    restaurantsView: RestaurantViewModel[] = [];
+    restaurantView: RestaurantViewModel = new RestaurantViewModel();
+
+    restaurants: RestaurantModel[] = []; 
+    restaurant: RestaurantModel = new RestaurantModel();  
 
     // private api = "https://localhost:44390/api";
-
 
     constructor() {
         makeAutoObservable(this);
         this.getRestaurantsAsync();
     }
 
-    get Restaurants() {
-        return this.restaurants;
+    // Special getters and settersfor sql-views
+    get RestaurantsView() {
+        return this.restaurantsView;
     }
+
+    get RestaurantView() {
+        return this.restaurantView;
+    }
+
+    setRestaurantView = (restaurantView : RestaurantViewModel) => {
+        this.restaurantView= restaurantView
+    }
+
+    setRestaurantsView = (restaurantsView : RestaurantViewModel[] ) => {
+        this.restaurantsView = restaurantsView
+    }
+
+
+
+    // Regular getters and setters mathing database clases. 
+    /*get Restaurants() {
+        return this.restaurants;
+    }*/
 
     get Restaurant() {
         return this.restaurant;
     }
 
+    setRestaurant = (restaurant : RestaurantModel) => {
+        this.restaurant= restaurant
+    }
+
+    /*setRestaurants = (restaurants : RestaurantModel[] ) => {
+        this.restaurants = restaurants
+    }*/ 
 
     setRestaurantName = (name : string) => {
-        this.Restaurant.restaurantName = name;
+        this.Restaurant.name = name;
     }
 
-    setRestaurant = (restaurant : RestaurantModel) => {
-        this.restaurant = restaurant
+    setRestaurantOwner = (id : number) => {
+        this.Restaurant.ownerID = id;
     }
 
-    setRestaurants = (restaurants : RestaurantModel[] ) => {
-        this.restaurants = restaurants
-    }
-
+    // Get ResturantViewData for all resturants        
     getRestaurantsAsync = async () => {
-        const response = await fetch(api.Api + "/Restaurant");
+        const response = await fetch(api.Api + "/ViewRestaurantInfo");
         const data = await response.json();
-        this.setRestaurants(data);
+        this.setRestaurantsView(data);
     }
-
-    getRestaurantByIdAsync = async (id : number) => {
-        const response = await fetch(`${api.Api}/Restaurant/${id}`);
-        const data = await response.json();
-        this.setRestaurant(data);
-    }
-
     
+    // Get ResturantViewData for a specific resturant.
+    getRestaurantByIdAsync = async (id : number) => {
+        const response = await fetch(`${api.Api}/ViewRestaurantInfo/${id}`);
+        const data = await response.json();
+        this.setRestaurantView(data);
+    }
+    
+
     // Alters a user in the database, uses PUT HTTP Request
     putResturantAsync = async () => {
         const headers = new Headers();
@@ -72,5 +100,6 @@ class RestaurantStore {
         return response.status;
     }
 }
+
 
 export const rs = new RestaurantStore();

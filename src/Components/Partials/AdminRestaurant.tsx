@@ -19,7 +19,7 @@ const AdminRestaurant = () => {
         navigate(`/Restaurant/${id}`, {replace: false})
     };
 
-    if(!rs.Restaurants) {
+    if(!rs.RestaurantsView) {
         return (
             <Loading/>
         )
@@ -36,7 +36,7 @@ const AdminRestaurant = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {rs.Restaurants.map((restaurant, index) =>( 
+                    {rs.RestaurantsView.map((restaurant, index) =>( 
                         // Todo: Hover funktionalitet skal vise at man både kan  trykke på restaurant og owner navn.
                             <tr key={index}>
                             <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.id}</td>

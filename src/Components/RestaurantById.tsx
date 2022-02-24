@@ -15,16 +15,16 @@ const RestaurantById = () => {
     const { id } = useParams();
 
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [selectedOwner, setOwnerId] = useState(rs.Restaurant.ownerID)
+    const [selectedOwner, setOwnerId] = useState(rs.RestaurantView.ownerID)
 
     if(!hasLoaded) {
         rs.getRestaurantByIdAsync(Number(id));
         setHasLoaded(true);
-        setOwnerId(rs.Restaurant.ownerID);
+        setOwnerId(rs.RestaurantView.ownerID);
     }
     
     
-    if(rs.Restaurant.id !== Number(id)) {
+    if(rs.RestaurantView.id !== Number(id)) {
         rs.getRestaurantByIdAsync(Number(id))
     }
 
@@ -32,7 +32,7 @@ const RestaurantById = () => {
     // Defines what happens when the user press the confirm/ submit button 
     const navigate = useNavigate();
     const handleOnSubmitFunction = () => {
-        rs.setRestaurant(rs.Restaurant); 
+        /*rs.setRestaurant(rs.Restaurant)*/ 
         rs.putResturantAsync();
         as.setActiveKey(2) 
         navigate(`/AdminPanel`)
@@ -48,13 +48,13 @@ const RestaurantById = () => {
     const renderOwnerOptions = () => {
 
         return (
-            us.Users.filter(userfilt=>userfilt.id!==rs.Restaurant.ownerID).map((user) => ( 
+            us.Users.filter(userfilt=>userfilt.id!==rs.RestaurantView.ownerID).map((user) => ( 
             <option value = {user.id}>{user.name}</option> )
         ))
     }
 
      
-    if(!rs.Restaurant) {
+    if(!rs.RestaurantView) {
         return (
             <Loading />
         )
@@ -66,16 +66,16 @@ const RestaurantById = () => {
             <Container>
                 <Row className="justify-content-center">
                     <Col xs={6} md={6} lg={4}>
-                        <h1 style={{ textAlign: "center"}}> {rs.Restaurant.restaurantName} </h1>
+                        <h1 style={{ textAlign: "center"}}> {rs.RestaurantView.restaurantName} </h1>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Id</Form.Label>
-                                <Form.Control type="number" value={rs.Restaurant.id} disabled/>
+                                <Form.Control type="number" value={rs.RestaurantView.id} disabled/>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Restaurant name</Form.Label>
-                                <Form.Control type="text" value={rs.Restaurant.restaurantName}
+                                <Form.Control type="text" value={rs.RestaurantView.restaurantName}
                                 onChange={(e) => {
                                     rs.setRestaurantName(e.target.value);
                                 }} />
@@ -83,7 +83,7 @@ const RestaurantById = () => {
 
                             <Form.Label>Restaurant ejer</Form.Label>
                             <Form.Select aria-label="Default select example" onChange={ e=> setOwnerId(parseInt(e.target.value))}>
-                                <option value = {rs.Restaurant.ownerID}> {rs.Restaurant.ownerName}</option>
+                                <option value = {rs.RestaurantView.ownerID}> {rs.RestaurantView.ownerName}</option>
                                 {renderOwnerOptions()}
                             </Form.Select>
 

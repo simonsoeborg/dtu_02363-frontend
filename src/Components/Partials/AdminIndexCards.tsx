@@ -19,7 +19,7 @@ const AdminIndexCards = () => {
                 <Card.Body>
                     <Card.Title>Restaurants Count</Card.Title>
                     <Card.Text>
-                        We currently have { rs.Restaurants.length } restaurants in our system!
+                        We currently have { rs.RestaurantsView.length } restaurants in our system!
                     </Card.Text>
                 </Card.Body>
             </Card>

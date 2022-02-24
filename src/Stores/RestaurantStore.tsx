@@ -62,6 +62,10 @@ class RestaurantStore {
         this.Restaurant.ownerID = id;
     }
 
+    setRestaurantId = (id : number) => {
+        this.Restaurant.id = id
+    }
+
     // Get ResturantViewData for all resturants        
     getRestaurantsAsync = async () => {
         const response = await fetch(api.Api + "/ViewRestaurantInfo");
@@ -74,6 +78,7 @@ class RestaurantStore {
         const response = await fetch(`${api.Api}/ViewRestaurantInfo/${id}`);
         const data = await response.json();
         this.setRestaurantView(data);
+        this.setRestaurant(data);
     }
     
 

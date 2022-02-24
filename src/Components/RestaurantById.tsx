@@ -29,10 +29,13 @@ const RestaurantById = () => {
     }
 
 
+
     // Defines what happens when the user press the confirm/ submit button 
     const navigate = useNavigate();
     const handleOnSubmitFunction = () => {
-        /*rs.setRestaurant(rs.Restaurant)*/ 
+       /* rs.setRestaurantId(rs.restaurantView.id);*/ 
+       /* console.log(rs.Restaurant.id + rs.Restaurant.name + rs.Restaurant.ownerID) */ 
+        rs.setRestaurant(rs.restaurant) 
         rs.putResturantAsync();
         as.setActiveKey(2) 
         navigate(`/AdminPanel`)
@@ -82,13 +85,11 @@ const RestaurantById = () => {
                             </Form.Group>
 
                             <Form.Label>Restaurant ejer</Form.Label>
-                            <Form.Select aria-label="Default select example" onChange={ e=> setOwnerId(parseInt(e.target.value))}>
+                            <Form.Select aria-label="Default select example" onChange={ e=> rs.setRestaurantOwner(parseInt(e.target.value))}>
                                 <option value = {rs.RestaurantView.ownerID}> {rs.RestaurantView.ownerName}</option>
                                 {renderOwnerOptions()}
                             </Form.Select>
 
-                            {selectedOwner}
-                        
                             <Button variant="outline-warning" type="submit" onClick={() => handleOnSubmitFunction()}>
                                 Confirm
                             </Button>

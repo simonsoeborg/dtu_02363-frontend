@@ -5,6 +5,8 @@ import AdminPanel from './Components/AdminPanel';
 import UserById from './Components/UserById';
 import Login from './Components/Login';
 import Register from './Components/Register';
+import RestaurantById from './Components/RestaurantById';
+
 import {
   BrowserRouter, Routes, Route
 } from "react-router-dom";
@@ -20,6 +22,8 @@ const App = () => {
                     <Route path="/User/:id" element={<UserById />} ></Route>
                     <Route path="/Login" element={<Login />} ></Route>
                     <Route path="/Login/Register" element={<Register />} ></Route>
+                    <Route path="/Restaurant/:id" element={<RestaurantById/>} ></Route>
+                    
                 </Routes>
             </BrowserRouter>
         </div>

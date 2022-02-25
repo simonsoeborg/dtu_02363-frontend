@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class ApiStore {
-    api : string = "http://grp2.uglyrage.com:8080/api"
+    api : string = "https://localhost:44390/api"
 
     constructor() {
         makeAutoObservable(this);

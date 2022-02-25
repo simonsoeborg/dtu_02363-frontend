@@ -3,10 +3,23 @@ import { rs } from "../../Stores/RestaurantStore";
 // import { usUser } from "../../Stores/UserStore";
 import Loading from '../Partials/Loading';
 import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 
 
 const AdminRestaurant = () => {
-    if(!rs.Restaurants) {
+
+    // Benytter pt. component UserbyID.
+    const navigate = useNavigate();
+
+    const routeEditOwner = (ownerID : number) => {
+        navigate(`/User/${ownerID}`, {replace: false})
+    };
+
+    const routeEditRestaurant= (id : number) => {
+        navigate(`/Restaurant/${id}`, {replace: false})
+    };
+
+    if(!rs.RestaurantsView) {
         return (
             <Loading/>
         )
@@ -18,16 +31,17 @@ const AdminRestaurant = () => {
                 <thead> 
                     <tr>
                          <th>Id</th>
-                         <th>Name</th>
-                         <th>Owner ID</th>
+                         <th>Restaurant name</th>
+                         <th>Owner Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {rs.Restaurants.map((restaurant, index) =>( 
+                    {rs.RestaurantsView.map((restaurant, index) =>( 
+                        // Todo: Hover funktionalitet skal vise at man både kan  trykke på restaurant og owner navn.
                             <tr key={index}>
-                            <td>{restaurant.id}</td>
-                            <td>{restaurant.name}</td>
-                            <td>{restaurant.ownerId}</td>
+                            <td onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.id}</td>
+                            <td className="tableListItem" onClick={() => routeEditRestaurant(restaurant.id)}>{restaurant.restaurantName}</td>
+                            <td className="tableListItem"onClick={() => routeEditOwner(restaurant.ownerID)}>{restaurant.ownerName}</td>
                         </tr>
                         ))}
                 </tbody>

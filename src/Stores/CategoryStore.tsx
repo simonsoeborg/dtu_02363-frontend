@@ -33,7 +33,6 @@ class CategoryStore {
         const response = await fetch(api.api + "/Category");
         const data = await response.json();
         this.categories = data;
-        console.log(data);
     }
 }
 

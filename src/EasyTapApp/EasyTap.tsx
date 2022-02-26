@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Container } from "react-bootstrap";
-import TableTop from './TableTop/TableTop';
+import LoginApp from "./Login/LoginApp";
 
 const MainApp = () => {
+
+  const [isLoggedIn, setIsLoggedIn ] = useState(false);
+
   return (
     <Container fluid>
-      <TableTop />
+        <LoginApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     </Container>
   );
 };

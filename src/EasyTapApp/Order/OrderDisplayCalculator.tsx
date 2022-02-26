@@ -1,7 +1,7 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
 import { is } from "../../Stores/ItemStore";
 import { observer } from "mobx-react-lite";
-import Loading from "./Loading";
+import Loading from "../../Components/Partials/Loading";
 
 const OrderDisplayCalculator = () => {
   if (!is.Items) {

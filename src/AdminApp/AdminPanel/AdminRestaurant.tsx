@@ -1,7 +1,6 @@
 import { Container, Table } from "react-bootstrap";
 import { rs } from "../../Stores/RestaurantStore";
-// import { usUser } from "../../Stores/UserStore";
-import Loading from '../Partials/Loading';
+import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 

@@ -18,6 +18,9 @@ const GlobalNavbar = () => {
           <Nav.Item>
             <Nav.Link href="/AdminPanel">AdminPanel</Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/EasyTap">EasyTapApp</Nav.Link>
+          </Nav.Item>
           {
             isAuthenticated ?  
             <Nav.Item>
@@ -28,10 +31,6 @@ const GlobalNavbar = () => {
               <Nav.Link href="/Login">Login</Nav.Link>
             </Nav.Item> 
           }
-
-          <Nav.Item>
-            <Nav.Link href="PlaceOrder">PlaceOrder</Nav.Link>
-          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Container>

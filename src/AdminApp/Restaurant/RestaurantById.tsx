@@ -1,21 +1,21 @@
-import { Container, Row, Form, Button, Col, Dropdown } from "react-bootstrap";
+import { Container, Row, Form, Button, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import { rs } from "../Stores/RestaurantStore";
-import { as } from '../Stores/AdminStore';
-import { us } from '../Stores/UserStore';
+import { rs } from "../../Stores/RestaurantStore";
+import { as } from '../../Stores/AdminStore';
+import { us } from '../../Stores/UserStore';
 import { observer } from "mobx-react-lite";
-import Loading from "./Partials/Loading";
+import Loading from "../../Partials/Loading";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import "bootstrap/dist/css/bootstrap.min.css";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 const RestaurantById = () => {
 
     const { id } = useParams();
-
     const [hasLoaded, setHasLoaded] = useState(false);
     const [selectedOwner, setOwnerId] = useState(rs.RestaurantView.ownerID)
+    const[show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     if(!hasLoaded) {
         rs.getRestaurantByIdAsync(Number(id));
@@ -27,8 +27,6 @@ const RestaurantById = () => {
     if(rs.RestaurantView.id !== Number(id)) {
         rs.getRestaurantByIdAsync(Number(id))
     }
-
-
 
     // Defines what happens when the user press the confirm/ submit button 
     const navigate = useNavigate();
@@ -62,9 +60,6 @@ const RestaurantById = () => {
             <Loading />
         )
     } else {
-        const[show, setShow] = useState(false);
-        const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
         return (
             <Container>
                 <Row className="justify-content-center">

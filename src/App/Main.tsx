@@ -1,5 +1,3 @@
-// Tabletop App
-
 import { Container } from "react-bootstrap";
 import TableTop from "./TableTop/Tabletop";
 

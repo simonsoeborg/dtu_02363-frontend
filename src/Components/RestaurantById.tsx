@@ -7,8 +7,6 @@ import { observer } from "mobx-react-lite";
 import Loading from "./Partials/Loading";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import "bootstrap/dist/css/bootstrap.min.css";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 const RestaurantById = () => {
 

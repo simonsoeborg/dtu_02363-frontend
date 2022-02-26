@@ -1,7 +1,7 @@
 import { Container, Col, ListGroup, Row, ListGroupItem } from "react-bootstrap";
 import { is } from "../../Stores/ItemStore";
 import { observer } from "mobx-react-lite";
-import Loading from "./Loading";
+import Loading from "../../Partials/Loading";
 
 const OrderDisplayOverView = () => {
   if (!is.Items) {

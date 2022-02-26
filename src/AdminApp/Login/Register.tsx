@@ -1,8 +1,8 @@
 import { Button, Card, Container, Form, Image, Row } from 'react-bootstrap';
-import defaultUserImage from '../resources/default_user.jpg';
+import defaultUserImage from '../../resources/default_user.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { us } from '../Stores/UserStore';
+import { us } from '../../Stores/UserStore';
 import { useAuth0 } from '@auth0/auth0-react';
 import GoogleIcon from '@mui/icons-material/Google';
 

@@ -1,10 +1,10 @@
 import { Container, Row, Form, Button, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import { urs } from "../Stores/UserRolesStore";
+import { urs } from "../../Stores/UserRolesStore";
 import { observer } from "mobx-react-lite";
-import Loading from "./Partials/Loading";
+import Loading from "../../Partials/Loading";
 import { useState } from "react";
-import { as } from '../Stores/AdminStore';
+import { as } from '../../Stores/AdminStore';
 
 const UserById = () => {
 

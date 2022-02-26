@@ -1,6 +1,6 @@
 import { Container, Table } from "react-bootstrap"
 import { urs } from "../../Stores/UserRolesStore";
-import Loading from './Loading';
+import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 

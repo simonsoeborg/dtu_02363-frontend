@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import TableTop from "./TableTop/Tabletop";
+import TableTop from './TableTop/TableTop';
 
 const MainApp = () => {
   return (

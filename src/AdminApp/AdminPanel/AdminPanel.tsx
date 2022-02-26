@@ -1,14 +1,10 @@
 import { Col, Row, Container, Tab, Nav } from 'react-bootstrap';
-import AdminRestaurant from './Partials/AdminRestaurant';
-import AdminIndex from './Partials/AdminIndex';
-import AdminUser from './Partials/AdminUserList';
+import AdminRestaurant from './AdminRestaurant';
+import AdminIndex from './AdminIndex';
+import AdminUser from './AdminUserList';
 import { observer } from "mobx-react-lite";
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 
 const AdminPanel = () => {
-
-    const [key, setKey] = useState(1);
 
     return(
         <div>

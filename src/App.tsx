@@ -7,6 +7,7 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import RestaurantById from './Components/RestaurantById';
 
+import PlaceOrder from './Components/PlaceOrder';
 import {
   BrowserRouter, Routes, Route
 } from "react-router-dom";
@@ -23,7 +24,7 @@ const App = () => {
                     <Route path="/Login" element={<Login />} ></Route>
                     <Route path="/Login/Register" element={<Register />} ></Route>
                     <Route path="/Restaurant/:id" element={<RestaurantById/>} ></Route>
-                    
+                    <Route path="PlaceOrder" element={<PlaceOrder />} ></Route>
                 </Routes>
             </BrowserRouter>
         </div>

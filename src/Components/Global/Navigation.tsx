@@ -29,6 +29,9 @@ const GlobalNavbar = () => {
             </Nav.Item> 
           }
 
+          <Nav.Item>
+            <Nav.Link href="PlaceOrder">PlaceOrder</Nav.Link>
+          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Container>

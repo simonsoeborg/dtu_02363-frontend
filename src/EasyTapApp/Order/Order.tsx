@@ -2,7 +2,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
-import { useState } from "react";
 import OrderDisplayOverView from "./OrderDisplayOverView";
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.

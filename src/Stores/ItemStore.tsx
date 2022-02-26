@@ -23,7 +23,6 @@ class ItemStore {
         const response = await fetch(api.api + "/ItemView");
         const data = await response.json();
         this.items = data;
-        console.log(data);
     }
 }
 

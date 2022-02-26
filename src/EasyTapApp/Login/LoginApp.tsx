@@ -27,6 +27,20 @@ const LoginApp = ( props : IProps ) => {
         }
     } 
 
+    const enableAllKeys = () => {
+        if(activeKeys) {
+            setActiveKeys(false);
+        }
+    }
+
+    const handleOnClearClick = () => {
+        setFirstEntry("");
+        setSecondEntry("");
+        setThirdEntry("");
+        setForthEntry("");
+        enableAllKeys();
+    }
+
     const disableAllKeys = () => {
         if(!activeKeys) {
             setActiveKeys(true);
@@ -35,6 +49,15 @@ const LoginApp = ( props : IProps ) => {
 
     if(forthEntry !== "") {
         disableAllKeys();
+    }
+
+    const handleOnSubmit = () => {
+        if(firstEntry !== "" && secondEntry !== "" && thirdEntry !== "" && forthEntry !== "") {
+            // Check Database for user that has this pin. 
+
+            // Then set isLoggedIn to True
+            props.setIsLoggedIn(true);
+        } 
     }
 
     return (
@@ -111,13 +134,13 @@ const LoginApp = ( props : IProps ) => {
                             <Row className='PinFormRowBox'>
                                 {/* Cancel - 0 - Enter */}
                                 <Col>
-                                    <Button className='PinForm' variant="outline-danger">C</Button>
+                                    <Button className='PinForm' variant="outline-danger" onClick={() => handleOnClearClick()}>C</Button>
                                 </Col>
                                 <Col>
                                     <Button className='PinForm' variant="outline-primary" disabled={activeKeys} onClick={() => handleOnKeyClick("0")}>0</Button>
                                 </Col>
                                 <Col>
-                                    <Button className='PinForm' variant="outline-success">E</Button>
+                                    <Button className='PinForm' variant="outline-success" onClick={() => handleOnSubmit()}>E</Button>
                                 </Col>
                             </Row>
                         </Row>

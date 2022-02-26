@@ -5,7 +5,7 @@ import LoginApp from "./Login/LoginApp";
 const MainApp = () => {
 
   const [isLoggedIn, setIsLoggedIn ] = useState(false);
-
+  // console.log(`isLoggedIn: ${isLoggedIn.toString()}`)
   return (
     <Container fluid>
         <LoginApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />

@@ -10,7 +10,9 @@ const Order = () => {
     <Container fluid>
       <Row md="auto">
         <h1>Table: 5 </h1>
-        Reserved at: <b>15:00</b> for <b>Brian Sandberg</b>
+      </Row>
+      <Row md="auto">
+      <p>Reserved at: <b>15:00</b> for <b>Brian Sandberg</b></p>
       </Row>
       <Row>
         <Col md={8}>
@@ -22,8 +24,14 @@ const Order = () => {
             <OrderDisplayItems />
           </Row>
         </Col>
-        <Col md={4}>
+        <Col>
+          <Row >
           <OrderDisplayOverView />
+          </Row>
+          <Row>
+          <OrderDisplayOverView />
+          </Row>
+
         </Col>
       </Row>
     </Container>

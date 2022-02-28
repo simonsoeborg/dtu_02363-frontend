@@ -37,7 +37,7 @@ const Login = () => {
     navigate(`/Login/Register/`, { replace: false });
   };
 
-  const { loginWithPopup } = useAuth0();
+  /* const { loginWithPopup } = useAuth0(); */
   return (
     <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
@@ -64,7 +64,7 @@ const Login = () => {
               <Button
                 style={{ width: "30%" }}
                 variant="outline-primary"
-                onClick={() => loginWithPopup()}
+                /* onClick={() => loginWithPopup()} */
               >
                 <GoogleIcon />{" "}
               </Button>

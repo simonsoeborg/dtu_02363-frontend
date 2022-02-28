@@ -68,14 +68,14 @@ class RestaurantStore {
 
     // Get ResturantViewData for all resturants        
     getRestaurantsAsync = async () => {
-        const response = await fetch(api.Api + "/ViewRestaurantInfo");
+        const response = await fetch(api.Api + "/Restaurant");
         const data = await response.json();
         this.setRestaurantsView(data);
     }
     
     // Get ResturantViewData for a specific resturant.
     getRestaurantByIdAsync = async (id : number) => {
-        const response = await fetch(`${api.Api}/ViewRestaurantInfo/${id}`);
+        const response = await fetch(`${api.Api}/Restaurant/${id}`);
         const data = await response.json();
         this.setRestaurantView(data);
         this.setRestaurant(data);

@@ -22,7 +22,7 @@ const Register = () => {
         navigate("/", {replace: false})
     }
 
-    const { loginWithPopup } = useAuth0();
+    /* const { loginWithPopup } = useAuth0(); */
 
     return (
         
@@ -38,7 +38,7 @@ const Register = () => {
                 </Row>
                 <Row className="justify-content-center" style={{ margin: "1rem"}}>
                     <p style={{ textAlign: "center"}}>Register using: </p>
-                    <Button style={{width: "30%"}} variant="outline-primary" onClick={() => loginWithPopup()}><GoogleIcon /> </Button>
+                    <Button style={{width: "30%"}} variant="outline-primary" /* onClick={() => loginWithPopup()} */><GoogleIcon /> </Button>
                 </Row>
                 <Row>
                     <Form>

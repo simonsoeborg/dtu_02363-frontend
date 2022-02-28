@@ -6,6 +6,6 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
-      - "443:443"
+      - "3001:3001"
     volumes:
       - ./src:/app/src

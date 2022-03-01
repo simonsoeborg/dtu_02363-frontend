@@ -1,5 +1,5 @@
 import { runInAction, makeAutoObservable } from 'mobx';
-import { api } from './APIStore';
+import { API_URL } from '../Services/_services';
 import OrderModel from '../Models/OrderModel'
 
 class OrderStore{
@@ -29,8 +29,10 @@ class OrderStore{
     }
 
     getOrdersAsync = async () => {
-        const response = await fetch(api.Api + "/Order")
+        const response = await fetch(API_URL + "/Order")
         const data = await response.json();
         this.setOrders(data)
     }
 }
+
+export const os = new OrderStore();

@@ -28,10 +28,6 @@ const Order = () => {
           <Row >
           <OrderDisplayOverView />
           </Row>
-          <Row>
-          <OrderDisplayOverView />
-          </Row>
-
         </Col>
       </Row>
     </Container>

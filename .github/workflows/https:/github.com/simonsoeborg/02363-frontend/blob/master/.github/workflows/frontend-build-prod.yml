@@ -1,0 +1,27 @@
+name: frontend
+
+on:
+  push:
+    branches: [ Production ]
+  pull_request:
+    branches: [ Production ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: /home/server/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pull from Github
+      run: git pull
+
+    - uses: actions/checkout@v2
+    - name: Take down already running docker container
+      run:  docker-compose -f docker-compose-prod.yml down
+
+    - uses: actions/checkout@v2
+    - name: Docker compose with Dockerfile
+      run:  docker-compose -f docker-compose-prod.yml -d up

@@ -1,5 +1,5 @@
 import { Button, Card, Container, Form, Image, Row } from 'react-bootstrap';
-import defaultUserImage from '../../resources/default_user.jpg';
+import {defaultImage} from '../../Services/_services';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { us } from '../../Stores/UserStore';
@@ -34,7 +34,7 @@ const Register = () => {
             </Card.Header>
             <Card.Body>
                 <Row className="justify-content-center">
-                    <Image style={{ maxHeight: "7.5rem", maxWidth: "7.5rem", padding: "1rem", margin: "1rem"}} fluid roundedCircle src={defaultUserImage} />
+                    <Image style={{ maxHeight: "7.5rem", maxWidth: "7.5rem", padding: "1rem", margin: "1rem"}} fluid roundedCircle src={defaultImage} />
                 </Row>
                 <Row className="justify-content-center" style={{ margin: "1rem"}}>
                     <p style={{ textAlign: "center"}}>Register using: </p>

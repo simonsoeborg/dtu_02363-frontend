@@ -3,15 +3,17 @@ import AdminRestaurant from './AdminRestaurant';
 import AdminIndex from './AdminIndex';
 import AdminUser from './AdminUserList';
 import { observer } from "mobx-react-lite";
+import { useState } from 'react';
 
 const AdminPanel = () => {
+    const [activeKey, setActiveKey] = useState(1);
 
     return(
         <div>
             <Container style={{ paddingTop: "2rem" }}>
                 <Row>
                     <Container>
-                        <Tab.Container id="left-tabs-example" defaultActiveKey={1}>
+                        <Tab.Container id="left-tabs-example" defaultActiveKey={activeKey}>
                             <Row>
                                 <Col sm={4}>
                                     <Nav className="flex-column">
@@ -29,7 +31,7 @@ const AdminPanel = () => {
                                 <Col sm={8}>
                                     <Tab.Content>
                                         <Tab.Pane eventKey="1">
-                                            <AdminIndex />
+                                            <AdminIndex activeKey={activeKey} setActiveKey={setActiveKey} />
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="2">
                                             <AdminRestaurant />

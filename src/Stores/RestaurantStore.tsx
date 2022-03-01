@@ -1,8 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import RestaurantViewModel from '../Models/RestaurantViewModel';
 import RestaurantModel from '../Models/RestaurantModel';
-
-import { api } from './APIStore';
+import { API_URL } from '../Services/_services';
 
 class RestaurantStore {
     restaurantsView: RestaurantViewModel[] = [];
@@ -68,14 +67,14 @@ class RestaurantStore {
 
     // Get ResturantViewData for all resturants        
     getRestaurantsAsync = async () => {
-        const response = await fetch(api.Api + "/Restaurant");
+        const response = await fetch(API_URL + "/Restaurant");
         const data = await response.json();
         this.setRestaurantsView(data);
     }
     
     // Get ResturantViewData for a specific resturant.
     getRestaurantByIdAsync = async (id : number) => {
-        const response = await fetch(`${api.Api}/Restaurant/${id}`);
+        const response = await fetch(`${API_URL}/Restaurant/${id}`);
         const data = await response.json();
         this.setRestaurantView(data);
         this.setRestaurant(data);
@@ -94,7 +93,7 @@ class RestaurantStore {
 
         console.log( JSON.stringify(this.Restaurant))
 
-        const request = new Request(`${api.Api}/Restaurant/${this.Restaurant.id}`, options)
+        const request = new Request(`${API_URL}/Restaurant/${this.Restaurant.id}`, options)
         const response = await fetch(request);
 
         if (response.status !== 204) {

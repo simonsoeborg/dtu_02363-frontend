@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import ItemModel from "../Models/ItemModel";
-import { api } from './APIStore';
+import { API_URL } from '../Services/_services';
 
 class ItemStore {
     items: ItemModel[] = [];
@@ -20,7 +20,7 @@ class ItemStore {
     }
 
     getItemsAsync = async () => {
-        const response = await fetch(api.api + "/ItemView");
+        const response = await fetch(API_URL + "/ItemView");
         const data = await response.json();
         this.items = data;
     }

@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Pull from Github
-      run: git clone --branch Production https://github.com/simonsoeborg/02363-frontend.git
+      run: git pull
 
     - uses: actions/checkout@v2
     - name: Take down already running docker container

@@ -1,7 +1,7 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import UserModel from '../Models/UserModel';
 import UserPostModel from '../Models/UserPostModel';
-import { api } from './APIStore';
+import { API_URL } from '../Services/_services';
 
 class UserStore {
     users: UserModel[] = [];
@@ -58,14 +58,14 @@ class UserStore {
 
     // Gets all users from database uses, GET HTTP Request
     getUsersAsync = async () => {
-        const response = await fetch(api.Api + "/User");
+        const response = await fetch(API_URL + "/User");
         const data = await response.json();
         this.setUsers(data)
     }
 
     // Gets a user from database with ID argument, uses GET HTTP Request
     getUserByIdAsync = async (userId : number) => {
-        const response = await fetch(`${api.Api}/User/${userId}`);
+        const response = await fetch(`${API_URL}/User/${userId}`);
         const data = await response.json();
         this.setUser(data);
     }
@@ -80,7 +80,7 @@ class UserStore {
             body: JSON.stringify(this.User)
         };
 
-        const request = new Request(`${api.Api}/User/${this.User.id}`, options)
+        const request = new Request(`${API_URL}/User/${this.User.id}`, options)
         const response = await fetch(request);
 
         if (response.status !== 204) {
@@ -104,7 +104,7 @@ class UserStore {
             body: JSON.stringify(userItem),
         };
 
-        const request = new Request(api.Api + "/User/", options)
+        const request = new Request(API_URL + "/User/", options)
         const response = await fetch(request);
 
         if (response.status !== 201) {
@@ -117,7 +117,7 @@ class UserStore {
 
     // Deletes a user in the database, uses DELETE HTTP Request
     deleteUserAsync = async (userId : number) => {
-        const res = await fetch(`${api.Api}/User/${userId}`, {
+        const res = await fetch(`${API_URL}/User/${userId}`, {
             method: "DELETE",
             mode: "cors",
         });

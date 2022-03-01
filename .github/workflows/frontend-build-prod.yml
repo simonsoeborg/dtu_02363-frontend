@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: /home/server/
+        working-directory: /home/server/prod
 
     steps:
     - uses: actions/checkout@v2

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Form, Image, Row } from "react-bootstrap";
-import defaultUserImage from '../../resources/default_user.jpg';
+import {defaultImage} from '../../Services/_services';
 import { useAuth0 } from "@auth0/auth0-react";
 import GoogleIcon from "@mui/icons-material/Google";
 
@@ -37,7 +37,7 @@ const Login = () => {
     navigate(`/Login/Register/`, { replace: false });
   };
 
-  const { loginWithPopup } = useAuth0();
+  /* const { loginWithPopup } = useAuth0(); */
   return (
     <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
@@ -56,7 +56,7 @@ const Login = () => {
                 }}
                 fluid
                 roundedCircle
-                src={defaultUserImage}
+                src={defaultImage}
               />
             </Row>
             <Row className="justify-content-center" style={{ margin: "1rem" }}>
@@ -64,7 +64,7 @@ const Login = () => {
               <Button
                 style={{ width: "30%" }}
                 variant="outline-primary"
-                onClick={() => loginWithPopup()}
+                /* onClick={() => loginWithPopup()} */
               >
                 <GoogleIcon />{" "}
               </Button>

@@ -12,6 +12,7 @@ const Login = () => {
   const [emailFilled, setEmailFilled] = useState(false);
   const [passwordFilled, setPasswordFilled] = useState(false);
   const navigate = useNavigate();
+  const {isAuthenticated, user, loginWithPopup, getAccessTokenSilently, getIdTokenClaims} = useAuth0();
 
   const checkIfFormIsFilled = () => {
     if (email.length > 3) {
@@ -32,6 +33,17 @@ const Login = () => {
       setFormFilled(false);
     }
   };
+
+
+
+  if(isAuthenticated) {
+    console.log(user)
+    const test = async () => {
+      const token = await getAccessTokenSilently()
+      console.log( token )
+    }
+    test()
+  }
 
   const routeEditChange = () => {
     navigate(`/Login/Register/`, { replace: false });
@@ -64,7 +76,7 @@ const Login = () => {
               <Button
                 style={{ width: "30%" }}
                 variant="outline-primary"
-                /* onClick={() => loginWithPopup()} */
+                onClick={() => loginWithPopup()}
               >
                 <GoogleIcon />{" "}
               </Button>

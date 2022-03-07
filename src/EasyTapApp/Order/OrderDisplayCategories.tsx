@@ -1,7 +1,7 @@
-import { Container, Col, ButtonGroup, Button, Nav } from "react-bootstrap";
+import { Container, Nav } from "react-bootstrap";
 import { cs } from "../../Stores/CategoryStore";
 import { observer } from "mobx-react-lite";
-import Loading from "./Loading";
+import Loading from "../../Partials/Loading";
 
 const DisplayCategories = () => {
 

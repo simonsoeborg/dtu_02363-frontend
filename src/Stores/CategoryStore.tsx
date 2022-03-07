@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import CategoryModel from "../Models/CategoryModel";
-import { api } from './APIStore';
+import { API_URL } from '../Services/_services';
 
 class CategoryStore {
     categories: CategoryModel[] = [];
@@ -30,10 +30,9 @@ class CategoryStore {
 
 
     getCategoriesAsync = async () => {
-        const response = await fetch(api.api + "/Category");
+        const response = await fetch(API_URL + "/Category");
         const data = await response.json();
         this.categories = data;
-        console.log(data);
     }
 }
 

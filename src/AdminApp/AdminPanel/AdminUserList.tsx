@@ -1,6 +1,6 @@
 import { Container, Table } from "react-bootstrap"
-import { us } from "../../Stores/UserStore";
-import Loading from './Loading';
+import { urs } from "../../Stores/UserRolesStore";
+import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const AdminUser = () => {
         navigate(`/User/${id}`, {replace: false})
     };
 
-    if(!us.Users) {
+    if(!urs.Users) {
         return (
             <Loading />
         )
@@ -29,11 +29,11 @@ const AdminUser = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {us.Users.map((user, index) => (
+                    {urs.Users.map((user, index) => (
                         <tr className="tableListItem" onClick={() => routeEditChange(user.id)} key={index}>
                             <td>{user.id}</td>
                             <td>{user.name}</td>
-                            <td>{user.role}</td>
+                            <td>{user.roles}</td>
                             <td>{user.createdAt}</td>
                         </tr>
                     ))}

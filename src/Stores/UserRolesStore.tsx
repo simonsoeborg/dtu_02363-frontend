@@ -1,12 +1,10 @@
 import { runInAction, makeAutoObservable } from 'mobx';
-import UserModel from '../Models/UserModel';
-import UserPostModel from '../Models/UserPostModel';
+import UserRolesModel from '../Models/UserRolesModel';
 import { API_URL } from '../Services/_services';
 
-class UserStore {
-    users: UserModel[] = [];
-    user: UserModel = new UserModel();
-    postUser: UserPostModel = new UserPostModel();
+class UserRolesStore {
+    users: UserRolesModel[] = [];
+    user: UserRolesModel = new UserRolesModel();
 
     constructor() {
         makeAutoObservable(this);
@@ -24,48 +22,28 @@ class UserStore {
         return this.user;
     }
 
-    get PostUser() {
-        return this.postUser;
-    }
-
-    setPostUserName = (name : string) => {
-        this.PostUser.name = name;
-    }
-    setPostUserEmail = (email : string) => {
-        this.PostUser.email = email;
-    }
-    setPostUserPassword = (password : string) => {
-        this.PostUser.password = password;
-    }
-
     setUserName = (name : string) => {
         this.User.name = name;
     }
-    setUserEmail = (email : string) => {
-        this.User.email = email;
-    }
-    setUserPassword = (password : string) => {
-        this.User.password = password;
-    }
 
-    setUsers = (users : UserModel[] ) => {
+    setUsers = (users : UserRolesModel[] ) => {
         this.users = users
     }
 
-    setUser = (user : UserModel) => {
+    setUser = (user : UserRolesModel) => {
         this.user = user
     }
 
     // Gets all users from database uses, GET HTTP Request
     getUsersAsync = async () => {
-        const response = await fetch(API_URL + "/User");
+        const response = await fetch(API_URL + "/UserRoles");
         const data = await response.json();
         this.setUsers(data)
     }
 
     // Gets a user from database with ID argument, uses GET HTTP Request
     getUserByIdAsync = async (userId : number) => {
-        const response = await fetch(`${API_URL}/User/${userId}`);
+        const response = await fetch(`${API_URL}/UserRoles/${userId}`);
         const data = await response.json();
         this.setUser(data);
     }
@@ -80,7 +58,7 @@ class UserStore {
             body: JSON.stringify(this.User)
         };
 
-        const request = new Request(`${API_URL}/User/${this.User.id}`, options)
+        const request = new Request(`${API_URL}/UserRoles/${this.User.id}`, options)
         const response = await fetch(request);
 
         if (response.status !== 204) {
@@ -92,10 +70,7 @@ class UserStore {
     }
 
     // Posts a new user in the database, uses POST HTTP Request
-    postUserAsync = async (userItem : UserPostModel) => {
-        if(userItem.roleId === 0) {
-            userItem.roleId = 1
-        }
+    postUserAsync = async (userItem : UserRolesModel) => {
         const headers = new Headers();
         headers.append("Content-type", "application/json");
         var options = {
@@ -104,10 +79,10 @@ class UserStore {
             body: JSON.stringify(userItem),
         };
 
-        const request = new Request(API_URL + "/User/", options)
+        const request = new Request(API_URL + "/UserRoles/", options)
         const response = await fetch(request);
 
-        if (response.status !== 201) {
+        if (response.status !== 204) {
             console.log(response);
         }
 
@@ -117,7 +92,7 @@ class UserStore {
 
     // Deletes a user in the database, uses DELETE HTTP Request
     deleteUserAsync = async (userId : number) => {
-        const res = await fetch(`${API_URL}/User/${userId}`, {
+        const res = await fetch(`${API_URL}/UserRoles/${userId}`, {
             method: "DELETE",
             mode: "cors",
         });
@@ -130,4 +105,4 @@ class UserStore {
     }
 }
 
-export const us = new UserStore();
+export const urs = new UserRolesStore();

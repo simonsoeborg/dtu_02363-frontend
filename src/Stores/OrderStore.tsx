@@ -29,7 +29,7 @@ class OrderStore{
     }
 
     getOrdersAsync = async () => {
-        const response = await fetch(API_URL + "/Order")
+        const response = await fetch(API_URL + "/resOrder")
         const data = await response.json();
         this.setOrders(data)
     }

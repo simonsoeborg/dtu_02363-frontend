@@ -4,6 +4,8 @@ import { Button, Card, Container, Form, Image, Row } from "react-bootstrap";
 import {defaultImage} from '../../Services/_services';
 import { useAuth0 } from "@auth0/auth0-react";
 import GoogleIcon from "@mui/icons-material/Google";
+import { aus } from '../../Stores/AuthStore';
+import AuthenticationModel from "../../Models/AuthenticationModel";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,19 +39,15 @@ const Login = () => {
 
 
   if(isAuthenticated) {
-    console.log(user)
-    const test = async () => {
-      const token = await getAccessTokenSilently()
-      console.log( token )
-    }
-    test()
+    const temp = new AuthenticationModel();
+    user?.copyInto(temp);
+    console.log(temp);
   }
 
   const routeEditChange = () => {
     navigate(`/Login/Register/`, { replace: false });
   };
 
-  /* const { loginWithPopup } = useAuth0(); */
   return (
     <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>

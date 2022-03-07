@@ -1,23 +1,24 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
-import { is } from "../../Stores/ItemStore";
-import { cs } from "../../Stores/CategoryStore";
-import { observer } from "mobx-react-lite";
-import Loading from "../../Partials/Loading";
+import { Dispatch, SetStateAction } from 'react';
+import ItemModel from "../../Models/ItemModel";
 
 
-const DisplayItems = () => {
+interface IProps {
 
-  if (!is.Items) {
-    return <Loading />;
-  } else {
+  items : ItemModel[],
+  setItems : Dispatch<SetStateAction<ItemModel[]>>,
+  selectedCategory : String
+}
 
-    const itemsToShow = is.Items.filter(item => item.categoryName=== cs.ActiveCategory)
+const DisplayItems = (props : IProps) => {
+
+    const itemsToShow = props.items.filter(item => item.categoryName=== props.selectedCategory)
 
     return (
       <Container>
         <Row xs="auto" md="auto" className="g-4">
         {itemsToShow.map((item, index) => (
-          <Col md="auto">
+          <Col md="auto" key={index}>
               <Card
                 bg={"dark"}
                 style={{ width: "12.25rem"}}
@@ -32,7 +33,6 @@ const DisplayItems = () => {
         </Row>
       </Container>
     );
-  }
 };
 
-export default observer(DisplayItems);
+export default DisplayItems;

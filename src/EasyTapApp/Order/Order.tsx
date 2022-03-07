@@ -18,16 +18,17 @@ import { observer } from "mobx-react-lite";
 const Order = () => {
   const[categories, setCategories] = useState<CategoryModel[]>([]);
   const[selectedCategory, setSelectedCategory] = useState<String>("Starters");
+  const[selectedItem, setSelectedItem] = useState<String>();
   const[items, setItems] = useState<ItemModel[]>([]);
   const[calculatorValue, setCalculaterValue] = useState(1);
-  const[tempOrder, setTempOrder] = useState<OrderModel[]>([]);
+  const[tempOrder, setTempOrder] = useState<ItemModel[]>([]);
   const[order, setOrder] = useState<OrderModel[]>([]);
   const[tableNr, setTableNr] = useState(0);
   const[hasLoaded, setHasLoaded] = useState(false);
 
   if(!cs.Categories && !is.Items){
     return (
-      <Loading />
+      <Loading/>
   )
   }else{ 
     if(cs.Categories.length > 0 && is.Items.length > 0){
@@ -54,12 +55,12 @@ const Order = () => {
             </Row>
             <br></br>
             <Row>
-              <OrderDisplayItems items={items} setItems={setItems} selectedCategory={selectedCategory} />
+              <OrderDisplayItems items={items} setItems={setItems} selectedCategory={selectedCategory} setTempOrder={setTempOrder}/>
             </Row>
           </Col>
           <Col>
             <Row >
-            <OrderDisplayOverView />
+            <OrderDisplayOverView order={order} tempOrder={tempOrder} setOrder={}/>
             </Row>
           </Col>
         </Row>

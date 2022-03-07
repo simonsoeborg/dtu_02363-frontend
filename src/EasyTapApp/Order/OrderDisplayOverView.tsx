@@ -1,12 +1,19 @@
 import { Container, Col, ListGroup, Row, ListGroupItem, Card } from "react-bootstrap";
+import { Dispatch, SetStateAction } from 'react';
 import { is } from "../../Stores/ItemStore";
-import { observer } from "mobx-react-lite";
 import Loading from "../../Partials/Loading";
 import ItemModel from "../../Models/ItemModel";
-import { os } from "../../Stores/OrderStore";
+import OrderModel from "../../Models/OrderModel";
 
+interface IProps {
 
-const OrderDisplayOverView = () => {
+  order : OrderModel[],
+  tempOrder : OrderModel[],
+  setTempOrder : Dispatch<SetStateAction<OrderModel[]>>,
+  setOrder : Dispatch<SetStateAction<OrderModel[]>>
+}
+
+const OrderDisplayOverView = (props : IProps) => {
     const orderData: ItemModel[] = [];
     
     function getTotal(): number {
@@ -58,4 +65,4 @@ const OrderDisplayOverView = () => {
   }
 };
 
-export default observer(OrderDisplayOverView);
+export default OrderDisplayOverView;

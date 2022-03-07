@@ -1,0 +1,10 @@
+version: "3.1"
+services:
+  build-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+    environment:
+    NODE_ENV: production

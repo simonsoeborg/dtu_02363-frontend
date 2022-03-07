@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { runInAction, makeAutoObservable } from 'mobx';
 import CategoryModel from "../Models/CategoryModel";
 import { API_URL } from '../Services/_services';
 
@@ -9,7 +9,9 @@ class CategoryStore {
 
     constructor() {
         makeAutoObservable(this);
-        this.getCategoriesAsync();
+        runInAction(() => {
+            this.getCategoriesAsync();
+        })
     }
 
     get Categories() {
@@ -28,11 +30,14 @@ class CategoryStore {
         this.activeCategory = category;
     }
 
+    setCategories = (categories: CategoryModel[]) =>{
+        this.categories = categories
+    }
 
     getCategoriesAsync = async () => {
         const response = await fetch(API_URL + "/Category");
         const data = await response.json();
-        this.categories = data;
+        this.setCategories(data);
     }
 }
 

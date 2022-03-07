@@ -1,29 +1,31 @@
 import { Container, Nav } from "react-bootstrap";
-import { cs } from "../../Stores/CategoryStore";
-import { observer } from "mobx-react-lite";
-import Loading from "../../Partials/Loading";
+import { Dispatch, SetStateAction } from 'react';
+import CategoryModel from "../../Models/CategoryModel";
 
-const DisplayCategories = () => {
+interface IProps {
 
-  if (!cs.Categories) {
-    return <Loading />;
-  } else {
-    const handleOnClickEvent = (category: string) => {
-      cs.setActiveCategory(category)
+  categories : CategoryModel[],
+  setCategories : Dispatch<SetStateAction<CategoryModel[]>>,
+  setSelectedCategory : Dispatch<SetStateAction<String>>
+}
+
+const DisplayCategories = (props : IProps) => {
+
+    const handleOnClickEvent = (categories: string) => {
+     props.setSelectedCategory(categories)
     }
 
     return (
       <Container>
-        <Nav fill variant="tabs" defaultActiveKey="">
-          {cs.Categories.map((category, index) => (
-            <Nav.Item onClick={()=>handleOnClickEvent(category.name)}>
+        <Nav fill variant ="tabs" defaultActiveKey="">
+          {props.categories.map((category, index) => (
+            <Nav.Item key={index} onClick={()=>handleOnClickEvent(category.name)}>
               <Nav.Link eventKey={category.name}>{category.name}</Nav.Link>
             </Nav.Item>
           ))}
         </Nav>
       </Container>
     );
-  }
 };
 
-export default observer(DisplayCategories);
+export default DisplayCategories;

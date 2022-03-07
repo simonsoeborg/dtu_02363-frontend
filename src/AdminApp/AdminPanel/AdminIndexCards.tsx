@@ -8,7 +8,7 @@ interface IAdminProps {
     activeKey: number;
     setActiveKey: Dispatch<SetStateAction<number>>;
 }
-
+// Display Cards
 const AdminIndexCards = (props : IAdminProps) => {
 
     const handleOnCardClickEvent = (key : number) => {

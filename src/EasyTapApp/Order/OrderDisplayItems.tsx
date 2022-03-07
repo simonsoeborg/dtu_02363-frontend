@@ -11,24 +11,26 @@ const DisplayItems = () => {
     return <Loading />;
   } else {
 
-    const itemsToShow = is.Items.filter(item => item.categoryName=== cs.ActiveCategory)
+    const itemsToShow = is.Items.filter(item => item.categoryName === cs.ActiveCategory)
 
     return (
       <Container>
         <Row xs="auto" md="auto" className="g-4">
-        {itemsToShow.map((item, index) => (
-          <Col md="auto">
-              <Card
-                bg={"dark"}
-                style={{ width: "12.25rem"}}
-                text={"white"}
-                className="mb-2"
-              >
-                <Card.Header key={index}>{item.itemName}</Card.Header>
-                <Card.Img variant="top" src="holder.js/100px160" />
-              </Card> 
-          </Col>
-            ))}
+          {itemsToShow.map((item, index) => (
+            <Col md="auto">
+              <div onClick={() => alert(JSON.stringify(item.itemName))}>
+                <Card
+                  bg={"dark"}
+                  style={{ width: "12.25rem" }}
+                  text={"white"}
+                  className="mb-2"
+                >
+                  <Card.Header key={index}>{item.itemName}</Card.Header>
+                  <Card.Img variant="top" src="holder.js/100px160" />
+                </Card>
+              </div>
+            </Col>
+          ))}
         </Row>
       </Container>
     );

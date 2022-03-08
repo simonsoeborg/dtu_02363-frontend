@@ -13,16 +13,17 @@ import { is } from "../../Stores/ItemStore";
 import { os } from "../../Stores/OrderStore";
 import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
+import TapOutModel from "../../Models/TapOutModel";
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
   const[categories, setCategories] = useState<CategoryModel[]>([]);
   const[selectedCategory, setSelectedCategory] = useState<String>("Starters");
-  const[selectedItem, setSelectedItem] = useState<String>();
+  const[selectedItem, setSelectedItem] = useState<ItemModel>();
   const[items, setItems] = useState<ItemModel[]>([]);
   const[calculatorValue, setCalculaterValue] = useState(1);
-  const[tempOrder, setTempOrder] = useState<ItemModel[]>([]);
-  const[order, setOrder] = useState<OrderModel[]>([]);
+  const[tempOrders, setTempOrders] = useState<TapOutModel[]>([]);
+  const[orders, setOrders] = useState<TapOutModel[]>([]);
   const[tableNr, setTableNr] = useState(0);
   const[hasLoaded, setHasLoaded] = useState(false);
 
@@ -55,12 +56,12 @@ const Order = () => {
             </Row>
             <br></br>
             <Row>
-              <OrderDisplayItems items={items} setItems={setItems} selectedCategory={selectedCategory} setTempOrder={setTempOrder}/>
+              <OrderDisplayItems items={items} setItems={setItems} selectedCategory={selectedCategory} setSelectedItem={setSelectedItem}/>
             </Row>
           </Col>
           <Col>
             <Row >
-            <OrderDisplayOverView order={order} tempOrder={tempOrder} setOrder={}/>
+            <OrderDisplayOverView/>
             </Row>
           </Col>
         </Row>
@@ -68,5 +69,15 @@ const Order = () => {
     );
   }
 };
+
+// evt functionen til at sæt op en temptOrder
+const CreateTempOrder = (tempOrder : TapOutModel, item : ItemModel, calculatorValue: number, tableNr: number, orders: TapOutModel ) => {
+  tempOrder.name = item.itemName
+  tempOrder.price = item.price
+  tempOrder.quantity = calculatorValue
+  tempOrder.tableId  = tableNr
+  tempOrder.ordreId = orders.ordreId
+}
+
 
 export default observer(Order);

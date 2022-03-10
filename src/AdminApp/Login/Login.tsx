@@ -40,7 +40,6 @@ const Login = () => {
 
   if(isAuthenticated) {
     const temp = new AuthenticationModel();
-    user?.copyInto(temp);
     console.log(temp);
   }
 

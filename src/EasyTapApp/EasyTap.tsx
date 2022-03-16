@@ -1,31 +1,28 @@
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import LoginApp from "./Login/LoginApp";
-import Order from "./Order/Order";
+import RestaurantOverview from "./RestaurantLayout/RestaurantOverview";
 
 const MainApp = () => {
-
-  const [isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // console.log(`isLoggedIn: ${isLoggedIn.toString()}`)
-  if(!isLoggedIn){
+  if (!isLoggedIn) {
     return (
       <Container fluid>
-          <LoginApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <LoginApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       </Container>
     );
   }
 
-  if(isLoggedIn){
+  if (isLoggedIn) {
     return (
       <Container fluid>
-          <Order/>
+        <RestaurantOverview />
       </Container>
     );
   }
 
-  return (
-    <div></div>
-  );
+  return <div></div>;
 };
 
 export default MainApp;

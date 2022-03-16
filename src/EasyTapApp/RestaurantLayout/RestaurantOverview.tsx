@@ -7,17 +7,15 @@ import "../../resources/Css/layout.css";
 import BarLayout from "./ResturantLayoutPartials/BarLayout";
 import TableLayout from "./ResturantLayoutPartials/TableLayout";
 import PlantLayout from "./ResturantLayoutPartials/PlantLayout";
-const RestaurantLayout = () => {
-  const barTitle = "Bar Title";
 
-  const tableId = "Hent fra API tableId for hvert table tables.map().";
-  const tableImage = "tableImage";
+const RestaurantLayout = () => {
+  const tableId = 10;
 
   return (
     <Container className="OverviewLayout">
-      <BarLayout title={barTitle} image={Bar} />
-      <TableLayout title={barTitle} image={Table} />
-      <PlantLayout title={barTitle} image={Plant} />
+      <BarLayout image={Bar} />
+      <TableLayout tableId={tableId} image={Table} />
+      <PlantLayout image={Plant} />
     </Container>
   );
 };

@@ -1,7 +1,6 @@
 import "../../../resources/Css/layout.css";
 
 interface IProps {
-  title: String;
   image: any;
 }
 

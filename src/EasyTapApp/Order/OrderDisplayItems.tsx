@@ -1,7 +1,7 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
+import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
-import TapOutModel from "../../Models/TapOutModel";
 
 interface IProps {
   items: ItemModel[];
@@ -16,13 +16,16 @@ const DisplayItems = (props: IProps) => {
     (item) => item.categoryName === props.selectedCategory
   );
 
+  const [itemId, setItemId] = useState(0);
+
   const handleOnClickEvent = (item: ItemModel) => {
     const newItemObject = {
-      id: props.orderItems.length + 1,
+      id: itemId,
       itemName: item.itemName,
       price: item.price,
       categoryName: item.categoryName
     };
+    setItemId(itemId+1);
     props.setOrderItems(props.orderItems.concat(newItemObject));
   };
 

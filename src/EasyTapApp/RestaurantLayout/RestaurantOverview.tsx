@@ -1,4 +1,3 @@
-import { calculateNewValue } from "@testing-library/user-event/dist/utils";
 import { Container } from "react-bootstrap";
 import Bar from "../../resources/LayOutDesign/bar.png";
 import Table from "../../resources/LayOutDesign/table.png";

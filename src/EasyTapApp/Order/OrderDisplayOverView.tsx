@@ -29,7 +29,7 @@ const OrderDisplayOverView = (props: IProps) => {
   }
 
   const handleDeleteItem = (item: ItemModel) => {
-    props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem !== item));
+    props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
   };
 
   if (!is.Items) {
@@ -49,7 +49,7 @@ const OrderDisplayOverView = (props: IProps) => {
                     <Col md="auto">1x</Col>
                     <Col md={8}>{item.itemName}</Col>
                     <Col md="auto">{item.price}</Col>
-                    <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red" /></Col>
+                    <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
                   </Row>
                 </ListGroupItem>
               ))}

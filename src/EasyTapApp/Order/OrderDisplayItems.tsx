@@ -17,7 +17,13 @@ const DisplayItems = (props: IProps) => {
   );
 
   const handleOnClickEvent = (item: ItemModel) => {
-    props.setOrderItems(props.orderItems.concat(item));
+    const newItemObject = {
+      id: props.orderItems.length + 1,
+      itemName: item.itemName,
+      price: item.price,
+      categoryName: item.categoryName
+    };
+    props.setOrderItems(props.orderItems.concat(newItemObject));
   };
 
   return (

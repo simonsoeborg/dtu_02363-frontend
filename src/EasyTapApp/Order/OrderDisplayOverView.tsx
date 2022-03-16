@@ -42,7 +42,7 @@ const OrderDisplayOverView = (props: IProps) => {
             <h2>Order Overview</h2>
           </Card.Header>
           <Card.Body>
-            <ListGroup>
+            <ListGroup className="scrollable-menu">
               {props.currentOrderItems.map((item, index) => (
                 <ListGroupItem key={index}>
                   <Row >

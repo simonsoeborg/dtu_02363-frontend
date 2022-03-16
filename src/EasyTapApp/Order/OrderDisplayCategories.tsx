@@ -5,14 +5,13 @@ import CategoryModel from "../../Models/CategoryModel";
 interface IProps {
 
   categories : CategoryModel[],
-  setCategories : Dispatch<SetStateAction<CategoryModel[]>>,
   setSelectedCategory : Dispatch<SetStateAction<String>>
 }
 
 const DisplayCategories = (props : IProps) => {
 
-    const handleOnClickEvent = (categories: string) => {
-     props.setSelectedCategory(categories)
+    const handleOnClickEvent = (selectedCategory: string) => {
+      props.setSelectedCategory(selectedCategory)
     }
 
     return (

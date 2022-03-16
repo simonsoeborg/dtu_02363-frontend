@@ -21,6 +21,9 @@ const GlobalNavbar = () => {
           <Nav.Item>
             <Nav.Link href="/EasyTap">EasyTapApp</Nav.Link>
           </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/EasyTap/Layout">Restaurant overView</Nav.Link>
+            </Nav.Item> 
           {
             isAuthenticated ?  
             <Nav.Item>

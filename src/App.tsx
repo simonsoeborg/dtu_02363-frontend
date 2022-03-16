@@ -10,6 +10,7 @@ import RestaurantById from './AdminApp/Restaurant/RestaurantById';
 import Order from './EasyTapApp/Order/Order';
 import TableTop from './EasyTapApp/TableTop/TableTop';
 import EasyTap from './EasyTapApp/EasyTap';
+import Layout from './EasyTapApp/RestaurantLayout/RestaurantOverview';
 import {
   BrowserRouter, Routes, Route
 } from "react-router-dom";
@@ -30,6 +31,7 @@ const App = () => {
                     <Route path="/EasyTap" element={<EasyTap />} ></Route>
                     <Route path="/EasyTap/TableTop" element={<TableTop />} ></Route>
                     <Route path="/EasyTap/Order" element={<Order />} ></Route>
+                    <Route path="/EasyTap/Layout" element={<Layout />} ></Route>
                 </Routes>
             </BrowserRouter>
         </div>

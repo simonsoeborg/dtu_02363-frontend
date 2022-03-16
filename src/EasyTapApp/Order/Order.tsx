@@ -56,12 +56,14 @@ const Order = () => {
             </Row>
             <br></br>
             <Row>
-              <OrderDisplayItems items={items} setItems={setItems} selectedCategory={selectedCategory} setSelectedItem={setSelectedItem}/>
+              {/* {<OrderDisplayItems items={items} setItems={setItems} selectedCategory={selectedCategory} setSelectedItem={setSelectedItem}/>*/}
             </Row>
           </Col>
           <Col>
             <Row >
-            <OrderDisplayOverView/>
+        
+            {/* {/<OrderDisplayOverView/>/} */}
+          
             </Row>
           </Col>
         </Row>

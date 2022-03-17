@@ -13,6 +13,9 @@ import { os } from "../../Stores/OrderStore";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
 import TapOutModel from "../../Models/TapOutModel";
+import OrderAmountChosen from "./OrderAmountPanel";
+import OrderAmountPanel from "./OrderAmountPanel";
+ 
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
@@ -75,6 +78,8 @@ const Order = () => {
               <OrderDisplayOverView 
               currentOrderItems={orderItems}
               setCurrentOrderItems={setOrderItems} />
+              
+              <OrderAmountPanel/>
             </Row>
           </Col>
         </Row>

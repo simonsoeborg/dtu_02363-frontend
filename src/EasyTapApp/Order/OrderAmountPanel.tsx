@@ -6,24 +6,27 @@ import {
     Button
   } from "react-bootstrap";
   import { Dispatch, SetStateAction, useState } from "react";
-  
-  const OrderAmountPanel = () => {
-    const [AmountChosen, setAmount] = useState(0);
+
+  interface IProps {
+    amountChosen: number;
+    setAmount: Dispatch<SetStateAction<number>>;
+  }
+
+  const OrderAmountPanel = (props : IProps) => {
 
     const handleOnKeyClick = (value: number) => {
         // observe pressed number and add to currrent amountChosen.
-        if(AmountChosen!==0){
-            setAmount(AmountChosen*10+value)
+        if(props.amountChosen!==0){
+            props.setAmount(props.amountChosen*10+value)
         }
         else {
-            setAmount(value)
+            props.setAmount(value)
         }
-        console.log(AmountChosen)
     };
   
     const handleOnClearClick = () => {
         // Clear Chosen amount 
-        setAmount(0);
+        props.setAmount(0);
     };
   
     return (
@@ -31,7 +34,7 @@ import {
         <Container style={{ maxWidth: "20rem", margin: "2rem" }}>
           <Card>
               <Card.Header>
-                  Current quantaty chosen: {AmountChosen.toString()}
+                  Current quantity chosen: {props.amountChosen.toString()}
               </Card.Header>
             <Card.Body>
               <Row className="justify-content-center">

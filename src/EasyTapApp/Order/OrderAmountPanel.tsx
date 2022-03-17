@@ -3,28 +3,36 @@ import {
     Container,
     Card,
     Col,
-    Button,
-    InputGroup,
-    FormControl,
+    Button
   } from "react-bootstrap";
   import { Dispatch, SetStateAction, useState } from "react";
   
-  
   const OrderAmountPanel = () => {
     const [AmountChosen, setAmount] = useState(0);
-  
-    const handleOnKeyClick = (value: string) => {
-        // observe pressed number and add to currrent amountChosen. 
+
+    const handleOnKeyClick = (value: number) => {
+        // observe pressed number and add to currrent amountChosen.
+        if(AmountChosen!==0){
+            setAmount(AmountChosen*10+value)
+        }
+        else {
+            setAmount(value)
+        }
+        console.log(AmountChosen)
     };
   
     const handleOnClearClick = () => {
         // Clear Chosen amount 
+        setAmount(0);
     };
   
     return (
       <Row className="justify-content-center">
-        <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
+        <Container style={{ maxWidth: "20rem", margin: "2rem" }}>
           <Card>
+              <Card.Header>
+                  Current quantaty chosen: {AmountChosen.toString()}
+              </Card.Header>
             <Card.Body>
               <Row className="justify-content-center">
                 {/* 0 - 9 */}
@@ -34,7 +42,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("7")}
+                      onClick={() => handleOnKeyClick(7)}
                     >
                       7
                     </Button>
@@ -43,7 +51,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("8")}
+                      onClick={() => handleOnKeyClick(8)}
                     >
                       8
                     </Button>
@@ -52,7 +60,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("9")}
+                      onClick={() => handleOnKeyClick(9)}
                     >
                       9
                     </Button>
@@ -64,7 +72,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("4")}
+                      onClick={() => handleOnKeyClick(4)}
                     >
                       4
                     </Button>
@@ -73,7 +81,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("5")}
+                      onClick={() => handleOnKeyClick(5)}
                     >
                       5
                     </Button>
@@ -82,7 +90,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("6")}
+                      onClick={() => handleOnKeyClick(6)}
                     >
                       6
                     </Button>
@@ -94,7 +102,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("1")}
+                      onClick={() => handleOnKeyClick(1)}
                     >
                       1
                     </Button>
@@ -103,7 +111,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("2")}
+                      onClick={() => handleOnKeyClick(2)}
                     >
                       2
                     </Button>
@@ -112,7 +120,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("3")}
+                      onClick={() => handleOnKeyClick(3)}
                     >
                       3
                     </Button>
@@ -133,7 +141,7 @@ import {
                     <Button
                       className="PinForm"
                       variant="outline-primary"
-                      onClick={() => handleOnKeyClick("0")}
+                      onClick={() => handleOnKeyClick(0)}
                     >
                       0
                     </Button>

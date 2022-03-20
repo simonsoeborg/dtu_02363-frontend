@@ -1,5 +1,5 @@
 
-export default class AuthenticationModel {
+export default class AuthViewModel {
     email : string = "";
     email_verified : boolean = false;
     family_name : string = "";
@@ -8,7 +8,9 @@ export default class AuthenticationModel {
     nickname : string = "";
     picture : string = "";
     sub : string = "";
-    roleId : number = 0;
+    role : string = "";
+    pin : number = 0;
+    userEmail : string = "";
 
     constructor(
         email : string, 
@@ -19,7 +21,9 @@ export default class AuthenticationModel {
         sub : string,
         nickname? : string,
         picture? : string,
-        roleId? : number,
+        role? : string, 
+        pin? : number,
+        userEmail? : string
         ) {
             this.email = email;
             this.email_verified = email_verified;
@@ -29,7 +33,9 @@ export default class AuthenticationModel {
             this.sub = sub;
             this.nickname = nickname!; // Non-Null Assertion Operator
             this.picture = picture!;
-            this.roleId = roleId!;
+            this.role = role!;
+            this.pin = pin!;
+            this.userEmail = userEmail!;
         }
 
 }

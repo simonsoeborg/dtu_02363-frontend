@@ -4,7 +4,7 @@ import { Button, Card, Container, Form, Image, Row } from "react-bootstrap";
 import {defaultImage} from '../../Services/_services';
 import { useAuth0 } from "@auth0/auth0-react";
 import GoogleIcon from "@mui/icons-material/Google";
-import { aus } from '../../Stores/AuthStore';
+import { authentication } from '../../Stores/AuthenticationStore';
 import AuthenticationModel from "../../Models/AuthenticationModel";
 
 const Login = () => {
@@ -13,6 +13,7 @@ const Login = () => {
   const [formFilled, setFormFilled] = useState(false);
   const [emailFilled, setEmailFilled] = useState(false);
   const [passwordFilled, setPasswordFilled] = useState(false);
+  const [userHasBeenChecked, setUserHasBeenChecked] = useState(false)
   const navigate = useNavigate();
   const {isAuthenticated, user, loginWithPopup, getAccessTokenSilently, getIdTokenClaims} = useAuth0();
 
@@ -36,11 +37,30 @@ const Login = () => {
     }
   };
 
-
-
   if(isAuthenticated) {
-    const temp = new AuthenticationModel();
-    console.log(temp);
+    if(!userHasBeenChecked) {
+      if(user!) { // Asserting that user is not null
+        authentication.setAuth(new AuthenticationModel(
+          user.email!, // Asserting that value is not null (Non-Null Assertion Operator)
+          user.email_verified!,
+          user.family_name!,
+          user.given_name!,
+          user.name!,
+          user.sub!,
+          user.nickname!,
+          user.picture!,
+          1,
+        ));
+        authentication.postAuthentication(authentication.Auth);
+        /* TODO 
+          New Store for Auth View
+          Compare user with Auth View. Get Role
+          Create store for Role, so we can global access
+          If Role is this navigate to this.
+          If Role is t hat nagivate  to that.
+        */ 
+      }
+    }
   }
 
   const routeEditChange = () => {

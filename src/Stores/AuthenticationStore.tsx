@@ -28,14 +28,14 @@ class AuthStore {
     postAuthentication = async (auth : AuthenticationModel) => {
         const headers = new Headers();
         headers.append("Content-type", "application/json");
-        headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-        headers.append('Access-Control-Allow-Credentials', 'true');
+        //headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
+        //headers.append('Access-Control-Allow-Credentials', 'true');
         var options = {
             method: "POST",
             headers,
             body: JSON.stringify(auth)
         };
-
+        //const request = new Request(`https://localhost:44390/api/Authentication/`, options)
         const request = new Request(`${API_URL}/Authentication/`, options)
         await fetch(request);
     }   

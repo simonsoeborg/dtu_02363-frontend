@@ -73,7 +73,9 @@ const Order = () => {
           </Col>
           <Col>
             <Row>
-              <OrderDisplayOverView currentOrder={orderItems} />
+              <OrderDisplayOverView 
+              currentOrderItems={orderItems}
+              setCurrentOrderItems={setOrderItems} />
             </Row>
           </Col>
           <Col>

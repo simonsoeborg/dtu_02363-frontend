@@ -5,7 +5,10 @@ import {
   Row,
   ListGroupItem,
   Card,
+  Button
 } from "react-bootstrap";
+import { useState } from "react";
+import { TiDelete } from 'react-icons/ti';
 import { Dispatch, SetStateAction } from "react";
 import { is } from "../../Stores/ItemStore";
 import Loading from "../../Partials/Loading";
@@ -13,15 +16,21 @@ import ItemModel from "../../Models/ItemModel";
 import OrderModel from "../../Models/OrderModel";
 
 interface IProps {
-  currentOrder: ItemModel[];
+  currentOrderItems: ItemModel[];
+  setCurrentOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
 }
 
 const OrderDisplayOverView = (props: IProps) => {
+
   function getTotal(): number {
     var result: number = 0;
-    props.currentOrder.map((item) => (result = result + item.price));
+    props.currentOrderItems.map((item) => (result = result + item.price));
     return result;
   }
+
+  const handleDeleteItem = (item: ItemModel) => {
+    props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
+  };
 
   if (!is.Items) {
     return <Loading />;
@@ -34,12 +43,13 @@ const OrderDisplayOverView = (props: IProps) => {
           </Card.Header>
           <Card.Body>
             <ListGroup className="scrollable-menu">
-              {props.currentOrder.map((item, index) => (
+              {props.currentOrderItems.map((item, index) => (
                 <ListGroupItem key={index}>
-                  <Row>
+                  <Row >
                     <Col md="auto">1x</Col>
                     <Col md={8}>{item.itemName}</Col>
                     <Col md="auto">{item.price}</Col>
+                    <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
                   </Row>
                 </ListGroupItem>
               ))}

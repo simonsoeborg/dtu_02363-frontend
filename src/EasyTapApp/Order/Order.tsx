@@ -81,6 +81,8 @@ const Order = () => {
               <OrderDisplayOverView 
               currentOrderItems={orderItems}
               setCurrentOrderItems={setOrderItems}
+              amountChosen = {AmountChosen}
+              setAmount = {setAmount}
               />
               <OrderAmountPanel 
               amountChosen = {AmountChosen}

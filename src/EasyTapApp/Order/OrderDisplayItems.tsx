@@ -2,7 +2,7 @@ import { Container, Col, Card, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
- 
+
 interface IProps {
   items: ItemModel[];
   setItems: Dispatch<SetStateAction<ItemModel[]>>;
@@ -30,13 +30,13 @@ const DisplayItems = (props: IProps) => {
   }
 
   const handleOnClickEvent = (item: ItemModel) => {
-    
-    const newItemObject = {
-      id: itemId,
-      itemName: item.itemName,
-      price: item.price,
-      categoryName: item.categoryName
-    };
+
+      const newItemObject = {
+        id: itemId,
+        itemName: item.itemName,
+        price: item.price,
+        categoryName: item.categoryName
+      };
     addItems(newItemObject, 3)
   };
 

@@ -18,6 +18,8 @@ import OrderModel from "../../Models/OrderModel";
 interface IProps {
   currentOrderItems: ItemModel[];
   setCurrentOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
+  amountChosen: number;
+  setAmount: Dispatch<SetStateAction<number>>;
 }
 
 const OrderDisplayOverView = (props: IProps) => {
@@ -26,6 +28,15 @@ const OrderDisplayOverView = (props: IProps) => {
     var result: number = 0;
     props.currentOrderItems.map((item) => (result = result + item.price));
     return result;
+  }
+  
+  function getQuantity(itemName: String) {
+    const quantity = props.currentOrderItems.filter(item => item.itemName === itemName).length;
+    return quantity;
+  }
+
+  function getQuantityPrice(item: ItemModel) {
+    return item.price * getQuantity(item.itemName);
   }
 
   const handleDeleteItem = (item: ItemModel) => {
@@ -46,9 +57,9 @@ const OrderDisplayOverView = (props: IProps) => {
               {props.currentOrderItems.map((item, index) => (
                 <ListGroupItem key={index}>
                   <Row >
-                    <Col md="auto">1x</Col>
+                    <Col md="auto">{getQuantity(item.itemName)}</Col>
                     <Col md={8}>{item.itemName}</Col>
-                    <Col md="auto">{item.price}</Col>
+                    <Col md="auto">{getQuantityPrice(item)}</Col>
                     <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
                   </Row>
                 </ListGroupItem>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
@@ -8,12 +9,14 @@ import ItemModel from "../../Models/ItemModel";
 import OrderModel from "../../Models/OrderModel";
 import { cs } from "../../Stores/CategoryStore";
 import { is } from "../../Stores/ItemStore";
+import { ts } from "../../Stores/TableStore";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
 import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
 import PrintBillButton from "./PrintBillButton";
 import TapOutButton from "./TapOutButton";
+import TableModel from "../../Models/TableModel";
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
@@ -21,6 +24,7 @@ const Order = () => {
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");
   const [hasLoaded, setHasLoaded] = useState(false);
   const [items, setItems] = useState<ItemModel[]>([]);
+  const { id } = useParams();
 
   // const containing the current order
   const [order, setOrder] = useState<OrderModel>(new OrderModel());
@@ -30,16 +34,18 @@ const Order = () => {
   const [AmountChosen, setAmount] = useState(0);
   const [isPayed, setIsPayed] = useState(false);
 
-  if (!cs.Categories && !is.Items) {
+  if (!cs.Categories && !is.Items && !ts.Table) {
     return <Loading />;
   } else {
     if (cs.Categories.length > 0 && is.Items.length > 0) {
       if (!hasLoaded) {
+        ts.getTableByIdAsync(Number(id));
         const orderData: ItemModel[] = [];
         const dummy_order = new OrderModel();
         dummy_order.id = 1;
         dummy_order.items = orderData;
-        dummy_order.tableId = 5;
+        console.log(ts.Table.id!);
+        dummy_order.tableId = ts.Table.id!;
         dummy_order.orderPlaced = "";
         dummy_order.orderFinished = "";
         setHasLoaded(true);

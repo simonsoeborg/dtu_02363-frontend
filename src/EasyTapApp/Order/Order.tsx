@@ -21,6 +21,7 @@ const Order = () => {
   const [categories, setCategories] = useState<CategoryModel[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [tableNr, setTableNr] = useState(0);
   const [items, setItems] = useState<ItemModel[]>([]);
 
   // const containing the current order
@@ -86,6 +87,11 @@ const Order = () => {
               amountChosen = {AmountChosen}
               setAmount = {setAmount}
               />
+            </Row>
+          </Col>
+          <Col>
+            <Row>
+              <OrderDisplayCalculator />
             </Row>
           </Col>
         </Row>

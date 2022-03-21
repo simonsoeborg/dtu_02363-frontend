@@ -128,9 +128,7 @@ const OrderDisplayCalculator = (props: IProps) => {
               </Row>
               <Row className="PinFormRowBox">
                 {/* Cancel - 0 - Enter */}
-                <Col>
-                  <Button className="PinForm" variant="outline-danger" />
-                </Col>
+                <Col></Col>
                 <Col>
                   <Button
                     className="PinForm"
@@ -140,9 +138,7 @@ const OrderDisplayCalculator = (props: IProps) => {
                     0
                   </Button>
                 </Col>
-                <Col>
-                  <Button className="PinForm" variant="outline-success" />
-                </Col>
+                <Col></Col>
               </Row>
             </Row>
           </Card.Body>

@@ -2,13 +2,15 @@ import { Container, Col, Card, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
-
+ 
 interface IProps {
   items: ItemModel[];
   setItems: Dispatch<SetStateAction<ItemModel[]>>;
   selectedCategory: String;
   orderItems: ItemModel[];
   setOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
+  amountChosen: number;
+  setAmount: Dispatch<SetStateAction<number>>;
 }
 
 const DisplayItems = (props: IProps) => {
@@ -18,15 +20,24 @@ const DisplayItems = (props: IProps) => {
 
   const [itemId, setItemId] = useState(0);
 
+  const addItems = (newItem : ItemModel, amount : Number) => {
+  
+    // Få loopet til at virke (således at den laver amount-antal kopier)
+    for (let i = 0; i< amount; i++){
+      setItemId(itemId+1);
+      props.setOrderItems(props.orderItems.concat(newItem));
+    }
+  }
+
   const handleOnClickEvent = (item: ItemModel) => {
+    
     const newItemObject = {
       id: itemId,
       itemName: item.itemName,
       price: item.price,
       categoryName: item.categoryName
     };
-    setItemId(itemId+1);
-    props.setOrderItems(props.orderItems.concat(newItemObject));
+    addItems(newItemObject, 3)
   };
 
   return (

@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import Bar from "../../resources/LayOutDesign/bar.png";
 import Table from "../../resources/LayOutDesign/table.png";
 import Plant from "../../resources/LayOutDesign/plant.png";
-import "../../resources/Css/layout.css";
+import "../../resources/Css/ResturantLayout.css";
 import BarLayout from "./ResturantLayoutPartials/BarLayout";
 import TableLayout from "./ResturantLayoutPartials/TableLayout";
 import PlantLayout from "./ResturantLayoutPartials/PlantLayout";

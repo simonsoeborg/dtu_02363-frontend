@@ -1,4 +1,4 @@
-import "../../../resources/Css/layout.css";
+import "../../../resources/Css/ResturantLayout.css";
 
 interface IProps {
   image: any;

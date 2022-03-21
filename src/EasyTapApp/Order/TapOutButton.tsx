@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import "../../resources/Css/layout.css";
+import "../../resources/Css/OrderLayout.css";
 
 const TapOutButton = () => {
   return (

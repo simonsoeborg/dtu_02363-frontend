@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
-import "../../resources/Css/layout.css";
+import "../../resources/Css/OrderLayout.css";
 
 interface IProps {
   printbutton: boolean;

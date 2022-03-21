@@ -1,25 +1,3 @@
-.OverviewLayout {
-  background-color: rgb(174, 154, 154);
-  width: calc(200vh - 4em);
-  height: calc(100vh - 4em);
-  border-style: solid;
-}
-
-.BarSize {
-  height: 300px;
-  width: 300px;
-}
-
-.TableSize {
-  height: 180px;
-  width: 180px;
-}
-
-.PlantSize {
-  height: 100px;
-  width: 50px;
-}
-
 .scrollable-menu {
   height: 280px;
   max-height: 280px;

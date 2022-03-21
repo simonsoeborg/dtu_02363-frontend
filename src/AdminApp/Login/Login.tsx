@@ -53,18 +53,12 @@ const Login = () => {
           0,
         ));
         authentication.postAuthentication(authentication.Auth);
-        /* TODO 
-          New Store for Auth View
-          Compare user with Auth View. Get Role
-          Create store for Role, so we can global access
-          If Role is this navigate to this.
-          If Role is t hat nagivate  to that.
-        */ 
       }
     }
+    // navigate(`/Login/LoginResult`, { replace: false });
   }
 
-  const routeEditChange = () => {
+  const navigateToRegister = () => {
     navigate(`/Login/Register/`, { replace: false });
   };
 
@@ -149,7 +143,7 @@ const Login = () => {
             <Button
               style={{ maxWidth: "6rem" }}
               variant="outline-primary"
-              onClick={() => routeEditChange()}
+              onClick={() => navigateToRegister()}
             >
               Register
             </Button>

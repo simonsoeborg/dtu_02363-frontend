@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import OrderDisplayCalculator from "./OrderDisplayCalculator";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
@@ -87,11 +86,6 @@ const Order = () => {
               amountChosen = {AmountChosen}
               setAmount = {setAmount}
               />
-            </Row>
-          </Col>
-          <Col>
-            <Row>
-              <OrderDisplayCalculator />
             </Row>
           </Col>
         </Row>

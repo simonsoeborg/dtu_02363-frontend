@@ -72,7 +72,6 @@ const Order = () => {
                 orderItems={orderItems}
                 setOrderItems={setOrderItems}
                 amountChosen = {AmountChosen} 
-                setAmount = {setAmount}
               />
             </Row>
           </Col>

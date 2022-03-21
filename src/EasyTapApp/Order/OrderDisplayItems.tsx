@@ -10,7 +10,6 @@ interface IProps {
   orderItems: ItemModel[];
   setOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
   amountChosen: number;
-  setAmount: Dispatch<SetStateAction<number>>;
 }
 
 const DisplayItems = (props: IProps) => {
@@ -20,14 +19,25 @@ const DisplayItems = (props: IProps) => {
 
   const [itemId, setItemId] = useState(0);
 
+  const [combinedModel, setCombindedModel] = useState<ItemModel[]>([]);
+
+
   const addItems = (newItem : ItemModel, amount : Number) => {
-  
     // Få loopet til at virke (således at den laver amount-antal kopier)
-    for (let i = 0; i< amount; i++){
+      
+      for (let i = 0; i< amount; i++){
       setItemId(itemId+1);
-      props.setOrderItems(props.orderItems.concat(newItem));
+
+      setCombindedModel(combinedModel.concat(newItem));
+      //props.setOrderItems(combinedModel)
+      }
+      props.setOrderItems(combinedModel);
+
+
+      combinedModel.map((item,index)=>(console.log(item)));
+     //props.setOrderItems(props.orderItems.concat(newItem))
     }
-  }
+  
 
   const handleOnClickEvent = (item: ItemModel) => {
     
@@ -37,7 +47,7 @@ const DisplayItems = (props: IProps) => {
       price: item.price,
       categoryName: item.categoryName
     };
-    addItems(newItemObject, 3)
+      addItems(newItemObject, 3)
   };
 
   return (

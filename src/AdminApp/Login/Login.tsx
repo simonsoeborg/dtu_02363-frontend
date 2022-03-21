@@ -50,6 +50,7 @@ const Login = () => {
           user.nickname!,
           user.picture!,
           1,
+          0,
         ));
         authentication.postAuthentication(authentication.Auth);
         /* TODO 

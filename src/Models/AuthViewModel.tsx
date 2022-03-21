@@ -10,7 +10,6 @@ export default class AuthViewModel {
     sub : string = "";
     role : string = "";
     pin : number = 0;
-    userEmail : string = "";
 
     constructor(
         email : string, 
@@ -23,7 +22,6 @@ export default class AuthViewModel {
         picture? : string,
         role? : string, 
         pin? : number,
-        userEmail? : string
         ) {
             this.email = email;
             this.email_verified = email_verified;
@@ -35,7 +33,6 @@ export default class AuthViewModel {
             this.picture = picture!;
             this.role = role!;
             this.pin = pin!;
-            this.userEmail = userEmail!;
         }
 
 }

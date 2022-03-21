@@ -9,6 +9,7 @@ export default class AuthenticationModel {
     picture : string = "";
     sub : string = "";
     roleId : number = 0;
+    pin : number = 0;
 
     constructor(
         email : string, 
@@ -20,6 +21,7 @@ export default class AuthenticationModel {
         nickname? : string,
         picture? : string,
         roleId? : number,
+        pin? : number,
         ) {
             this.email = email;
             this.email_verified = email_verified;
@@ -30,6 +32,7 @@ export default class AuthenticationModel {
             this.nickname = nickname!; // Non-Null Assertion Operator
             this.picture = picture!;
             this.roleId = roleId!;
+            this.pin = pin!;
         }
 
 }

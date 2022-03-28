@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, ListGroup, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import Bar from "../../resources/LayOutDesign/bar.png";
 import Table from "../../resources/LayOutDesign/table.png";
@@ -19,11 +19,39 @@ const RestaurantLayout = () => {
   } else {
     return (
       <Container className="OverviewLayout">
-        <BarLayout image={Bar} />
-        {ts.Tables.map((table, index) => (
-          <TableLayout tableId={table.id!} image={Table} />
-        ))}
-        <PlantLayout image={Plant} />
+        <Row>
+          <Col xs="3">
+            <BarLayout image={Bar} />
+          </Col>
+          <Col xs="1"></Col>
+          <Col xs="2">
+            <TableLayout tableId={1} image={Table} />
+          </Col>
+          <Col xs="1">
+            <PlantLayout image={Plant} />
+          </Col>
+          <Col xs="2">
+            <TableLayout tableId={2} image={Table} />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="2">
+            <TableLayout tableId={3} image={Table} />
+          </Col>
+          <Col xs="1">
+            <PlantLayout image={Plant} />
+          </Col>
+
+          <Col xs="2">
+            <TableLayout tableId={4} image={Table} />
+          </Col>
+          <Col xs="1">
+            <PlantLayout image={Plant} />
+          </Col>
+          <Col xs="2">
+            <TableLayout tableId={5} image={Table} />
+          </Col>
+        </Row>
       </Container>
     );
   }

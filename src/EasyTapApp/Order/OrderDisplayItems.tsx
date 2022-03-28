@@ -19,36 +19,36 @@ const DisplayItems = (props: IProps) => {
   );
 
   
- const [itemId, setItemId] = useState(0);
-  
-
-  const addItems = (newItem : ItemModel, amount : Number) => {
-    const items = []; 
+ const [currentItemId, setCurrentItemId] = useState(0);
+ 
+  const addItems = (newItem : ItemModel, amount : number) => {
+    const items = [];
 
     // Få loopet til at virke (således at den laver amount-antal kopier)
       for (let i = 0; i< amount; i++){
-      setItemId(itemId+1)
-      items.push(newItem)
+
+        const newItemObject = {
+          id: currentItemId+i,
+          itemName: newItem.itemName,
+          price: newItem.price,
+          categoryName: newItem.categoryName
+        };
+
+      items.push(newItemObject)
       }
-      
-    return items
+
+      setCurrentItemId(currentItemId+amount)
+      return items
     }
 
+
   const handleOnClickEvent = (item: ItemModel) => {
-    
-    const newItemObject = {
-      id: itemId,
-      itemName: item.itemName,
-      price: item.price,
-      categoryName: item.categoryName
-    };
-    //setItemId(itemId+1)
-    
+
     if (props.amountChosen == 0){
-      props.setOrderItems(props.orderItems.concat(addItems(newItemObject, 1)))
+      props.setOrderItems(props.orderItems.concat(addItems(item, 1)))
     }
     else{
-      props.setOrderItems(props.orderItems.concat(addItems(newItemObject, props.amountChosen)))
+      props.setOrderItems(props.orderItems.concat(addItems(item, props.amountChosen)))
       props.setAmount(0);
     }
   };

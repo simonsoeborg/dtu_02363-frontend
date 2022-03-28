@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { useParams, useNavigate } from "react-router-dom";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
@@ -14,9 +14,7 @@ import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
 import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
-import PrintBillButton from "./PrintBillButton";
-import TapOutButton from "./TapOutButton";
-import TableModel from "../../Models/TableModel";
+import "../../resources/Css/OrderLayout.css";
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
@@ -25,6 +23,15 @@ const Order = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [items, setItems] = useState<ItemModel[]>([]);
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const tapOutNavigate = () => {
+    navigate(`/EasyTap`);
+  };
+
+  const PrintOutNavigation = () => {
+    navigate(`/EasyTap`);
+  };
 
   // const containing the current order
   const [order, setOrder] = useState<OrderModel>(new OrderModel());
@@ -95,11 +102,23 @@ const Order = () => {
               </Col>
               <Col>
                 <Row className="d-flex justify-content-center">
-                  <PrintBillButton
-                    printbutton={isPayed}
-                    setPrintOut={setIsPayed}
-                  />
-                  <TapOutButton />
+                  <Button
+                    className="button-PrintBill"
+                    variant="outline-primary"
+                    onClick={() => PrintOutNavigation()}
+                  >
+                    Print Bill
+                  </Button>
+
+                  <Button
+                    className="button-tabOut"
+                    variant="outline-primary"
+                    onClick={() => {
+                      tapOutNavigate();
+                    }}
+                  >
+                    Tap Out
+                  </Button>
                 </Row>
               </Col>
             </Row>

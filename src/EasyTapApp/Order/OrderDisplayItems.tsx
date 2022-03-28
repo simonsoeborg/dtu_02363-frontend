@@ -18,17 +18,19 @@ const DisplayItems = (props: IProps) => {
     (item) => item.categoryName === props.selectedCategory
   );
 
-  const [itemId, setItemId] = useState(0);
-
   
+ const [itemId, setItemId] = useState(0);
+  
+
   const addItems = (newItem : ItemModel, amount : Number) => {
     const items = []; 
 
     // Få loopet til at virke (således at den laver amount-antal kopier)
       for (let i = 0; i< amount; i++){
+      setItemId(itemId+1)
       items.push(newItem)
       }
-      //combined.map((item,index)=>(console.log(item)));
+      
     return items
     }
 
@@ -40,7 +42,8 @@ const DisplayItems = (props: IProps) => {
       price: item.price,
       categoryName: item.categoryName
     };
-
+    //setItemId(itemId+1)
+    
     if (props.amountChosen == 0){
       props.setOrderItems(props.orderItems.concat(addItems(newItemObject, 1)))
     }

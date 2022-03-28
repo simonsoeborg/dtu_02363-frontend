@@ -39,10 +39,9 @@ class AuthStore {
     postAuthentication = async (auth : AuthenticationModel) => {
         var instance = axios.create({ baseURL: `${API_URL}/`, headers: {'Content-Type': 'application/json'}});
 
-        await instance.post("Authentication", JSON.stringify(auth)).then((res) => {
+        instance.post("Authentication", JSON.stringify(auth)).then((res) => {
             const data = res.data;
             this.setRBACAuth(new AuthViewModel(data.email, data.emailVerified, data.familyName, data.givenName, data.name, data.sub, data.nickname, data.picture!, data.role!, data.pin!));
-            return res.status;
         });
     }
 

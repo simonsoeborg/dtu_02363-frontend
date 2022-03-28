@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from "react";
 import CategoryModel from "../../Models/CategoryModel";
 
 interface IProps {
-  categories: CategoryModel[];
-  setSelectedCategory: Dispatch<SetStateAction<String>>;
+  categories : CategoryModel[],
+  setSelectedCategory : Dispatch<SetStateAction<String>>
 }
 
 const DisplayCategories = (props: IProps) => {

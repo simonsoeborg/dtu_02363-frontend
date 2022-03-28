@@ -1,8 +1,8 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
- 
+
 interface IProps {
   items: ItemModel[];
   setItems: Dispatch<SetStateAction<ItemModel[]>>;
@@ -20,14 +20,17 @@ const DisplayItems = (props: IProps) => {
 
   const [itemId, setItemId] = useState(0);
 
-  const addItems = (newItem : ItemModel, amount : Number) => {
   
+  const addItems = (newItem : ItemModel, amount : Number) => {
+    const items = []; 
+
     // Få loopet til at virke (således at den laver amount-antal kopier)
-    for (let i = 0; i< amount; i++){
-      setItemId(itemId+1);
-      props.setOrderItems(props.orderItems.concat(newItem));
+      for (let i = 0; i< amount; i++){
+      items.push(newItem)
+      }
+      //combined.map((item,index)=>(console.log(item)));
+    return items
     }
-  }
 
   const handleOnClickEvent = (item: ItemModel) => {
     
@@ -37,7 +40,14 @@ const DisplayItems = (props: IProps) => {
       price: item.price,
       categoryName: item.categoryName
     };
-    addItems(newItemObject, 3)
+
+    if (props.amountChosen == 0){
+      props.setOrderItems(props.orderItems.concat(addItems(newItemObject, 1)))
+    }
+    else{
+      props.setOrderItems(props.orderItems.concat(addItems(newItemObject, props.amountChosen)))
+      props.setAmount(0);
+    }
   };
 
   return (

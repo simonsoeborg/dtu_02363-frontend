@@ -83,9 +83,11 @@ const Order = () => {
           </Col>
           <Col>
             <Row>
-              <OrderDisplayOverView
-                currentOrderItems={orderItems}
-                setCurrentOrderItems={setOrderItems}
+              <OrderDisplayOverView 
+              currentOrderItems={orderItems}
+              setCurrentOrderItems={setOrderItems}
+              amountChosen = {AmountChosen}
+              setAmount = {setAmount}
               />
               <Col>
                 <OrderAmountPanel

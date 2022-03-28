@@ -5,10 +5,10 @@ import {
   Row,
   ListGroupItem,
   Card,
-  Button
+  Button,
 } from "react-bootstrap";
 import { useState } from "react";
-import { TiDelete } from 'react-icons/ti';
+import { TiDelete } from "react-icons/ti";
 import { Dispatch, SetStateAction } from "react";
 import { is } from "../../Stores/ItemStore";
 import Loading from "../../Partials/Loading";
@@ -23,7 +23,6 @@ interface IProps {
 }
 
 const OrderDisplayOverView = (props: IProps) => {
-
   function getTotal(): number {
     var result: number = 0;
     props.currentOrderItems.map((item) => (result = result + item.price));
@@ -46,7 +45,9 @@ const OrderDisplayOverView = (props: IProps) => {
   }
   
   const handleDeleteItem = (item: ItemModel) => {
-    props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
+    props.setCurrentOrderItems(
+      props.currentOrderItems.filter((orderitem) => orderitem.id !== item.id)
+    );
   };
 
   function displayOrderItems(item: ItemModel, index: number) {

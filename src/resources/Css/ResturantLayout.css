@@ -19,9 +19,3 @@
   height: 100px;
   width: 50px;
 }
-
-.scrollable-menu {
-  height: 350px;
-  max-height: 350px;
-  overflow-x: hidden;
-}

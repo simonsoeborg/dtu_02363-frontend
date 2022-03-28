@@ -1,5 +1,5 @@
 import { Nav, Card } from "react-bootstrap";
-import "../../../resources/Css/layout.css";
+import "../../../resources/Css/ResturantLayout.css";
 import Order from "../../Order/Order";
 import { useNavigate } from "react-router-dom";
 interface IProps {

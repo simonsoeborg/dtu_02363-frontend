@@ -10,6 +10,7 @@ import PlantLayout from "./ResturantLayoutPartials/PlantLayout";
 import { ts } from "../../Stores/TableStore";
 import Loading from "../../Partials/Loading";
 import TableModel from "../../Models/TableModel";
+import { height } from "@mui/system";
 
 const RestaurantLayout = () => {
   const [tables, setTables] = useState<TableModel[]>([]);
@@ -18,7 +19,10 @@ const RestaurantLayout = () => {
     return <Loading />;
   } else {
     return (
-      <Container className="OverviewLayout">
+      <Container
+        style={{ height: "53rem" }}
+        className="OverviewLayout justify-content-space-around"
+      >
         <Row>
           <Col xs="3">
             <BarLayout image={Bar} />
@@ -34,14 +38,17 @@ const RestaurantLayout = () => {
             <TableLayout tableId={2} image={Table} />
           </Col>
         </Row>
-        <Row>
+
+        <Row
+          style={{ marginTop: "23rem" }}
+          className="d-flex align-items-end flex-Row justify-content-md-center"
+        >
           <Col xs="2">
             <TableLayout tableId={3} image={Table} />
           </Col>
           <Col xs="1">
             <PlantLayout image={Plant} />
           </Col>
-
           <Col xs="2">
             <TableLayout tableId={4} image={Table} />
           </Col>

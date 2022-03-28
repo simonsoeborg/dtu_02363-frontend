@@ -1,6 +1,7 @@
 import { Nav, Card } from "react-bootstrap";
 import "../../../resources/Css/ResturantLayout.css";
 import { useNavigate } from "react-router-dom";
+import { ts } from "../../../Stores/TableStore";
 interface IProps {
   tableId: number;
   image: any;
@@ -10,6 +11,7 @@ const TableLayout = (props: IProps) => {
   const navigate = useNavigate();
 
   const toOrderPage = () => {
+    ts.currentTableId = props.tableId;
     navigate(`/EasyTap/Order/${props.tableId}`);
   };
 

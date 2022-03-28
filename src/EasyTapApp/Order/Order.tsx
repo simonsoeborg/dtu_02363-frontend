@@ -34,18 +34,17 @@ const Order = () => {
   const [AmountChosen, setAmount] = useState(0);
   const [isPayed, setIsPayed] = useState(false);
 
-  if (!cs.Categories && !is.Items && !ts.Table) {
+  if (!cs.Categories && !is.Items && !ts.Tables) {
     return <Loading />;
   } else {
     if (cs.Categories.length > 0 && is.Items.length > 0) {
       if (!hasLoaded) {
-        ts.getTableByIdAsync(Number(id));
         const orderData: ItemModel[] = [];
         const dummy_order = new OrderModel();
         dummy_order.id = 1;
         dummy_order.items = orderData;
-        console.log(ts.Table.id!);
-        dummy_order.tableId = ts.Table.id!;
+        //console.log(ts.Table.id!);
+        dummy_order.tableId = ts.currentTableId;
         dummy_order.orderPlaced = "";
         dummy_order.orderFinished = "";
         setHasLoaded(true);

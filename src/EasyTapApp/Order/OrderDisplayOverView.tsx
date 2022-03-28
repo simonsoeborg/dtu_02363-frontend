@@ -39,6 +39,21 @@ const OrderDisplayOverView = (props: IProps) => {
     return item.price * getQuantity(item.itemName);
   }
 
+  function displayOrderItems(item: ItemModel, index: number) {
+    //if(getQuantity(item.itemName) <= 1){
+      return(
+      <ListGroupItem key={index}>
+        <Row >
+          <Col md="auto">{getQuantity(item.itemName)}</Col>
+          <Col md={8}>{item.itemName}</Col>
+          <Col md="auto">{getQuantityPrice(item)}</Col>
+          <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
+        </Row>
+      </ListGroupItem>
+      )
+    //}
+  }
+
   const handleDeleteItem = (item: ItemModel) => {
     props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
   };
@@ -55,14 +70,7 @@ const OrderDisplayOverView = (props: IProps) => {
           <Card.Body>
             <ListGroup className="scrollable-menu">
               {props.currentOrderItems.map((item, index) => (
-                <ListGroupItem key={index}>
-                  <Row >
-                    <Col md="auto">{getQuantity(item.itemName)}</Col>
-                    <Col md={8}>{item.itemName}</Col>
-                    <Col md="auto">{getQuantityPrice(item)}</Col>
-                    <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
-                  </Row>
-                </ListGroupItem>
+               displayOrderItems(item, index)
               ))}
             </ListGroup>
           </Card.Body>

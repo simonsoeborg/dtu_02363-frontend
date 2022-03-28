@@ -10,6 +10,7 @@ interface IProps {
   orderItems: ItemModel[];
   setOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
   amountChosen: number;
+  setAmount: Dispatch<SetStateAction<number>>;
 }
 
 const DisplayItems = (props: IProps) => {
@@ -19,22 +20,17 @@ const DisplayItems = (props: IProps) => {
 
   const [itemId, setItemId] = useState(0);
 
-
-  const [combined, setCombinded] = useState<ItemModel[]>([]);
   
   const addItems = (newItem : ItemModel, amount : Number) => {
+    const items = []; 
+
     // Få loopet til at virke (således at den laver amount-antal kopier)
       for (let i = 0; i< amount; i++){
-      setCombinded(combined.concat(newItem));
+      items.push(newItem)
       }
-      //props.setOrderItems(combined);
       //combined.map((item,index)=>(console.log(item)));
-      //setItemId(itemId+1);
-      // props.setOrderItems(props.orderItems.concat(newItem))
-
-    return combined
+    return items
     }
-
 
   const handleOnClickEvent = (item: ItemModel) => {
     
@@ -44,10 +40,14 @@ const DisplayItems = (props: IProps) => {
       price: item.price,
       categoryName: item.categoryName
     };
-    props.setOrderItems(props.orderItems.concat(addItems(newItemObject, 3)))
-    props.orderItems.map((item,index)=>(console.log(item)));
-   // setCombinded([]);
-      //addItems(newItemObject, 3)
+
+    if (props.amountChosen == 0){
+      props.setOrderItems(props.orderItems.concat(addItems(newItemObject, 1)))
+    }
+    else{
+      props.setOrderItems(props.orderItems.concat(addItems(newItemObject, props.amountChosen)))
+      props.setAmount(0);
+    }
   };
 
   return (

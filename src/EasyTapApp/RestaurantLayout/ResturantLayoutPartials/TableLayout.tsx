@@ -1,7 +1,7 @@
 import { Nav, Card } from "react-bootstrap";
 import "../../../resources/Css/ResturantLayout.css";
-import Order from "../../Order/Order";
 import { useNavigate } from "react-router-dom";
+import { ts } from "../../../Stores/TableStore";
 interface IProps {
   tableId: number;
   image: any;
@@ -11,7 +11,8 @@ const TableLayout = (props: IProps) => {
   const navigate = useNavigate();
 
   const toOrderPage = () => {
-    navigate("/EasyTap/Order");
+    ts.currentTableId = props.tableId;
+    navigate(`/EasyTap/Order/${props.tableId}`);
   };
 
   return (
@@ -23,8 +24,8 @@ const TableLayout = (props: IProps) => {
       }}
     >
       <Card.Img src={props.image} className="TableSize" />
-      <Card.ImgOverlay>
-        <Card.Title>{props.tableId}</Card.Title>
+      <Card.ImgOverlay className="TableAlignment">
+        <Card.Title className="TableText">{props.tableId}</Card.Title>
       </Card.ImgOverlay>
     </Card>
   );

@@ -18,6 +18,8 @@ import OrderModel from "../../Models/OrderModel";
 interface IProps {
   currentOrderItems: ItemModel[];
   setCurrentOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
+  amountChosen: number;
+  setAmount: Dispatch<SetStateAction<number>>;
 }
 
 const OrderDisplayOverView = (props: IProps) => {
@@ -27,10 +29,38 @@ const OrderDisplayOverView = (props: IProps) => {
     props.currentOrderItems.map((item) => (result = result + item.price));
     return result;
   }
+  
+  function getQuantity(itemName: String) {
+    const quantity = props.currentOrderItems.filter(item => item.itemName === itemName).length;
+    return quantity;
+  }
 
+  function getQuantityPrice(item: ItemModel) {
+    return item.price * getQuantity(item.itemName);
+  }
+
+  function getUniqueCurrentOrderItems(currentOrderItems: ItemModel[]){
+    const names = currentOrderItems.map(item => item.itemName)
+    const filtered = currentOrderItems.filter(({itemName}, index) => !names.includes(itemName, index + 1))
+    return filtered;
+  }
+  
   const handleDeleteItem = (item: ItemModel) => {
     props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
   };
+
+  function displayOrderItems(item: ItemModel, index: number) {
+      return(
+      <ListGroupItem key={index}>
+        <Row >
+          <Col md="auto">{getQuantity(item.itemName)}</Col>
+          <Col md={8}>{item.itemName}</Col>
+          <Col md="auto">{getQuantityPrice(item)}</Col>
+          <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
+        </Row>
+      </ListGroupItem>
+      )
+  }
 
   if (!is.Items) {
     return <Loading />;
@@ -43,15 +73,8 @@ const OrderDisplayOverView = (props: IProps) => {
           </Card.Header>
           <Card.Body>
             <ListGroup className="scrollable-menu">
-              {props.currentOrderItems.map((item, index) => (
-                <ListGroupItem key={index}>
-                  <Row >
-                    <Col md="auto">1x</Col>
-                    <Col md={8}>{item.itemName}</Col>
-                    <Col md="auto">{item.price}</Col>
-                    <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
-                  </Row>
-                </ListGroupItem>
+              {getUniqueCurrentOrderItems(props.currentOrderItems).map((item, index) => (
+               displayOrderItems(item, index)
               ))}
             </ListGroup>
           </Card.Body>

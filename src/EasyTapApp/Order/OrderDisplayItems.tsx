@@ -2,7 +2,7 @@ import { Container, Col, Card, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
- 
+
 interface IProps {
   items: ItemModel[];
   setItems: Dispatch<SetStateAction<ItemModel[]>>;

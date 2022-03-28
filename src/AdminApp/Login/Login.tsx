@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Form, Image, Row } from "react-bootstrap";
 import {defaultImage} from '../../Services/_services';
 import { useAuth0 } from "@auth0/auth0-react";
 import GoogleIcon from "@mui/icons-material/Google";
-import { aus } from '../../Stores/AuthStore';
+import { authentication } from '../../Stores/AuthenticationStore';
 import AuthenticationModel from "../../Models/AuthenticationModel";
+import { getRoles } from "@testing-library/react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ const Login = () => {
   const [formFilled, setFormFilled] = useState(false);
   const [emailFilled, setEmailFilled] = useState(false);
   const [passwordFilled, setPasswordFilled] = useState(false);
+  const [userHasBeenChecked, setUserHasBeenChecked] = useState(false)
   const navigate = useNavigate();
   const {isAuthenticated, user, loginWithPopup, getAccessTokenSilently, getIdTokenClaims} = useAuth0();
 
@@ -36,17 +38,31 @@ const Login = () => {
     }
   };
 
-
-
   if(isAuthenticated) {
-    const temp = new AuthenticationModel();
-    console.log(temp);
+    if(!userHasBeenChecked) {
+      if(user!) { // Asserting that user is not null
+        authentication.setAuth(new AuthenticationModel(
+          user.email!, // Asserting that value is not null (Non-Null Assertion Operator)
+          user.email_verified!,
+          user.family_name!,
+          user.given_name!,
+          user.name!,
+          user.sub!,
+          user.nickname!,
+          user.picture!,
+          1,
+          0,
+        ));
+        authentication.postAuthentication(authentication.Auth);
+      }
+    }
+    // navigate(`/Login/LoginResult`, { replace: false });
   }
 
-  const routeEditChange = () => {
+  const navigateToRegister = () => {
     navigate(`/Login/Register/`, { replace: false });
   };
-
+  
   return (
     <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
@@ -128,7 +144,7 @@ const Login = () => {
             <Button
               style={{ maxWidth: "6rem" }}
               variant="outline-primary"
-              onClick={() => routeEditChange()}
+              onClick={() => navigateToRegister()}
             >
               Register
             </Button>

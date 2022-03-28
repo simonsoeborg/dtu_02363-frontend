@@ -1,5 +1,5 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
  
@@ -19,25 +19,22 @@ const DisplayItems = (props: IProps) => {
 
   const [itemId, setItemId] = useState(0);
 
-  const [combinedModel, setCombindedModel] = useState<ItemModel[]>([]);
 
-
+  const [combined, setCombinded] = useState<ItemModel[]>([]);
+  
   const addItems = (newItem : ItemModel, amount : Number) => {
     // Få loopet til at virke (således at den laver amount-antal kopier)
-      
       for (let i = 0; i< amount; i++){
-      setItemId(itemId+1);
-
-      setCombindedModel(combinedModel.concat(newItem));
-      //props.setOrderItems(combinedModel)
+      setCombinded(combined.concat(newItem));
       }
-      props.setOrderItems(combinedModel);
+      //props.setOrderItems(combined);
+      //combined.map((item,index)=>(console.log(item)));
+      //setItemId(itemId+1);
+      // props.setOrderItems(props.orderItems.concat(newItem))
 
-
-      combinedModel.map((item,index)=>(console.log(item)));
-     //props.setOrderItems(props.orderItems.concat(newItem))
+    return combined
     }
-  
+
 
   const handleOnClickEvent = (item: ItemModel) => {
     
@@ -47,7 +44,10 @@ const DisplayItems = (props: IProps) => {
       price: item.price,
       categoryName: item.categoryName
     };
-      addItems(newItemObject, 3)
+    props.setOrderItems(props.orderItems.concat(addItems(newItemObject, 3)))
+    props.orderItems.map((item,index)=>(console.log(item)));
+   // setCombinded([]);
+      //addItems(newItemObject, 3)
   };
 
   return (

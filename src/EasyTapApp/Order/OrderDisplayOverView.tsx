@@ -39,8 +39,17 @@ const OrderDisplayOverView = (props: IProps) => {
     return item.price * getQuantity(item.itemName);
   }
 
+  function getUniqueCurrentOrderItems(currentOrderItems: ItemModel[]){
+    const names = currentOrderItems.map(item => item.itemName)
+    const filtered = currentOrderItems.filter(({itemName}, index) => !names.includes(itemName, index + 1))
+    return filtered;
+  }
+  
+  const handleDeleteItem = (item: ItemModel) => {
+    props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
+  };
+
   function displayOrderItems(item: ItemModel, index: number) {
-    //if(getQuantity(item.itemName) <= 1){
       return(
       <ListGroupItem key={index}>
         <Row >
@@ -51,12 +60,7 @@ const OrderDisplayOverView = (props: IProps) => {
         </Row>
       </ListGroupItem>
       )
-    //}
   }
-
-  const handleDeleteItem = (item: ItemModel) => {
-    props.setCurrentOrderItems(props.currentOrderItems.filter(orderitem => orderitem.id !== item.id));
-  };
 
   if (!is.Items) {
     return <Loading />;
@@ -69,7 +73,7 @@ const OrderDisplayOverView = (props: IProps) => {
           </Card.Header>
           <Card.Body>
             <ListGroup className="scrollable-menu">
-              {props.currentOrderItems.map((item, index) => (
+              {getUniqueCurrentOrderItems(props.currentOrderItems).map((item, index) => (
                displayOrderItems(item, index)
               ))}
             </ListGroup>

@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import GoogleIcon from "@mui/icons-material/Google";
 import { authentication } from '../../Stores/AuthenticationStore';
 import AuthenticationModel from "../../Models/AuthenticationModel";
-import { getRoles } from "@testing-library/react";
+import { observer } from "mobx-react-lite";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,8 +15,9 @@ const Login = () => {
   const [emailFilled, setEmailFilled] = useState(false);
   const [passwordFilled, setPasswordFilled] = useState(false);
   const [userHasBeenChecked, setUserHasBeenChecked] = useState(false)
+  const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
-  const {isAuthenticated, user, loginWithPopup, getAccessTokenSilently, getIdTokenClaims} = useAuth0();
+  const {isAuthenticated, user, loginWithPopup} = useAuth0();
 
   const checkIfFormIsFilled = () => {
     if (email.length > 3) {
@@ -53,113 +54,129 @@ const Login = () => {
           1,
           0,
         ));
-        authentication.postAuthentication(authentication.Auth);
+        if(authentication.getRole() === undefined) {
+          authentication.postAuthentication(authentication.Auth);
+        }
+        if(authentication.getRole() !== undefined) {
+          navigate(`/Login/LoginResult`, { replace: false });
+        }
       }
+      setUserHasBeenChecked(true)
     }
-    // navigate(`/Login/LoginResult`, { replace: false });
   }
 
   const navigateToRegister = () => {
     navigate(`/Login/Register/`, { replace: false });
   };
   
-  return (
-    <Row className="justify-content-center">
-      <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
-        <Card>
-          <Card.Header>
-            <Card.Title>Login</Card.Title>
-          </Card.Header>
-          <Card.Body>
-            <Row className="justify-content-center">
-              <Image
-                style={{
-                  maxHeight: "7.5rem",
-                  maxWidth: "7.5rem",
-                  padding: "1rem",
-                  margin: "1rem",
-                }}
-                fluid
-                roundedCircle
-                src={defaultImage}
-              />
-            </Row>
-            <Row className="justify-content-center" style={{ margin: "1rem" }}>
-              <p style={{ textAlign: "center" }}>Login with: </p>
-              <Button
-                style={{ width: "30%" }}
-                variant="outline-primary"
-                onClick={() => loginWithPopup()}
-              >
-                <GoogleIcon />{" "}
-              </Button>
-            </Row>
-            <Row>
-              <Form>
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter Email"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const newVal = e.currentTarget.value;
-                      setEmail(newVal);
-                      checkIfFormIsFilled();
-                    }}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter Password"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const newVal = e.currentTarget.value;
-                      setPassword(newVal);
-                      checkIfFormIsFilled();
-                    }}
-                  />
-                </Form.Group>
-              </Form>
-            </Row>
-          </Card.Body>
-          <Card.Footer style={{ textAlign: "center", padding: "1rem" }}>
-            {formFilled ? (
-              <Button
-                style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
-                variant="outline-success"
-                onMouseOver={checkIfFormIsFilled}
-              >
-                Login
-              </Button>
-            ) : (
-              { checkIfFormIsFilled } && (
+  if(isAuthenticated) {
+    setTimeout(() => {
+      navigate(`/Login/LoginResult/`, { replace: false });
+    }, 1000);
+    return (
+      <Row className="justify-content-center">
+        <h1>User is logged in.</h1>
+      </Row>
+    )
+  } else {
+    return (
+      <Row className="justify-content-center">
+        <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
+          <Card>
+            <Card.Header>
+              <Card.Title>Login</Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <Row className="justify-content-center">
+                <Image
+                  style={{
+                    maxHeight: "7.5rem",
+                    maxWidth: "7.5rem",
+                    padding: "1rem",
+                    margin: "1rem",
+                  }}
+                  fluid
+                  roundedCircle
+                  src={defaultImage}
+                />
+              </Row>
+              <Row className="justify-content-center" style={{ margin: "1rem" }}>
+                <p style={{ textAlign: "center" }}>Login with: </p>
+                <Button
+                  style={{ width: "30%" }}
+                  variant="outline-primary"
+                  onClick={() => loginWithPopup()}
+                >
+                  <GoogleIcon />{" "}
+                </Button>
+              </Row>
+              <Row>
+                <Form>
+                  <Form.Group className="mb-3">
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter Email"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const newVal = e.currentTarget.value;
+                        setEmail(newVal);
+                        checkIfFormIsFilled();
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Control
+                      type="password"
+                      placeholder="Enter Password"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const newVal = e.currentTarget.value;
+                        setPassword(newVal);
+                        checkIfFormIsFilled();
+                      }}
+                    />
+                  </Form.Group>
+                </Form>
+              </Row>
+            </Card.Body>
+            <Card.Footer style={{ textAlign: "center", padding: "1rem" }}>
+              {formFilled ? (
                 <Button
                   style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
                   variant="outline-success"
-                  disabled
+                  onMouseOver={checkIfFormIsFilled}
                 >
                   Login
                 </Button>
-              )
-            )}
-            <Button
-              style={{ maxWidth: "6rem" }}
-              variant="outline-primary"
-              onClick={() => navigateToRegister()}
-            >
-              Register
-            </Button>
-            <Button
-              style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
-              onClick={() => navigate(-1)}
-              variant="outline-danger"
-            >
-              Cancel
-            </Button>
-          </Card.Footer>
-        </Card>
-      </Container>
-    </Row>
-  );
+              ) : (
+                { checkIfFormIsFilled } && (
+                  <Button
+                    style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
+                    variant="outline-success"
+                    disabled
+                  >
+                    Login
+                  </Button>
+                )
+              )}
+              <Button
+                style={{ maxWidth: "6rem" }}
+                variant="outline-primary"
+                onClick={() => navigateToRegister()}
+              >
+                Register
+              </Button>
+              <Button
+                style={{ marginLeft: "0.5rem", marginRight: "0.5rem" }}
+                onClick={() => navigate(-1)}
+                variant="outline-danger"
+              >
+                Cancel
+              </Button>
+            </Card.Footer>
+          </Card>
+        </Container>
+      </Row>
+    );
+  }
 };
 
-export default Login;
+export default observer(Login);

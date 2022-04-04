@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ts } from "../../../Stores/TableStore";
 interface IProps {
   tableId: number;
+  tableStatus: boolean; 
   image: any;
 }
 

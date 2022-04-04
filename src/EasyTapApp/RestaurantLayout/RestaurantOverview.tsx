@@ -2,6 +2,7 @@ import { Container, ListGroup, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import Bar from "../../resources/LayOutDesign/bar.png";
 import Table from "../../resources/LayOutDesign/table.png";
+import TableUsing from "../../resources/LayOutDesign/TableUsing.png";
 import Plant from "../../resources/LayOutDesign/plant.png";
 import "../../resources/Css/ResturantLayout.css";
 import BarLayout from "./ResturantLayoutPartials/BarLayout";
@@ -15,6 +16,24 @@ import { height } from "@mui/system";
 const RestaurantLayout = () => {
   const [tables, setTables] = useState<TableModel[]>([]);
 
+
+  function displayTable(index : number){
+
+    if (!ts.tables[index-1].isInUse){
+   return(
+    <Col xs="2">
+    <TableLayout tableId={index} image={Table} tableStatus={ts.tables[index-1].isInUse}/>
+    </Col>
+   )
+    }
+   else{
+     return(
+      <Col xs="2">
+      <TableLayout tableId={index} image={TableUsing} tableStatus={ts.tables[index-1].isInUse}/>
+      </Col>
+     )
+   }
+}
   if (!ts.Tables) {
     return <Loading />;
   } else {
@@ -28,36 +47,24 @@ const RestaurantLayout = () => {
             <BarLayout image={Bar} />
           </Col>
           <Col xs="1"></Col>
-          <Col xs="2">
-            <TableLayout tableId={1} image={Table} />
-          </Col>
+         {displayTable(1)}
           <Col xs="1">
             <PlantLayout image={Plant} />
           </Col>
-          <Col xs="2">
-            <TableLayout tableId={2} image={Table} />
-          </Col>
+          {displayTable(2)}
         </Row>
-
         <Row
           style={{ marginTop: "23rem" }}
-          className="d-flex align-items-end flex-Row justify-content-md-center"
-        >
-          <Col xs="2">
-            <TableLayout tableId={3} image={Table} />
-          </Col>
+          className="d-flex align-items-end flex-Row justify-content-md-center">
+          {displayTable(3)}
           <Col xs="1">
             <PlantLayout image={Plant} />
           </Col>
-          <Col xs="2">
-            <TableLayout tableId={4} image={Table} />
-          </Col>
+          {displayTable(4)}
           <Col xs="1">
             <PlantLayout image={Plant} />
           </Col>
-          <Col xs="2">
-            <TableLayout tableId={5} image={Table} />
-          </Col>
+          {displayTable(5)}
         </Row>
       </Container>
     );

@@ -30,7 +30,7 @@ const Order = () => {
   const [order, setOrder] = useState<OrderModel>(new OrderModel());
   // const containing the items for the current order
   const [orderItems, setOrderItems] = useState<ItemModel[]>([]);
-  //
+ 
   const [AmountChosen, setAmount] = useState(0);
   const [isPayed, setIsPayed] = useState(false);
 
@@ -39,6 +39,20 @@ const Order = () => {
   } else {
     if (cs.Categories.length > 0 && is.Items.length > 0) {
       if (!hasLoaded) {
+
+        if (ts.tableIsInUse == true){
+          /* TODO : first find current OrderInfo-id --> 
+          SQL * (where tableID = ts.currentTableId && orderpayed = 0)
+          use previus result to load data from OrderOverviewView, 
+          and show it in OrderDisplayOverview page */ 
+        }
+        else{
+          /*TODO:  return empty OrderDisplayOverview page
+          + put SeatingTable.isInUse = true (database) 
+          + push new instance of OrderInfo (database ) 
+          */
+        }
+        /* Remove unecesary parts*/
         const orderData: ItemModel[] = [];
         const dummy_order = new OrderModel();
         dummy_order.id = 1;

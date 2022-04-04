@@ -22,14 +22,14 @@ const RestaurantLayout = () => {
     if (!ts.tables[index-1].isInUse){
    return(
     <Col xs="2">
-    <TableLayout tableId={index} image={Table} tableStatus={ts.tables[index-1].isInUse}/>
+    <TableLayout tableId={index} image={Table} tableIsInUse={ts.tables[index-1].isInUse}/>
     </Col>
    )
     }
    else{
      return(
       <Col xs="2">
-      <TableLayout tableId={index} image={TableUsing} tableStatus={ts.tables[index-1].isInUse}/>
+      <TableLayout tableId={index} image={TableUsing} tableIsInUse={ts.tables[index-1].isInUse}/>
       </Col>
      )
    }

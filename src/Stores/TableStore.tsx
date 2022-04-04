@@ -5,6 +5,7 @@ import { API_URL } from "../Services/_services";
 class TableStore {
   tables: TableModel[] = [];
   currentTableId: number = 0;
+  tableIsInUse: boolean = false; 
 
   constructor() {
     makeAutoObservable(this);
@@ -16,6 +17,7 @@ class TableStore {
   get Tables() {
     return this.tables;
   }
+  
 
   setTables = (tables: TableModel[]) => {
     this.tables = tables;
@@ -24,6 +26,11 @@ class TableStore {
   setCurrentTableId(id: number){
     this.currentTableId = id;
   }
+
+  setCurrentTableStatus(status : boolean){
+    this.tableIsInUse = status;
+  }
+
 
   getTablesAsync = async () => {
     const response = await fetch(API_URL + "/SeatingTable");

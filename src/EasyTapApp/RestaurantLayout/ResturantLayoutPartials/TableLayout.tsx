@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ts } from "../../../Stores/TableStore";
 interface IProps {
   tableId: number;
+  tableIsInUse: boolean; 
   image: any;
 }
 
@@ -12,6 +13,7 @@ const TableLayout = (props: IProps) => {
 
   const toOrderPage = () => {
     ts.currentTableId = props.tableId;
+    ts.tableIsInUse = props.tableIsInUse; 
     navigate(`/EasyTap/Order/${props.tableId}`);
   };
 

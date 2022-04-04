@@ -54,10 +54,10 @@ const OrderDisplayOverView = (props: IProps) => {
       return(
       <ListGroupItem key={index}>
         <Row >
-          <Col md="auto">{getQuantity(item.itemName)}</Col>
-          <Col md={8}>{item.itemName}</Col>
-          <Col md="auto">{getQuantityPrice(item)}</Col>
-          <Col onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
+          <Col md={2}>{getQuantity(item.itemName)}x</Col>
+          <Col md={7}>{item.itemName}</Col>
+          <Col md={2}>{getQuantityPrice(item)} kr</Col>
+          <Col md={1} onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
         </Row>
       </ListGroupItem>
       )

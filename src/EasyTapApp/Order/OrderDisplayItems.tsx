@@ -67,7 +67,6 @@ const DisplayItems = (props: IProps) => {
                 key={index}
               >
                 <Card.Header>{item.itemName}</Card.Header>
-                <Card.Img variant="top" src="holder.js/100px160" />
               </Card>
             </div>
           </Col>

@@ -74,3 +74,13 @@
   height: 80px;
   margin-top: 60px;
 }
+
+.nav-link {
+  font-family: 'Roboto', sans-serif;
+  color: #2699 !important;
+}
+
+.nav-link:hover {
+  background-color: whitesmoke;
+
+}

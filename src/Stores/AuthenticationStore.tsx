@@ -3,6 +3,7 @@ import AuthenticationModel from '../Models/AuthenticationModel';
 import AuthViewModel from '../Models/AuthViewModel';
 import { API_URL } from '../Services/_services';
 import axios from 'axios';
+import jwt from 'jwt-decode';
 
 class AuthStore {
     auth : AuthenticationModel = new AuthenticationModel("", false, "", "", "", "");
@@ -45,6 +46,7 @@ class AuthStore {
 
         instance.post("Authentication", JSON.stringify(auth)).then((res) => {
             const data = res.data;
+            console.log(jwt(data))
             this.setRBACAuth(new AuthViewModel(data.email, data.emailVerified, data.familyName, data.givenName, data.name, data.sub, data.nickname, data.picture!, data.role!, data.pin!));
         });
     }

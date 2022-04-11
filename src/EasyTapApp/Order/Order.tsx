@@ -52,6 +52,12 @@ const Order = () => {
           SQL * (where tableID = ts.currentTableId && orderpayed = 0)
           use previus result to load data from OrderOverviewView, 
           and show it in OrderDisplayOverview page */
+          if (os.Order.items.length > 0) {
+            setOrder(os.Order);
+            console.log(os.Order.items);
+          } else {
+            os.getOrdersAsync();
+          }
         } else {
           /*TODO:  return empty OrderDisplayOverview page
           + put SeatingTable.isInUse = true (database) 
@@ -67,6 +73,7 @@ const Order = () => {
         // dummy_order.tableId = ts.currentTableId;
         // dummy_order.orderPlaced = "";
         // dummy_order.orderFinished = "";
+        os.setTableNumber(ts.currentTableId);
         setHasLoaded(true);
         setCategories(cs.Categories);
         setItems(is.Items);

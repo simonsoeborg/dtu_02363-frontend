@@ -10,8 +10,6 @@ class RestaurantStore {
     restaurants: RestaurantModel[] = []; 
     restaurant: RestaurantModel = new RestaurantModel();  
 
-    // private api = "https://localhost:44390/api";
-
     constructor() {
         makeAutoObservable(this);
         this.getRestaurantsAsync();

@@ -1,8 +1,8 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
- 
+
 interface IProps {
   items: ItemModel[];
   setItems: Dispatch<SetStateAction<ItemModel[]>>;
@@ -18,26 +18,39 @@ const DisplayItems = (props: IProps) => {
     (item) => item.categoryName === props.selectedCategory
   );
 
-  const [itemId, setItemId] = useState(0);
-
-  const addItems = (newItem : ItemModel, amount : Number) => {
   
+ const [currentItemId, setCurrentItemId] = useState(0);
+ 
+  const addItems = (newItem : ItemModel, amount : number) => {
+    const items = [];
+
     // Få loopet til at virke (således at den laver amount-antal kopier)
-    for (let i = 0; i< amount; i++){
-      setItemId(itemId+1);
-      props.setOrderItems(props.orderItems.concat(newItem));
+      for (let i = 0; i< amount; i++){
+
+        const newItemObject = {
+          id: currentItemId+i,
+          itemName: newItem.itemName,
+          price: newItem.price,
+          categoryName: newItem.categoryName
+        };
+
+      items.push(newItemObject)
+      }
+
+      setCurrentItemId(currentItemId+amount)
+      return items
     }
-  }
+
 
   const handleOnClickEvent = (item: ItemModel) => {
-    
-    const newItemObject = {
-      id: itemId,
-      itemName: item.itemName,
-      price: item.price,
-      categoryName: item.categoryName
-    };
-    addItems(newItemObject, 3)
+
+    if (props.amountChosen == 0){
+      props.setOrderItems(props.orderItems.concat(addItems(item, 1)))
+    }
+    else{
+      props.setOrderItems(props.orderItems.concat(addItems(item, props.amountChosen)))
+      props.setAmount(0);
+    }
   };
 
   return (
@@ -54,7 +67,6 @@ const DisplayItems = (props: IProps) => {
                 key={index}
               >
                 <Card.Header>{item.itemName}</Card.Header>
-                <Card.Img variant="top" src="holder.js/100px160" />
               </Card>
             </div>
           </Col>

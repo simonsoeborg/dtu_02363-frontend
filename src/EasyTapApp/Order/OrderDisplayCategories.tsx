@@ -1,16 +1,50 @@
 import { Container, Nav } from "react-bootstrap";
 import { Dispatch, SetStateAction } from "react";
+import { FaCocktail, FaCookie, FaCookieBite, FaBirthdayCake, FaHamburger, FaJava, FaStar, FaBreadSlice, FaWineGlass } from "react-icons/fa"
 import CategoryModel from "../../Models/CategoryModel";
 
 interface IProps {
-  categories: CategoryModel[];
-  setSelectedCategory: Dispatch<SetStateAction<String>>;
+  categories: CategoryModel[],
+  setSelectedCategory: Dispatch<SetStateAction<String>>
 }
 
 const DisplayCategories = (props: IProps) => {
   const handleOnClickEvent = (selectedCategory: string) => {
     props.setSelectedCategory(selectedCategory);
   };
+
+  function setCategoryIcon(categoryName: string){
+    console.log(props.categories)
+    switch(categoryName){
+      /*
+        Names of categories 0-6
+        Starters, Main dishes, Desserts, Specials, Soft drinks & Beers, Cocktails, Warm drinks
+        Instead of hard coding the names to the categories, we collect them from the property and set the desired icons.
+      */
+      case props.categories[0].name.toString():
+        //Starters
+        return <FaBreadSlice />
+      case props.categories[1].name.toString():
+        //Main dishes
+        return <FaHamburger />
+      case props.categories[2].name.toString():
+        //Desserts
+        return <FaBirthdayCake />
+      case props.categories[3].name.toString():
+        //Specials
+        return <FaStar />
+      case props.categories[4].name.toString():
+        //Soft drinks & Beers
+        return <FaWineGlass />
+      case props.categories[5].name.toString():
+        //Cocktails
+        return <FaCocktail />
+      case props.categories[6].name.toString():
+        //Warm drinks
+        return <FaJava />
+    }
+
+  }
 
   return (
     <Container>
@@ -20,7 +54,7 @@ const DisplayCategories = (props: IProps) => {
             key={index}
             onClick={() => handleOnClickEvent(category.name)}
           >
-            <Nav.Link eventKey={category.name}>{category.name}</Nav.Link>
+            <Nav.Link eventKey={category.name}>{category.name} {setCategoryIcon(category.name)} </Nav.Link>
           </Nav.Item>
         ))}
       </Nav>

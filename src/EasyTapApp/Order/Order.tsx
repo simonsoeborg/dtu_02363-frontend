@@ -10,6 +10,7 @@ import OrderModel from "../../Models/OrderModel";
 import { cs } from "../../Stores/CategoryStore";
 import { is } from "../../Stores/ItemStore";
 import { ts } from "../../Stores/TableStore";
+import { os } from "../../Stores/OrderStore";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
 import TapOutModel from "../../Models/TapOutModel";
@@ -41,24 +42,24 @@ const Order = () => {
   const [AmountChosen, setAmount] = useState(0);
   const [isPayed, setIsPayed] = useState(false);
 
-  if (!cs.Categories && !is.Items && !ts.Tables) {
+  if (!cs.Categories && !is.Items && !ts.Tables && !os.Orders) {
     return <Loading />;
   } else {
     if (cs.Categories.length > 0 && is.Items.length > 0) {
       if (!hasLoaded) {
-        const orderData: ItemModel[] = [];
-        const dummy_order = new OrderModel();
-        dummy_order.id = 1;
-        dummy_order.items = orderData;
-        //console.log(ts.Table.id!);
-        dummy_order.tableId = ts.currentTableId;
-        dummy_order.orderPlaced = "";
-        dummy_order.orderFinished = "";
+        // const orderData: ItemModel[] = [];
+        // const dummy_order = new OrderModel();
+        // dummy_order.id = 1;
+        // dummy_order.items = orderData;
+        // console.log(ts.Table.id!);
+        // dummy_order.tableId = ts.currentTableId;
+        // dummy_order.orderPlaced = "";
+        // dummy_order.orderFinished = "";
         setHasLoaded(true);
         setCategories(cs.Categories);
         setItems(is.Items);
-        setOrder(dummy_order);
-        setOrderItems(dummy_order.items);
+        setOrder(os.Order);
+        setOrderItems(os.Order.items);
       }
     }
 

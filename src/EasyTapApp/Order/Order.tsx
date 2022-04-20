@@ -16,6 +16,7 @@ import { observer } from "mobx-react-lite";
 import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
 import "../../resources/Css/OrderLayout.css";
+import OrderInfoModel from "../../Models/OrderInfoModel";
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
@@ -40,7 +41,9 @@ const Order = () => {
   const [orderItems, setOrderItems] = useState<ItemModel[]>([]);
 
   const [AmountChosen, setAmount] = useState(0);
-  const [isPayed, setIsPayed] = useState(false);
+  //const [isPayed, setIsPayed] = useState(false);
+
+  const [chosenTable, setTable] =  useState<OrderInfoModel>(new OrderInfoModel());
 
   if (!cs.Categories && !is.Items && !ts.Tables && !os.Orders) {
     return <Loading />;
@@ -52,12 +55,15 @@ const Order = () => {
           SQL * (where tableID = ts.currentTableId && orderpayed = 0)
           use previus result to load data from OrderOverviewView, 
           and show it in OrderDisplayOverview page */
-          if (os.Order.items.length > 0) {
+          os.getSpecificOrderInfoAsync(ts.currentTableId);
+          console.log(os.orderInfoSpecific.id?.toString()); 
+          
+          /* if (os.Orders.order.length > 0) {
             setOrder(os.Order);
             console.log(os.Order.items);
           } else {
             os.getOrdersAsync();
-          }
+          }*/ 
         } else {
           /*TODO:  return empty OrderDisplayOverview page
           + put SeatingTable.isInUse = true (database) 
@@ -78,14 +84,14 @@ const Order = () => {
         setCategories(cs.Categories);
         setItems(is.Items);
         setOrder(os.Order);
-        setOrderItems(os.Order.items);
+        // setOrderItems(os.Order.items);
       }
     }
 
     return (
       <Container fluid>
         <Row md="auto">
-          <h1>Table {order.tableId} </h1>
+          <h1>Table {/*order.tableId*/} </h1>
         </Row>
         <Row>
           <Col md={8}>

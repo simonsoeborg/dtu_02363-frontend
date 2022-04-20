@@ -39,6 +39,10 @@ class OrderStore {
       this.OrderViews = orderViewList;
   }; 
 
+  setOrderInfo = (orderInfo : OrderInfoModel) => {
+    this.orderInfoSpecific = orderInfo;
+}; 
+
 
   getOrdersAsync = async () => {
     const response = await fetch(API_URL + "/Order");
@@ -46,11 +50,19 @@ class OrderStore {
     this.setOrders(data);
   };
 
+  getSpecificOrderInfoAsync = async (tableID : number) =>{
+    const response = await fetch(API_URL + "/OrderInfo/"+tableID.toString());
+    const data = await response.json();
+    this.setOrderInfo(data);
+  }
+
   getOrderViewAsync = async () =>{
     const response = await fetch(API_URL + "/OrderOverviewView");
     const data = await response.json();
     this.setOrderViewList(data);
   }
+
+
 
   setTableNumber = (id: number) => {
     this.orderInfoSpecific.tableId = id;

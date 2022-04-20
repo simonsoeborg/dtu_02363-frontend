@@ -19,52 +19,65 @@ import "../../resources/Css/OrderLayout.css";
 import OrderInfoModel from "../../Models/OrderInfoModel";
 import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
 
-//Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
+  // Contains the different categories in the resturant 
   const [categories, setCategories] = useState<CategoryModel[]>([]);
+  // Tells which food-category is chosen.  
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");
+  // Tells if the needed data i loaded
   const [hasLoaded, setHasLoaded] = useState(false);
+  // Contains the different items on the menu
   const [items, setItems] = useState<ItemModel[]>([]);
+  //Contains the items for the current order
+  const [orderItems, setOrderItems] = useState<ItemModel[]>([]);
+  // Shows amount chosen on calculator
+  const [AmountChosen, setAmount] = useState(0);
 
 
   const navigate = useNavigate();
   const tapOutNavigate = () => {
+    //TODO Gem data --> PUT (og kun det nye og ikke det gamle loadede.)
     navigate(`/EasyTap`);
   };
 
-  const PrintOutNavigation = () => {
+  const PrintOutNavigation = async () => {
+    //TODO 
+    // 1. Færdiggør neden stående changeTableOpucation-funktionalitet. 
+    // 2. Ændre OrderInfo - status: orderPayed til true! 
+    // await ts.changeTableOccupation;
+    // await ts.setCurrentTableStatus(false);
     navigate(`/EasyTap`);
   };
 
-  //const containing the current order
-  const [order, setOrder] = useState<OrderModel>(new OrderModel());
-  //const containing the items for the current order
-  const [orderItems, setOrderItems] = useState<ItemModel[]>([]);
-
-  const [previusItemsView, setpreviousItemsView] = useState<OrderOverviewViewModel[]>([]);
-  const [AmountChosen, setAmount] = useState(0);
-  const [isPayed, setIsPayed] = useState(false);
-
+  // UseEffect is used for securing that the functions is called in proper order and only onces, unless called again. 
   useEffect(() => {
-
+    // TODO - de to const i useEffect burde efsersigne være i sepperate useEffects. 
+  
+    // TODO + OBS OBS: fetchdata (eller et andet sted) skal tage højde for hvis et bord er optaget, men ikke har nogen varer.     
     const fetchData = async() => {
+      // Fetches the current order-id based on the which Table was pressed. 
       await os.getSpecificOrderInfoAsync(ts.currentTableId)
+      // Uses the knowledege from previous function to get all excisting orders from the id.  
       await os.getOrderViewAsync(os.orderInfoSpecific.id)
-      console.log(os.OrderViews[0].name);
+    }
+    
+    const newTable = async() => {
+      // TODO: - opret en instans af orderInfo i database.          
+      ts.changeTableOccupation()
+    }
 
-      setCategories(cs.categories)
-      setItems(is.items)
-      setHasLoaded(true);
-    } 
-    fetchData() 
+    if (ts.tableIsInUse){ fetchData() }
+    else  {newTable()}
+
+    setCategories(cs.categories)
+    setItems(is.items)
+    setHasLoaded(true);
   },[])
+
 
   if (!hasLoaded) {
     return <Loading />
   }
-
-
-
   return (
     <Container fluid>
       <Row md="auto">
@@ -134,8 +147,6 @@ const Order = () => {
   );
 };
 
-
-
 // Funktion til at gemme en midlertidig ordre som vises i OrderDisplayOverView
 // const CreateTempOrder = (
 //   tempOrder: TapOutModel,
@@ -150,5 +161,4 @@ const Order = () => {
 //   tempOrder.tableId = tableNr;
 //   tempOrder.ordreId = orders.ordreId;
 // };
-
 export default observer(Order);

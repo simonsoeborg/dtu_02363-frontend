@@ -44,7 +44,6 @@ class OrderStore {
     
 }; 
 
-
   getOrdersAsync = async () => {
     const response = await fetch(API_URL + "/Order");
     const data = await response.json();

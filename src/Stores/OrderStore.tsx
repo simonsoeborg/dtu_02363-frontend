@@ -51,6 +51,7 @@ class OrderStore {
     this.setOrders(data);
   };
 
+  // Returns the id of the current order/receipt of the active table with 'id' 
   getSpecificOrderInfoAsync = async (id : number) =>{
     const response = await fetch(API_URL + "/OrderInfo/"+id);
     const data = await response.json();

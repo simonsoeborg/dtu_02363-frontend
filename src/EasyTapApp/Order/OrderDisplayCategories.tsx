@@ -14,7 +14,6 @@ const DisplayCategories = (props: IProps) => {
   };
 
   function setCategoryIcon(categoryName: string){
-    console.log(props.categories)
     switch(categoryName){
       /*
         Names of categories 0-6

@@ -63,8 +63,6 @@ class OrderStore {
     this.setOrderViewList(data);
   }
 
-
-
   setTableNumber = (id: number) => {
     this.orderInfoSpecific.tableId = id;
   };

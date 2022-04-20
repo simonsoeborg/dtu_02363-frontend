@@ -14,21 +14,27 @@ import { is } from "../../Stores/ItemStore";
 import Loading from "../../Partials/Loading";
 import ItemModel from "../../Models/ItemModel";
 import OrderModel from "../../Models/OrderModel";
+import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
 
 interface IProps {
   currentOrderItems: ItemModel[];
   setCurrentOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
   amountChosen: number;
   setAmount: Dispatch<SetStateAction<number>>;
+  previousOrderItemsView: OrderOverviewViewModel[];
 }
 
 const OrderDisplayOverView = (props: IProps) => {
+
+
   function getTotal(): number {
-    var result: number = 0;
+    let result: number = 0;
+    let oldResult: number = 0;
     props.currentOrderItems.map((item) => (result = result + item.price));
+    // props.previousOrderItemsView.map((item) => (oldResult = oldResult + item.price)); 
     return result;
   }
-  
+
   function getQuantity(itemName: String) {
     const quantity = props.currentOrderItems.filter(item => item.itemName === itemName).length;
     return quantity;
@@ -38,11 +44,24 @@ const OrderDisplayOverView = (props: IProps) => {
     return item.price * getQuantity(item.itemName);
   }
 
+ /* function getOldQuantityPrice(item: OrderOverviewViewModel) {
+    return item.price * getQuantity(item.name);
+  }*/
+
   function getUniqueCurrentOrderItems(currentOrderItems: ItemModel[]){
     const names = currentOrderItems.map(item => item.itemName)
     const filtered = currentOrderItems.filter(({itemName}, index) => !names.includes(itemName, index + 1))
     return filtered;
   }
+
+ /* function getUniqueOldOrderItems(oldOrderItems: OrderOverviewViewModel[]){
+
+    const names = oldOrderItems.map(item => item.name)
+    const filtered = oldOrderItems.filter(({name}, index) => !names.includes(name, index + 1))
+    return filtered;
+  }
+  */
+
   
   const handleDeleteItem = (item: ItemModel) => {
     props.setCurrentOrderItems(
@@ -62,6 +81,18 @@ const OrderDisplayOverView = (props: IProps) => {
       </ListGroupItem>
       )
   }
+
+  /*function displayOldOrderItems(item: OrderOverviewViewModel, index: number) {
+    return(
+    <ListGroupItem key={index}>
+      <Row >
+        <Col md={2}>{getQuantity(item.name)}x</Col>
+        <Col md={7}>{item.name}</Col>
+        <Col md={2}>{getOldQuantityPrice(item)} kr</Col>
+      </Row>
+    </ListGroupItem>
+    )
+}*/
 
   if (!is.Items) {
     return <Loading />;

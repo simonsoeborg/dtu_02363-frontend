@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import DisplayCategories from "./OrderDisplayCategories";
@@ -25,9 +25,9 @@ const Order = () => {
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");
   const [hasLoaded, setHasLoaded] = useState(false);
   const [items, setItems] = useState<ItemModel[]>([]);
-  const { id } = useParams();
-  const navigate = useNavigate();
 
+
+  const navigate = useNavigate();
   const tapOutNavigate = () => {
     navigate(`/EasyTap`);
   };
@@ -36,150 +36,119 @@ const Order = () => {
     navigate(`/EasyTap`);
   };
 
-  // const containing the current order
+  //const containing the current order
   const [order, setOrder] = useState<OrderModel>(new OrderModel());
-  // const containing the items for the current order
+  //const containing the items for the current order
   const [orderItems, setOrderItems] = useState<ItemModel[]>([]);
 
-  const [orderViewItems, setOrderViewItems] = useState<OrderOverviewViewModel[]>([]);
+  const [previusItemsView, setpreviousItemsView] = useState<OrderOverviewViewModel[]>([]);
   const [AmountChosen, setAmount] = useState(0);
-  //const [isPayed, setIsPayed] = useState(false);
+  const [isPayed, setIsPayed] = useState(false);
 
+  useEffect(() => {
 
-  if (!cs.Categories && !is.Items && !ts.Tables && !os.Orders) {
-    return <Loading />;
-  } else {
-    if (cs.Categories.length > 0 && is.Items.length > 0) {
-      if (!hasLoaded) {
-        if (ts.tableIsInUse == true) {
-          /* TODO : first find current OrderInfo-id --> 
-          SQL * (where tableID = ts.currentTableId && orderpayed = 0)
-          use previus result to load data from OrderOverviewView, 
-          and show it in OrderDisplayOverview page */
+    const fetchData = async() => {
+      await os.getSpecificOrderInfoAsync(ts.currentTableId)
+      await os.getOrderViewAsync(os.orderInfoSpecific.id)
+      console.log(os.OrderViews[0].name);
 
-          os.getSpecificOrderInfoAsync(ts.currentTableId)
-          os.getOrderViewAsync(os.orderInfoSpecific.id)
-          setOrderViewItems(os.OrderViews);
+      setCategories(cs.categories)
+      setItems(is.items)
+      setHasLoaded(true);
+    } 
+    fetchData() 
+  },[])
 
-          if (os.orderInfoSpecific.id ==0 && orderViewItems.length > 0){
-            return <Loading />;
-          } else {
-          
-    
-          }
-          
-          /* if (os.Orders.order.length > 0) {
-            setOrder(os.Order);
-            console.log(os.Order.items);
-          } else {
-            os.getOrdersAsync();
-          }*/ 
-        } else {
-          /*TODO:  return empty OrderDisplayOverview page
-          + put SeatingTable.isInUse = true (database) 
-          + push new instance of OrderInfo (database ) 
-          */
-        }
-        /* Remove unecesary parts*/
-        // const orderData: ItemModel[] = [];
-        // const dummy_order = new OrderModel();
-        // dummy_order.id = 1;
-        // dummy_order.items = orderData;
-        // console.log(ts.Table.id!);
-        // dummy_order.tableId = ts.currentTableId;
-        // dummy_order.orderPlaced = "";
-        // dummy_order.orderFinished = "";
-        os.setTableNumber(ts.currentTableId);
-        setHasLoaded(true);
-        setCategories(cs.Categories);
-        setItems(is.Items);
-        setOrder(os.Order);
-        // setOrderItems(os.Order.items);
-      }
-    }
-
-    return (
-      <Container fluid>
-        <Row md="auto">
-          <h1>Table {ts.currentTableId} </h1>
-        </Row>
-        <Row>
-          <Col md={8}>
-            <Row>
-              <DisplayCategories
-                categories={categories}
-                setSelectedCategory={setSelectedCategory}
-              />
-            </Row>
-            <br></br>
-            <Row>
-              <OrderDisplayItems
-                items={items}
-                setItems={setItems}
-                selectedCategory={selectedCategory}
-                orderItems={orderItems}
-                setOrderItems={setOrderItems}
-                amountChosen={AmountChosen}
-                setAmount={setAmount}
-              />
-            </Row>
-          </Col>
-          <Col>
-            <Row>
-              <OrderDisplayOverView
-                currentOrderItems={orderItems}
-                setCurrentOrderItems={setOrderItems}
-                amountChosen={AmountChosen}
-                setAmount={setAmount}
-              />
-              <Col>
-                <OrderAmountPanel
-                  amountChosen={AmountChosen}
-                  setAmount={setAmount}
-                />
-              </Col>
-              <Col>
-                <Row className="d-flex justify-content-center">
-                  <Button
-                    className="button-PrintBill"
-                    variant="outline-primary"
-                    onClick={() => PrintOutNavigation()}
-                  >
-                    Print Bill
-                  </Button>
-
-                  <Button
-                    className="button-tabOut"
-                    variant="outline-primary"
-                    onClick={() => {
-                      tapOutNavigate();
-                    }}
-                  >
-                    Tap Out
-                  </Button>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    );
+  if (!hasLoaded) {
+    return <Loading />
   }
+
+
+
+  return (
+    <Container fluid>
+      <Row md="auto">
+        <h1>Table {ts.currentTableId} </h1>
+      </Row>
+      <Row>
+        <Col md={8}>
+          <Row>
+            <DisplayCategories
+              categories={categories}
+              setSelectedCategory={setSelectedCategory}
+            />
+          </Row>
+          <br></br>
+          <Row>
+            <OrderDisplayItems
+              items={items}
+              setItems={setItems}
+              selectedCategory={selectedCategory}
+              orderItems={orderItems}
+              setOrderItems={setOrderItems}
+              amountChosen={AmountChosen}
+              setAmount={setAmount}
+            />
+          </Row>
+        </Col>
+        <Col>
+          <Row>
+            <OrderDisplayOverView
+              currentOrderItems={orderItems}
+              setCurrentOrderItems={setOrderItems}
+              amountChosen={AmountChosen}
+              setAmount={setAmount}
+              previousOrderItemsView={os.OrderViews}
+            />
+            <Col>
+              <OrderAmountPanel
+                amountChosen={AmountChosen}
+                setAmount={setAmount}
+              />
+            </Col>
+            <Col>
+              <Row className="d-flex justify-content-center">
+                <Button
+                  className="button-PrintBill"
+                  variant="outline-primary"
+                  onClick={() => PrintOutNavigation()}
+                >
+                  Print Bill
+                </Button>
+
+                <Button
+                  className="button-tabOut"
+                  variant="outline-primary"
+                  onClick={() => {
+                    tapOutNavigate();
+                  }}
+                >
+                  Tap Out
+                </Button>
+              </Row>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
+
+
 
 // Funktion til at gemme en midlertidig ordre som vises i OrderDisplayOverView
-const CreateTempOrder = (
-  tempOrder: TapOutModel,
-  item: ItemModel,
-  calculatorValue: number,
-  tableNr: number,
-  orders: TapOutModel
-) => {
-  tempOrder.name = item.itemName;
-  tempOrder.price = item.price;
-  tempOrder.quantity = calculatorValue;
-  tempOrder.tableId = tableNr;
-  tempOrder.ordreId = orders.ordreId;
-};
+// const CreateTempOrder = (
+//   tempOrder: TapOutModel,
+//   item: ItemModel,
+//   calculatorValue: number,
+//   tableNr: number,
+//   orders: TapOutModel
+// ) => {
+//   tempOrder.name = item.itemName;
+//   tempOrder.price = item.price;
+//   tempOrder.quantity = calculatorValue;
+//   tempOrder.tableId = tableNr;
+//   tempOrder.ordreId = orders.ordreId;
+// };
 
 export default observer(Order);

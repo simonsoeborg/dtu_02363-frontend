@@ -19,7 +19,7 @@ class OrderStore {
     // Retrieves all order from the database on instantiated
     runInAction(() => {
       this.getOrdersAsync();
-      this.getOrderViewAsync(); 
+      //this.getOrderViewAsync(); 
     });
   }
 
@@ -41,6 +41,7 @@ class OrderStore {
 
   setOrderInfo = (orderInfo : OrderInfoModel) => {
     this.orderInfoSpecific = orderInfo;
+    
 }; 
 
 
@@ -50,14 +51,14 @@ class OrderStore {
     this.setOrders(data);
   };
 
-  getSpecificOrderInfoAsync = async (tableID : number) =>{
-    const response = await fetch(API_URL + "/OrderInfo/"+tableID.toString());
+  getSpecificOrderInfoAsync = async (id : number) =>{
+    const response = await fetch(API_URL + "/OrderInfo/"+id);
     const data = await response.json();
     this.setOrderInfo(data);
   }
 
-  getOrderViewAsync = async () =>{
-    const response = await fetch(API_URL + "/OrderOverviewView");
+  getOrderViewAsync = async (id : number) =>{
+    const response = await fetch(API_URL + "/OrderOverviewView/"+id);
     const data = await response.json();
     this.setOrderViewList(data);
   }

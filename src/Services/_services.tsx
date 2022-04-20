@@ -1,4 +1,4 @@
-const API_URL = "https://api.uglyrage.com/api";
+const API_URL = "https://localhost:5001/api";
 
     // private api = "https://localhost:44390/api";
     // "https://api.uglyrage.com/api";

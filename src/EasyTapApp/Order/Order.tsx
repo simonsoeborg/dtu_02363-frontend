@@ -17,6 +17,7 @@ import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
 import "../../resources/Css/OrderLayout.css";
 import OrderInfoModel from "../../Models/OrderInfoModel";
+import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
 
 //Hardcoded tableNumber, but should get tableNumber from an onClick function earlier.
 const Order = () => {
@@ -40,10 +41,10 @@ const Order = () => {
   // const containing the items for the current order
   const [orderItems, setOrderItems] = useState<ItemModel[]>([]);
 
+  const [orderViewItems, setOrderViewItems] = useState<OrderOverviewViewModel[]>([]);
   const [AmountChosen, setAmount] = useState(0);
   //const [isPayed, setIsPayed] = useState(false);
 
-  const [chosenTable, setTable] =  useState<OrderInfoModel>(new OrderInfoModel());
 
   if (!cs.Categories && !is.Items && !ts.Tables && !os.Orders) {
     return <Loading />;
@@ -55,8 +56,17 @@ const Order = () => {
           SQL * (where tableID = ts.currentTableId && orderpayed = 0)
           use previus result to load data from OrderOverviewView, 
           and show it in OrderDisplayOverview page */
-          os.getSpecificOrderInfoAsync(ts.currentTableId);
-          console.log(os.orderInfoSpecific.id?.toString()); 
+
+          os.getSpecificOrderInfoAsync(ts.currentTableId)
+          os.getOrderViewAsync(os.orderInfoSpecific.id)
+          setOrderViewItems(os.OrderViews);
+
+          if (os.orderInfoSpecific.id ==0 && orderViewItems.length > 0){
+            return <Loading />;
+          } else {
+          
+    
+          }
           
           /* if (os.Orders.order.length > 0) {
             setOrder(os.Order);
@@ -91,7 +101,7 @@ const Order = () => {
     return (
       <Container fluid>
         <Row md="auto">
-          <h1>Table {/*order.tableId*/} </h1>
+          <h1>Table {ts.currentTableId} </h1>
         </Row>
         <Row>
           <Col md={8}>

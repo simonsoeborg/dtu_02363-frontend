@@ -2,6 +2,7 @@ import { Nav, Card } from "react-bootstrap";
 import "../../../resources/Css/ResturantLayout.css";
 import { useNavigate } from "react-router-dom";
 import { ts } from "../../../Stores/TableStore";
+import { os } from "../../../Stores/OrderStore";
 interface IProps {
   tableId: number;
   tableIsInUse: boolean; 
@@ -13,7 +14,8 @@ const TableLayout = (props: IProps) => {
 
   const toOrderPage = () => {
     ts.currentTableId = props.tableId;
-    ts.tableIsInUse = props.tableIsInUse; 
+    ts.tableIsInUse = props.tableIsInUse;
+  
     navigate(`/EasyTap/Order/${props.tableId}`);
   };
 

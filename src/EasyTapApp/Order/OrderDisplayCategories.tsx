@@ -1,6 +1,6 @@
 import { Container, Nav } from "react-bootstrap";
 import { Dispatch, SetStateAction } from "react";
-import { FaCocktail, FaCookie, FaCookieBite, FaBirthdayCake, FaHamburger, FaJava, FaStar, FaBreadSlice, FaWineGlass } from "react-icons/fa"
+import { FaCocktail, FaCookie, FaMugHot, FaCheese, FaCookieBite, FaBirthdayCake, FaHamburger, FaJava, FaStar, FaConciergeBell, FaWineGlass } from "react-icons/fa"
 import CategoryModel from "../../Models/CategoryModel";
 
 interface IProps {
@@ -22,13 +22,13 @@ const DisplayCategories = (props: IProps) => {
       */
       case props.categories[0].name.toString():
         //Starters
-        return <FaBreadSlice />
+        return <FaConciergeBell />
       case props.categories[1].name.toString():
         //Main dishes
         return <FaHamburger />
       case props.categories[2].name.toString():
         //Desserts
-        return <FaBirthdayCake />
+        return <FaCheese />
       case props.categories[3].name.toString():
         //Specials
         return <FaStar />
@@ -40,7 +40,7 @@ const DisplayCategories = (props: IProps) => {
         return <FaCocktail />
       case props.categories[6].name.toString():
         //Warm drinks
-        return <FaJava />
+        return <FaMugHot />
     }
 
   }
@@ -53,7 +53,7 @@ const DisplayCategories = (props: IProps) => {
             key={index}
             onClick={() => handleOnClickEvent(category.name)}
           >
-            <Nav.Link eventKey={category.name}>{category.name} {setCategoryIcon(category.name)} </Nav.Link>
+            <Nav.Link className="nav-link unselectable" eventKey={category.name}>{category.name} {setCategoryIcon(category.name)} </Nav.Link>
           </Nav.Item>
         ))}
       </Nav>

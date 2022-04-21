@@ -32,9 +32,9 @@ import {
     return (
       <Row className="justify-content-center">
         <Container style={{ maxWidth: "20rem", margin: "2rem" }}>
-          <Card>
-              <Card.Header>
-                  Current quantity chosen: {props.amountChosen.toString()}
+          <Card className="calc-body card-shadow">
+              <Card.Header className="calc-header">
+                {props.amountChosen.toString()} x
               </Card.Header>
             <Card.Body>
               <Row className="justify-content-center">
@@ -44,7 +44,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(7)}
                     >
                       7
@@ -53,7 +53,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(8)}
                     >
                       8
@@ -62,7 +62,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(9)}
                     >
                       9
@@ -74,7 +74,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(4)}
                     >
                       4
@@ -83,7 +83,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(5)}
                     >
                       5
@@ -92,7 +92,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(6)}
                     >
                       6
@@ -104,7 +104,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(1)}
                     >
                       1
@@ -113,7 +113,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(2)}
                     >
                       2
@@ -122,7 +122,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(3)}
                     >
                       3
@@ -133,7 +133,7 @@ import {
                   {/* Cancel - 0 - Enter */}
                   <Col>
                     <Button
-                      className="PinForm"
+                      className="PinForm PinForm-clear"
                       variant="outline-danger"
                       onClick={() => handleOnClearClick()}
                     >
@@ -143,7 +143,7 @@ import {
                   <Col>
                     <Button
                       className="PinForm"
-                      variant="outline-primary"
+                      variant="outline-dark"
                       onClick={() => handleOnKeyClick(0)}
                     >
                       0

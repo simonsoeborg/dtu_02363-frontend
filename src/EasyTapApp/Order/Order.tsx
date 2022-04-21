@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
+import { FaReceipt,FaHandPointer } from "react-icons/fa"
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
 import CategoryModel from "../../Models/CategoryModel";
 import ItemModel from "../../Models/ItemModel";
-import OrderModel from "../../Models/OrderModel";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
-import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
 import "../../resources/Css/OrderLayout.css";
-import OrderInfoModel from "../../Models/OrderInfoModel";
-import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
 
 // stores
 // cs - category store
@@ -124,33 +121,29 @@ const Order = () => {
               setAmount={setAmount}
               previousOrderItemsView={os.OrderViews}
             />
-            <Col>
-              <OrderAmountPanel
-                amountChosen={AmountChosen}
-                setAmount={setAmount}
-              />
-            </Col>
-            <Col>
-              <Row className="d-flex justify-content-center">
+            <Col className="d-flex justify-content-center">
                 <Button
-                  className="button-PrintBill"
+                  className="btn icon-btn azm-social button-PrintBill"
                   variant="outline-primary"
                   onClick={() => PrintOutNavigation()}
                 >
-                  Print Bill
+                  <i className="fa"><FaReceipt ></FaReceipt></i> Print Bill
                 </Button>
 
                 <Button
-                  className="button-tabOut"
+                  className="btn icon-btn azm-social button-tapOut"
                   variant="outline-primary"
                   onClick={() => {
                     tapOutNavigate();
                   }}
                 >
-                  Tap Out
+                  <i className="fa"><FaHandPointer></FaHandPointer></i> Tap Out
                 </Button>
-              </Row>
             </Col>
+              <OrderAmountPanel
+                amountChosen={AmountChosen}
+                setAmount={setAmount}
+              />
           </Row>
         </Col>
       </Row>

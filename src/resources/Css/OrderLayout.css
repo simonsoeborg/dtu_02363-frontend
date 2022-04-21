@@ -1,18 +1,6 @@
-.scrollable-menu {
-  height: 280px;
-  max-height: 280px;
-  overflow-x: hidden;
-}
-.button-tabOut {
+.button-tapOut {
   appearance: button;
   background-color: #2a9d8f;
-  border: solid transparent;
-  border-top-width: medium;
-  border-right-width: medium;
-  border-bottom-width: medium;
-  border-left-width: medium;
-  border-radius: 16px;
-  border-width: 0 0 4px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
@@ -25,7 +13,8 @@
   margin: 0;
   outline: none;
   overflow: visible;
-  padding: 13px 16px;
+  padding-left: 2rem;
+  padding-right: 2rem;
   text-align: center;
   text-transform: uppercase;
   touch-action: manipulation;
@@ -35,33 +24,24 @@
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 60%;
-  height: 80px;
-  margin-top: 50px;
+  width: 95%;
+  height: 10rem;
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
 .button-PrintBill {
   appearance: button;
   background-color: #dd6031;
-  border: solid transparent;
-  border-top-width: medium;
-  border-right-width: medium;
-  border-bottom-width: medium;
-  border-left-width: medium;
-  border-radius: 16px;
-  border-width: 0 0 4px;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-family: din-round, sans-serif;
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 20px;
   overflow: visible;
-  padding: 13px 16px;
-  text-align: center;
   text-transform: uppercase;
   touch-action: manipulation;
   transform: translateZ(0);
@@ -70,7 +50,221 @@
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 60%;
-  height: 80px;
-  margin-top: 60px;
+  width: 100%;
+  height: 10rem;
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+  font-family: 'Roboto', sans-serif;
+  color: #2699 !important;
+}
+
+.nav-link:hover {
+  background-color: whitesmoke;
+
+}
+
+.card-shadow {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.473);
+
+}
+
+.customCard-Body {
+  background: rgba(27, 27, 27, 0.801) !important;
+  box-shadow: inset 0px 0px 20px 10px rgba(0, 0, 0, 0.6);
+}
+
+.customCard-Footer {
+  background: #a0a0a0de !important;
+  box-shadow: inset 0px -4px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.totalPrice {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #168a07 !important;
+  text-decoration: solid;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+  background-color: #666666b2;
+  box-shadow: inset 0px 0px 10px 2px rgba(0, 0, 0, 0.6);
+  font-weight: lighter;
+  font-size: 1.5rem;
+  width: 30%;
+  margin-left: 0px;
+  border-radius: 5px;
+  text-align: end;
+}
+
+.content {
+  height: 500px;
+  width: 400px;
+}
+
+.scrollable-menu {
+  height: 280px;
+  max-height: 280px;
+  overflow-x: auto;
+}
+
+.scroll {
+  width: 20px;
+  height: 200px;
+  overflow: auto;
+  float: left;
+  margin: 0 10px;
+}
+
+.scroll1::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll1::-webkit-scrollbar-thumb {
+  background: rgba(44, 72, 199, 0.541);
+  border-radius: 20px;
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.6);
+}
+
+.scroll1::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 2px;
+  box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+}
+
+.calc-header {
+  background-color: #b3fab7;
+  box-shadow: inset 0px 0px 10px 2px rgba(0, 0, 0, 0.6);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 1.5rem;
+  text-align: end;
+}
+
+.calc-body {
+  size: 4rem;
+  background-color: rgb(94, 93, 93);
+}
+
+.PinForm {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  color: #ccc;
+  background-color: rgba(0, 0, 0, 0.363);
+  box-shadow: inset 0px 0px 5px 1px #000;
+}
+
+.PinForm-clear {
+  background-color: rgba(255, 13, 13, 0.616);
+}
+
+.PinFormRowBox {
+  padding: 0;
+  margin: 0;
+}
+
+.PinFormRowBox .col {
+  padding: 0;
+  padding-left: 0.15rem;
+  padding-right: 0.15rem;
+  margin: 0;
+}
+
+.PinFormRowInputBox {
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.PinFormRowInputBox .col {
+  padding: 0;
+  padding-left: 0.15rem;
+  padding-right: 0.15rem;
+  margin: 0;
+}
+
+.icon-lined {
+  font-style: normal;
+  font-weight: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+  font-size: 140%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 0px 1px 5px rgba(255, 207, 118, 0.9);
+}
+
+.icon-btn {
+  height: 10rem;
+  padding: 13px 17px;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 300;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.icon-btn i {
+  padding-right: 27px;
+  font-size: 21px;
+  line-height: 21px;
+  vertical-align: top;
+}
+
+.icon-btn i:after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 70%;
+  width: 1px;
+  height: 36px;
+  background: #ccc;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.azm-social {
+  padding: 0;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -o-transition: all .3s;
+  -moz-transition: all .3s;
+  -webkit-transition: all .3s;
+  -ms-transition: all .3s;
+  transition: all .3s;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+  text-align: left;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

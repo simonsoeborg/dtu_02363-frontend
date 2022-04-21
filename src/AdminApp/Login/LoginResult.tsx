@@ -1,32 +1,37 @@
 import { authentication } from "../../Stores/AuthenticationStore";
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
 import Loading from '../../Partials/Loading';
 import { Container } from "react-bootstrap";
+import { observer } from "mobx-react-lite";
 
 const LoginResult = () => {
     const navigate = useNavigate();
 
-    if(!authentication.RBACAuth) {
+    if(authentication.getRole() === undefined) {
         return <Loading />
     } else {
-        console.log(authentication.getRole())
         if(authentication.getRole() === "waiter") {
-            navigate(`/EasyTap`, { replace: false });
+            setTimeout(() => {            
+                navigate(`/EasyTap`, { replace: false });    
+          }, 1500);
         }
-        if(authentication.getRole() === "user") {
-            navigate(`/`, { replace: false });
+        if(authentication.getRole() === "user") {    
+            setTimeout(() => {
+                navigate(`/`, { replace: false });
+          }, 1500);
         }
-        if(authentication.getRole() === "admin") {
-            navigate(`/AdminPanel`, { replace: false });
+        if(authentication.getRole() === "admin") {    
+            setTimeout(() => {
+                navigate(`/AdminPanel`, { replace: false });
+          }, 1500);
         }
         return (
             <Container>
                 <h1 className="text-success">Login Success</h1>
+                <h2 className="text-warning">Role: {authentication.RBACAuth.role}</h2>
             </Container>
         )
     }
 }
 
-export default LoginResult;
+export default observer(LoginResult);

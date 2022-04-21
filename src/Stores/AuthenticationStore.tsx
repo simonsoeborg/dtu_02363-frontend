@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import AuthenticationModel from '../Models/AuthenticationModel';
 import AuthViewModel from '../Models/AuthViewModel';
 import { API_URL } from '../Services/_services';
@@ -21,11 +21,15 @@ class AuthStore {
     }
 
     setRBACAuth = (rbacAuth : AuthViewModel) => {
-        this.rbacAuth = rbacAuth;
+        runInAction(() => {
+            this.rbacAuth = rbacAuth;
+        });
     }
 
-    setAuth = (auth : AuthenticationModel) => {
-        this.auth = auth;
+    setAuth = (auth : AuthenticationModel) => {        
+        runInAction(() => {        
+            this.auth = auth;
+        });
     }
 
     getRole = () => {

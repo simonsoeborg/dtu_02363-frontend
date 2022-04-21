@@ -12,6 +12,10 @@ import { Dispatch, SetStateAction } from "react";
 import { is } from "../../Stores/ItemStore";
 import Loading from "../../Partials/Loading";
 import ItemModel from "../../Models/ItemModel";
+import OrderModel from "../../Models/OrderModel";
+import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
+import { blue, blueGrey, lightGreen } from "@mui/material/colors";
+import { color } from "@mui/system";
 
 
 
@@ -20,35 +24,57 @@ interface IProps {
   setCurrentOrderItems: Dispatch<SetStateAction<ItemModel[]>>;
   amountChosen: number;
   setAmount: Dispatch<SetStateAction<number>>;
+  previousOrderItemsView: OrderOverviewViewModel[];
 }
 
 const OrderDisplayOverView = (props: IProps) => {
   function getTotal(): number {
-    var result: number = 0;
+    let result: number = 0;
+    let oldResult: number = 0;
     props.currentOrderItems.map((item) => (result = result + item.price));
-    return result;
+    props.previousOrderItemsView.map((item) => (oldResult = oldResult + item.price)); 
+    return result+oldResult;
   }
-  
+
   function getQuantity(itemName: String) {
     const quantity = props.currentOrderItems.filter(item => item.itemName === itemName).length;
     return quantity;
   }
 
+  function getQuantityOld(name: String) {
+    const quantity = props.previousOrderItemsView.filter(item => item.name === name).length;
+    return quantity;
+  }
+
+
   function getQuantityPrice(item: ItemModel) {
     return item.price * getQuantity(item.itemName);
   }
+  
+  function getOldQuantityPrice(item: OrderOverviewViewModel) {
+    return item.price * getQuantityOld(item.name);
+  }
+
 
   function getUniqueCurrentOrderItems(currentOrderItems: ItemModel[]){
     const names = currentOrderItems.map(item => item.itemName)
     const filtered = currentOrderItems.filter(({itemName}, index) => !names.includes(itemName, index + 1))
     return filtered;
   }
-  
+
+ function getUniqueOldOrderItems(oldOrderItems: OrderOverviewViewModel[]){
+    const names = oldOrderItems.map(item => item.name)
+    const filtered = oldOrderItems.filter(({name}, index) => !names.includes(name, index + 1))
+    return filtered;
+  }
+
+
   const handleDeleteItem = (item: ItemModel) => {
     props.setCurrentOrderItems(
       props.currentOrderItems.filter((orderitem) => orderitem.id !== item.id)
     );
   };
+
 
   function displayOrderItems(item: ItemModel, index: number) {
       return(
@@ -62,6 +88,18 @@ const OrderDisplayOverView = (props: IProps) => {
       </ListGroupItem>
       )
   }
+
+  function displayOldOrderItems(item: OrderOverviewViewModel, index: number) {
+    return(
+    <ListGroupItem variant="dark" key={index}>
+      <Row>
+        <Col md={2}>{getQuantityOld(item.name)}x</Col>
+        <Col md={7}>{item.name}</Col>
+        <Col md={2}>{getOldQuantityPrice(item)} kr</Col>
+      </Row>
+    </ListGroupItem>
+    )
+}
 
   if (!is.Items) {
     return <Loading />;
@@ -77,6 +115,10 @@ const OrderDisplayOverView = (props: IProps) => {
             <ListGroup className="scrollable-menu scroll1 unselectable">
               {getUniqueCurrentOrderItems(props.currentOrderItems).map((item, index) => (
                displayOrderItems(item, index)
+              ))}
+
+              {getUniqueOldOrderItems(props.previousOrderItemsView).map((item, index) => (
+               displayOldOrderItems(item, index)
               ))}
             </ListGroup>
           </Card.Body>

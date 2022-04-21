@@ -40,6 +40,7 @@ const Order = () => {
   const [AmountChosen, setAmount] = useState(0);
 
   const navigate = useNavigate();
+
   const tapOutNavigate = () => {
     //TODO Gem data --> PUT (og kun det nye og ikke det gamle loadede.)
     navigate(`/EasyTap`);

@@ -24,9 +24,7 @@ const DisplayItems = (props: IProps) => {
   const addItems = (newItem : ItemModel, amount : number) => {
     const items = [];
 
-    // Få loopet til at virke (således at den laver amount-antal kopier)
       for (let i = 0; i< amount; i++){
-
         const newItemObject = {
           id: currentItemId+i,
           itemName: newItem.itemName,

@@ -50,6 +50,7 @@ const Order = () => {
     //TODO
     // 2. Ændre OrderInfo - status: orderPayed til true!
     await ts.changeTableOccupation();
+    await os.putOrderInfo(ts.currentTableId);
     navigate(`/EasyTap`);
   };
 
@@ -67,7 +68,9 @@ const Order = () => {
 
     const newTable = async () => {
       // TODO: - opret en instans af orderInfo i database.
-      ts.changeTableOccupation();
+      await ts.changeTableOccupation();
+      await os.postOrderInfo(ts.currentTableId);
+      //await os.getSpecificOrderInfoAsync(ts.currentTableId);
     };
 
     if (ts.tableIsInUse) {
@@ -79,7 +82,9 @@ const Order = () => {
     setCategories(cs.categories);
     setItems(is.items);
     setHasLoaded(true);
+    // console.log(os.orderInfoSpecific.id)
   }, []);
+
 
   if (!hasLoaded) {
     return <Loading />;

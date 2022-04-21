@@ -7,14 +7,10 @@ import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
 import CategoryModel from "../../Models/CategoryModel";
 import ItemModel from "../../Models/ItemModel";
-import OrderModel from "../../Models/OrderModel";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
-import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
 import "../../resources/Css/OrderLayout.css";
-import OrderInfoModel from "../../Models/OrderInfoModel";
-import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
 
 // stores
 // cs - category store

@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
+import { FaReceipt, } from "react-icons/fa"
 import "../../resources/Css/OrderLayout.css";
 
 interface IProps {
@@ -16,10 +17,11 @@ const PrintBillButton = (props: IProps) => {
 
   return (
     <Button
-      className="button-PrintBill"
+      className="btn icon-btn azm-social button-PrintBill"
       variant="outline-primary"
       onClick={() => handleOnKeyClick(true)}
     >
+      <i className="fa"><FaReceipt ></FaReceipt></i>
       Print Bill
     </Button>
   );

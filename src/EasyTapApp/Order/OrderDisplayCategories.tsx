@@ -54,7 +54,7 @@ const DisplayCategories = (props: IProps) => {
             key={index}
             onClick={() => handleOnClickEvent(category.name)}
           >
-            <Nav.Link className="nav-link" eventKey={category.name}>{category.name} {setCategoryIcon(category.name)} </Nav.Link>
+            <Nav.Link className="nav-link unselectable" eventKey={category.name}>{category.name} {setCategoryIcon(category.name)} </Nav.Link>
           </Nav.Item>
         ))}
       </Nav>

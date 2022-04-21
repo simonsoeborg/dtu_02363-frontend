@@ -28,35 +28,3 @@
   background-color: #EBEBEB;
 }
 
-.PinForm {
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding: 1rem;
-  width: 100%;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-
-.PinFormRowBox {
-  padding: 0;
-  margin: 0;
-}
-
-.PinFormRowBox .col {
-  padding: 0;
-  padding-left: 0.15rem;
-  padding-right: 0.15rem;
-  margin: 0;
-}
-
-.PinFormRowInputBox {
-  padding: 0;
-  margin-bottom: 1rem;
-}
-
-.PinFormRowInputBox .col {
-  padding: 0;
-  padding-left: 0.15rem;
-  padding-right: 0.15rem;
-  margin: 0;
-}

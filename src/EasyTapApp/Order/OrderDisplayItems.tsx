@@ -66,7 +66,7 @@ const DisplayItems = (props: IProps) => {
                 className="mb-2"
                 key={index}
               >
-                <Card.Header>{item.itemName}</Card.Header>
+                <Card.Header className="unselectable">{item.itemName}</Card.Header>
               </Card>
             </div>
           </Col>

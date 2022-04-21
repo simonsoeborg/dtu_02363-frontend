@@ -83,27 +83,23 @@ const Order = () => {
           </Col>
           <Col>
             <Row>
-              <OrderDisplayOverView 
-              currentOrderItems={orderItems}
-              setCurrentOrderItems={setOrderItems}
-              amountChosen = {AmountChosen}
-              setAmount = {setAmount}
+              <OrderDisplayOverView
+                currentOrderItems={orderItems}
+                setCurrentOrderItems={setOrderItems}
+                amountChosen={AmountChosen}
+                setAmount={setAmount}
               />
-              <Col>
-                <OrderAmountPanel
-                  amountChosen={AmountChosen}
-                  setAmount={setAmount}
+              <Col className="d-flex justify-content-center">
+                <PrintBillButton
+                  printbutton={isPayed}
+                  setPrintOut={setIsPayed}
                 />
+                <TapOutButton />
               </Col>
-              <Col>
-                <Row className="d-flex justify-content-center">
-                  <PrintBillButton
-                    printbutton={isPayed}
-                    setPrintOut={setIsPayed}
-                  />
-                  <TapOutButton />
-                </Row>
-              </Col>
+              <OrderAmountPanel
+                amountChosen={AmountChosen}
+                setAmount={setAmount}
+              />
             </Row>
           </Col>
         </Row>

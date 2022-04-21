@@ -48,10 +48,8 @@ const Order = () => {
 
   const PrintOutNavigation = async () => {
     //TODO
-    // 1. Færdiggør neden stående changeTableOpucation-funktionalitet.
     // 2. Ændre OrderInfo - status: orderPayed til true!
-    // await ts.changeTableOccupation;
-    // await ts.setCurrentTableStatus(false);
+    await ts.changeTableOccupation();
     navigate(`/EasyTap`);
   };
 

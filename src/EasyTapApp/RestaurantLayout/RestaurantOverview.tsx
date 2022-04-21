@@ -14,7 +14,7 @@ import TableModel from "../../Models/TableModel";
 import { height } from "@mui/system";
 
 const RestaurantLayout = () => {
-  const [tables, setTables] = useState<TableModel[]>([]);
+  // const [tables, setTables] = useState<TableModel[]>([]);
 
 
   function displayTable(index : number){
@@ -34,7 +34,7 @@ const RestaurantLayout = () => {
      )
    }
 }
-  if (!ts.Tables) {
+  if (!ts.tables) {
     return <Loading />;
   } else {
     return (

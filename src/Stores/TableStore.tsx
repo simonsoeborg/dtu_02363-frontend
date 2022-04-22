@@ -22,18 +22,19 @@ class TableStore {
     this.tables = tables;
   };
 
-  setCurrentTableId(id: number){
-    this.currentTableId = id;
-  }
+  // Not used? --> it seems 
+  
+  // setCurrentTableId(id: number){
+  //   this.currentTableId = id;
+  // }
 
-  setCurrentTableStatus(status : boolean){
-    this.tableIsInUse = status;
-  }
+  // setCurrentTableStatus(status : boolean){
+  //   this.tableIsInUse = status;
+  // }
 
   changeTableOccupation = async () => {
     this.tables[this.currentTableId-1].isInUse = !(this.tables[this.currentTableId-1].isInUse); 
 
-    console.log(this.tables[this.currentTableId-1].isInUse);
       const headers = new Headers();
       headers.append("Content-type", "application/json");
       var options = {
@@ -42,7 +43,7 @@ class TableStore {
           body: JSON.stringify(this.tables.filter(x=>x.id===this.currentTableId)[0])
       };
       
-      console.log(JSON.stringify(this.tables.filter(x=>x.id===this.currentTableId)[0]));
+      //console.log(JSON.stringify(this.tables.filter(x=>x.id===this.currentTableId)[0]));
 
       const request = new Request(`${API_URL}/SeatingTable/${this.currentTableId}`, options)
       const response = await fetch(request);

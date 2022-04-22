@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
+import { FaReceipt,FaHandPointer } from "react-icons/fa"
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
 import CategoryModel from "../../Models/CategoryModel";
 import ItemModel from "../../Models/ItemModel";
-import OrderModel from "../../Models/OrderModel";
-import { cs } from "../../Stores/CategoryStore";
-import { is } from "../../Stores/ItemStore";
-import { ts } from "../../Stores/TableStore";
-import { os } from "../../Stores/OrderStore";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
-import TapOutModel from "../../Models/TapOutModel";
 import OrderAmountPanel from "./OrderAmountPanel";
 import "../../resources/Css/OrderLayout.css";
-import OrderInfoModel from "../../Models/OrderInfoModel";
-import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
+
+// stores
+// cs - category store
+import { cs } from "../../Stores/CategoryStore";
+// is - item store
+import { is } from "../../Stores/ItemStore";
+// ts - table store
+import { ts } from "../../Stores/TableStore";
+// os - order store
+import { os } from "../../Stores/OrderStore";
 
 const Order = () => {
-  // Contains the different categories in the resturant 
+  // Contains the different categories in the resturant
   const [categories, setCategories] = useState<CategoryModel[]>([]);
-  // Tells which food-category is chosen.  
+  // Tells which food-category is chosen.
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");
   // Tells if the needed data i loaded
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -33,50 +36,55 @@ const Order = () => {
   // Shows amount chosen on calculator
   const [AmountChosen, setAmount] = useState(0);
 
-
   const navigate = useNavigate();
+
   const tapOutNavigate = () => {
     //TODO Gem data --> PUT (og kun det nye og ikke det gamle loadede.)
     navigate(`/EasyTap`);
   };
 
   const PrintOutNavigation = async () => {
-    //TODO 
-    // 1. Færdiggør neden stående changeTableOpucation-funktionalitet. 
-    // 2. Ændre OrderInfo - status: orderPayed til true! 
-    // await ts.changeTableOccupation;
-    // await ts.setCurrentTableStatus(false);
+    //TODO
+    // 2. Ændre OrderInfo - status: orderPayed til true!
+    await ts.changeTableOccupation();
+    await os.putOrderInfo(ts.currentTableId);
     navigate(`/EasyTap`);
   };
 
-  // UseEffect is used for securing that the functions is called in proper order and only onces, unless called again. 
+  // UseEffect is used for securing that the functions is called in proper order and only onces, unless called again.
   useEffect(() => {
-    // TODO - de to const i useEffect burde efsersigne være i sepperate useEffects. 
-  
-    // TODO + OBS OBS: fetchdata (eller et andet sted) skal tage højde for hvis et bord er optaget, men ikke har nogen varer.     
-    const fetchData = async() => {
-      // Fetches the current order-id based on the which Table was pressed. 
-      await os.getSpecificOrderInfoAsync(ts.currentTableId)
-      // Uses the knowledege from previous function to get all excisting orders from the id.  
-      await os.getOrderViewAsync(os.orderInfoSpecific.id)
-    }
-    
-    const newTable = async() => {
-      // TODO: - opret en instans af orderInfo i database.          
-      ts.changeTableOccupation()
+    // TODO - de to const i useEffect burde efsersigne være i sepperate useEffects.
+
+    // TODO + OBS OBS: fetchdata (eller et andet sted) skal tage højde for hvis et bord er optaget, men ikke har nogen varer.
+    const fetchData = async () => {
+      // Fetches the current order-id based on the which Table was pressed.
+      await os.getSpecificOrderInfoAsync(ts.currentTableId);
+      // Uses the knowledege from previous function to get all excisting orders from the id.
+      await os.getOrderViewAsync(os.orderInfoSpecific.id);
+    };
+
+    const newTable = async () => {
+      // TODO: - opret en instans af orderInfo i database.
+      await ts.changeTableOccupation();
+      await os.postOrderInfo(ts.currentTableId);
+      //await os.getSpecificOrderInfoAsync(ts.currentTableId);
+    };
+
+    if (ts.tableIsInUse) {
+      fetchData();
+    } else {
+      newTable();
     }
 
-    if (ts.tableIsInUse){ fetchData() }
-    else  {newTable()}
-
-    setCategories(cs.categories)
-    setItems(is.items)
+    setCategories(cs.categories);
+    setItems(is.items);
     setHasLoaded(true);
-  },[])
+    // console.log(os.orderInfoSpecific.id)
+  }, []);
 
 
   if (!hasLoaded) {
-    return <Loading />
+    return <Loading />;
   }
   return (
     <Container fluid>
@@ -113,33 +121,29 @@ const Order = () => {
               setAmount={setAmount}
               previousOrderItemsView={os.OrderViews}
             />
-            <Col>
-              <OrderAmountPanel
-                amountChosen={AmountChosen}
-                setAmount={setAmount}
-              />
-            </Col>
-            <Col>
-              <Row className="d-flex justify-content-center">
+            <Col className="d-flex justify-content-center">
                 <Button
-                  className="button-PrintBill"
+                  className="btn icon-btn azm-social button-PrintBill"
                   variant="outline-primary"
                   onClick={() => PrintOutNavigation()}
                 >
-                  Print Bill
+                  <i className="fa"><FaReceipt ></FaReceipt></i> Print Bill
                 </Button>
 
                 <Button
-                  className="button-tabOut"
+                  className="btn icon-btn azm-social button-tapOut"
                   variant="outline-primary"
                   onClick={() => {
                     tapOutNavigate();
                   }}
                 >
-                  Tap Out
+                  <i className="fa"><FaHandPointer></FaHandPointer></i> Tap Out
                 </Button>
-              </Row>
             </Col>
+              <OrderAmountPanel
+                amountChosen={AmountChosen}
+                setAmount={setAmount}
+              />
           </Row>
         </Col>
       </Row>

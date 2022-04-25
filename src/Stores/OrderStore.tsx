@@ -76,10 +76,11 @@ class OrderStore {
   }
 
     for (let i = 0; i < newOrders.length; i++) {
-
+    
+      console.log(i)
       convertedItems[i].id = 0
-      convertedItems[i].itemId === 2
-      convertedItems[i].orderInfoId === orderInfoId     
+      convertedItems[i].itemId = 2
+      convertedItems[i].orderInfoId = orderInfoId     
     }
 
     console.log(convertedItems[0].itemId)

@@ -2,7 +2,6 @@ import { Container, Col, Card, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
-import { SmokedSalmon } from "../../Services/_services";
 
 interface IProps {
   items: ItemModel[];
@@ -63,7 +62,11 @@ const DisplayItems = (props: IProps) => {
                 className="mb-2"
                 key={index}
               >
-                <Card.Img variant="top" src={SmokedSalmon} />
+                <Card.Img
+                  variant="top"
+                  src={item.imgUrl}
+                  style={{ height: "10em" }}
+                />
                 <Card.Header className="unselectable">
                   {item.itemName}
                 </Card.Header>

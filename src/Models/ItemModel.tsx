@@ -3,4 +3,5 @@ export default class ItemModel {
   itemName: string = "";
   price: number = 0;
   categoryName: string = "";
+  imgUrl?: string = "";
 }

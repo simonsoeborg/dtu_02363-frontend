@@ -92,7 +92,7 @@ const Order = () => {
         <h1>Table {ts.currentTableId} </h1>
       </Row>
       <Row>
-        <Col md={8}>
+        <Col md={9}>
           <Row>
             <DisplayCategories
               categories={categories}
@@ -112,7 +112,7 @@ const Order = () => {
             />
           </Row>
         </Col>
-        <Col>
+        <Col md={3}>
           <Row>
             <OrderDisplayOverView
               currentOrderItems={orderItems}
@@ -120,6 +120,7 @@ const Order = () => {
               amountChosen={AmountChosen}
               setAmount={setAmount}
               previousOrderItemsView={os.OrderViews}
+              currentTableId={ts.currentTableId}
             />
             <Col className="d-flex justify-content-center">
                 <Button

@@ -5,18 +5,16 @@ import {
   Row,
   ListGroupItem,
   Card,
-  Button,
 } from "react-bootstrap";
-import { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { Dispatch, SetStateAction } from "react";
 import { is } from "../../Stores/ItemStore";
 import Loading from "../../Partials/Loading";
 import ItemModel from "../../Models/ItemModel";
-import OrderModel from "../../Models/OrderModel";
 import OrderOverviewViewModel from "../../Models/OrderOverviewViewModel";
-import { blue, blueGrey, lightGreen } from "@mui/material/colors";
-import { color } from "@mui/system";
+
+
+
 
 interface IProps {
   currentOrderItems: ItemModel[];
@@ -24,6 +22,7 @@ interface IProps {
   amountChosen: number;
   setAmount: Dispatch<SetStateAction<number>>;
   previousOrderItemsView: OrderOverviewViewModel[];
+  currentTableId: number;
 }
 
 const OrderDisplayOverView = (props: IProps) => {
@@ -80,8 +79,8 @@ const OrderDisplayOverView = (props: IProps) => {
       <ListGroupItem key={index}>
         <Row >
           <Col md={2}>{getQuantity(item.itemName)}x</Col>
-          <Col md={7}>{item.itemName}</Col>
-          <Col md={2}>{getQuantityPrice(item)} kr</Col>
+          <Col md={6}>{item.itemName}</Col>
+          <Col md={3}>{getQuantityPrice(item)} kr</Col>
           <Col md={1} onClick={() =>  handleDeleteItem(item) }  ><TiDelete color="red"/></Col>
         </Row>
       </ListGroupItem>
@@ -105,12 +104,14 @@ const OrderDisplayOverView = (props: IProps) => {
   } else {
     return (
       <Container>
-        <Card>
-          <Card.Header>
-            <h2>Order Overview</h2>
+        <Card >
+          <Card.Header className="text-center">
+            <h4>Order Overview</h4>
+            <h5>Table {props.currentTableId}</h5>
           </Card.Header>
-          <Card.Body>
-            <ListGroup className="scrollable-menu">
+
+          <Card.Body className="customCard-Body">
+            <ListGroup className="scrollable-menu scroll1 unselectable">
               {getUniqueCurrentOrderItems(props.currentOrderItems).map((item, index) => (
                displayOrderItems(item, index)
               ))}
@@ -120,7 +121,8 @@ const OrderDisplayOverView = (props: IProps) => {
               ))}
             </ListGroup>
           </Card.Body>
-          <Card.Footer>Total : {getTotal()}</Card.Footer>
+
+          <Card.Footer className="customCard-Footer"><Container className=" totalPrice unselectable"> {getTotal()} kr</Container></Card.Footer>
         </Card>
       </Container>
     );

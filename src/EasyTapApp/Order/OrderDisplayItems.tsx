@@ -1,5 +1,5 @@
 import { Container, Col, Card, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Dispatch, SetStateAction } from "react";
 import ItemModel from "../../Models/ItemModel";
 
@@ -18,35 +18,33 @@ const DisplayItems = (props: IProps) => {
     (item) => item.categoryName === props.selectedCategory
   );
 
-  
- const [currentItemId, setCurrentItemId] = useState(0);
- 
-  const addItems = (newItem : ItemModel, amount : number) => {
+  const [currentItemId, setCurrentItemId] = useState(0);
+
+  const addItems = (newItem: ItemModel, amount: number) => {
     const items = [];
 
-      for (let i = 0; i< amount; i++){
-        const newItemObject = {
-          id: currentItemId+i,
-          itemName: newItem.itemName,
-          price: newItem.price,
-          categoryName: newItem.categoryName
-        };
+    for (let i = 0; i < amount; i++) {
+      const newItemObject = {
+        id: currentItemId + i,
+        itemName: newItem.itemName,
+        price: newItem.price,
+        categoryName: newItem.categoryName,
+      };
 
-      items.push(newItemObject)
-      }
-
-      setCurrentItemId(currentItemId+amount)
-      return items
+      items.push(newItemObject);
     }
 
+    setCurrentItemId(currentItemId + amount);
+    return items;
+  };
 
   const handleOnClickEvent = (item: ItemModel) => {
-
-    if (props.amountChosen == 0){
-      props.setOrderItems(props.orderItems.concat(addItems(item, 1)))
-    }
-    else{
-      props.setOrderItems(props.orderItems.concat(addItems(item, props.amountChosen)))
+    if (props.amountChosen == 0) {
+      props.setOrderItems(props.orderItems.concat(addItems(item, 1)));
+    } else {
+      props.setOrderItems(
+        props.orderItems.concat(addItems(item, props.amountChosen))
+      );
       props.setAmount(0);
     }
   };
@@ -64,7 +62,14 @@ const DisplayItems = (props: IProps) => {
                 className="mb-2"
                 key={index}
               >
-                <Card.Header>{item.itemName}</Card.Header>
+                <Card.Img
+                  variant="top"
+                  src={item.imgUrl}
+                  style={{ height: "10em" }}
+                />
+                <Card.Header className="unselectable">
+                  {item.itemName}
+                </Card.Header>
               </Card>
             </div>
           </Col>

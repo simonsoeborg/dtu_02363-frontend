@@ -49,12 +49,23 @@ const RestaurantLayout = () => {
 
           {displayTable(2)}
 
-
           {displayTable(3)}
 
           {displayTable(4)}
 
           {displayTable(5)}
+
+          {displayTable(6)}
+
+          {displayTable(7)}
+
+          {displayTable(8)}
+
+          {displayTable(9)}
+
+          {displayTable(10)}
+
+
       </Container>
     );
   }

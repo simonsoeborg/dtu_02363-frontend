@@ -22,7 +22,7 @@
 }
 
 .TableText {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: bold;
   font-size: 3rem;
 }
@@ -40,6 +40,7 @@
   width: 80px;
   height: 80px;
   background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
 }
 
 .t2 {
@@ -50,6 +51,7 @@
   width: 80px;
   height: 80px;
   background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
 }
 
 .t3 {
@@ -60,6 +62,7 @@
   width: 80px;
   height: 80px;
   background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
 }
 
 .t4 {
@@ -70,6 +73,7 @@
   width: 80px;
   height: 80px;
   background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
 }
 
 .t5 {
@@ -80,4 +84,60 @@
   width: 80px;
   height: 80px;
   background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
+}
+
+.t6 {
+  position: relative;
+  left: 38em;
+  top: 27em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
+}
+
+.t7 {
+  position: relative;
+  left: 28em;
+  top: 20em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
+}
+
+.t8 {
+  position: relative;
+  left: 30em;
+  top: 21em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
+}
+
+.t9 {
+  position: relative;
+  left: 33em;
+  top: 22.5em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
+}
+
+.t10 {
+  position: relative;
+  left: 4em;
+  top: 38em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+  font-weight: bold;
 }

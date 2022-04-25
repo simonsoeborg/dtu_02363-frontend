@@ -5,12 +5,13 @@ import {
   Col,
   Button,
   InputGroup,
-  FormControl,
+  FormControl, Modal, Alert
 } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
 
 interface IProps {
   isLoggedIn: boolean;
+  pin : number;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -20,6 +21,9 @@ const LoginApp = (props: IProps) => {
   const [thirdEntry, setThirdEntry] = useState("");
   const [forthEntry, setForthEntry] = useState("");
   const [activeKeys, setActiveKeys] = useState(false);
+  const [show, setShow] = useState(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleOnKeyClick = (value: string) => {
     if (firstEntry === "") {
@@ -64,16 +68,33 @@ const LoginApp = (props: IProps) => {
       thirdEntry !== "" &&
       forthEntry !== ""
     ) {
-      // Check Database for user that has this pin.
+      let temp = `${firstEntry}${secondEntry}${thirdEntry}${forthEntry}`;
+      console.log(temp)
+      console.log(props.pin)
 
-      // Then set isLoggedIn to True
-      props.setIsLoggedIn(true);
+      if(props.pin === +temp) {
+        console.log("Success")
+        // Then set isLoggedIn to True
+        props.setIsLoggedIn(true);
+      } else {
+        handleShow();
+      }
     }
   };
 
   return (
     <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Body>
+          <Alert variant="danger">
+            <Alert.Heading>Wrong Pin!</Alert.Heading>
+            <p>
+              The Pin you have entered is not correct!
+            </p>
+          </Alert>
+        </Modal.Body>
+      </Modal>
         <Card>
           <Card.Body>
             <Row className="justify-content-center">

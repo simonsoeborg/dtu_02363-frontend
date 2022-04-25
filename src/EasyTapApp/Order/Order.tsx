@@ -44,17 +44,22 @@ const Order = () => {
     if (orderItems.length > 0){
       await os.postOrders(orderItems, os.getOrderInfoSpecific().id)
     }
-    
+
+    os.setOrderViewList([])
     navigate(`/EasyTap`);
   };
 
   const PrintOutNavigation = async () => {
     //TODO: 
     // Pop that shows price - mby a check: "Do you clear this table?"
-    await ts.changeTableOccupation();
-    await os.putOrderInfo(ts.currentTableId);
-    os.setOrderViewList([])
 
+    if (orderItems.length > 0){
+      await os.postOrders(orderItems, os.getOrderInfoSpecific().id)
+    }
+   
+    await os.changeOrderInfoStatus(ts.currentTableId);
+    await ts.changeTableOccupation();
+    os.setOrderViewList([])
     navigate(`/EasyTap`);
   };
 
@@ -87,7 +92,6 @@ const Order = () => {
     setCategories(cs.categories);
     setItems(is.items);
     setHasLoaded(true);
-    // console.log(os.orderInfoSpecific.id)
   }, []);
 
   if (!hasLoaded) {

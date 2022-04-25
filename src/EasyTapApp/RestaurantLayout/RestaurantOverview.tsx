@@ -1,8 +1,6 @@
 import { Container, ListGroup, Col, Row } from "react-bootstrap";
-import { useState } from "react";
 import Bar from "../../resources/LayOutDesign/bar.png";
 import Table from "../../resources/LayOutDesign/table.png";
-import TableUsing from "../../resources/LayOutDesign/TableUsing.png";
 import OccupiedTable from "../../resources/LayOutDesign/OccupiedTable.png";
 import Plant from "../../resources/LayOutDesign/plant.png";
 import "../../resources/Css/ResturantLayout.css";
@@ -11,8 +9,6 @@ import TableLayout from "./ResturantLayoutPartials/TableLayout";
 import PlantLayout from "./ResturantLayoutPartials/PlantLayout";
 import { ts } from "../../Stores/TableStore";
 import Loading from "../../Partials/Loading";
-import TableModel from "../../Models/TableModel";
-import { height } from "@mui/system";
 
 const RestaurantLayout = () => {
   // const [tables, setTables] = useState<TableModel[]>([]);
@@ -28,18 +24,21 @@ const RestaurantLayout = () => {
           />
         </Col>
       );
-    } else {
-      return (
-        <Col xs="2">
-          <TableLayout
-            tableId={index}
-            image={OccupiedTable}
-            tableIsInUse={ts.tables[index - 1].isInUse}
-          />
-        </Col>
-      );
+    } 
+    else {
+        return (
+          <Col xs="2">
+            <TableLayout
+              tableId={index}
+              image={OccupiedTable}
+              tableIsInUse={ts.tables[index - 1].isInUse}
+            />
+          </Col>
+        );
+      }
     }
-  }
+  
+
   if (!ts.tables) {
     return <Loading />;
   } else {

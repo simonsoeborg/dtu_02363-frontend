@@ -135,7 +135,8 @@ class OrderStore {
     return null
   }
 
-  putOrderInfo = async (tableId : number) =>{
+  
+  changeOrderInfoStatus = async (tableId : number) =>{
   
     const headers = new Headers();
     headers.append("Content-type", "application/json");

@@ -3,10 +3,12 @@ import "../../../resources/Css/RestaurantLayout.css";
 import { useNavigate } from "react-router-dom";
 import { ts } from "../../../Stores/TableStore";
 import { os } from "../../../Stores/OrderStore";
+import OccupiedTable from "../../resources/LayOutDesign/OccupiedTable.png";
+import Table from "../../resources/LayOutDesign/table.png";
 interface IProps {
   tableId: number;
   tableIsInUse: boolean;
-  image: any;
+  outline: string;
 }
 
 const TableLayout = (props: IProps) => {
@@ -15,24 +17,13 @@ const TableLayout = (props: IProps) => {
   const toOrderPage = () => {
     ts.currentTableId = props.tableId;
     ts.tableIsInUse = props.tableIsInUse;
+    
 
     navigate(`/EasyTap/Order/${props.tableId}`);
   };
 
-  if (ts.tables[ts.currentTableId].isInUse == true) {
-    return (
-      <Button variant="outline-warning"
-
-        className={`t${props.tableId} border-0`}
-        onClick={() => {
-          toOrderPage();
-        }}
-      >{props.tableId}
-      </Button>
-    );
-  } else {
     return(
-    <Button variant="outline-light"
+    <Button variant={`${props.outline}`}
 
       className={`t${props.tableId} border-0`}
       onClick={() => {
@@ -41,7 +32,7 @@ const TableLayout = (props: IProps) => {
     >{props.tableId}
     </Button>
     );
-  }
+  };
 
     // <Card
     //   className="bg-transparent text-white border-0"
@@ -55,6 +46,6 @@ const TableLayout = (props: IProps) => {
     //     <Card.Title className="TableText">{props.tableId}</Card.Title>
     //   </Card.ImgOverlay>
     // </Card>
-};
+
 
 export default TableLayout;

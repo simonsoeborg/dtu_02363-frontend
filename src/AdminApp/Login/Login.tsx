@@ -58,7 +58,9 @@ const Login = () => {
           authentication.postAuthentication(authentication.Auth);
         }
         if(authentication.getRole() !== undefined) {
-          navigate(`/Login/LoginResult`, { replace: false });
+          setInterval(() => {
+            navigate(`/Login/LoginResult`, { replace: false });
+          }, 5000)
         }
       }
       setUserHasBeenChecked(true)

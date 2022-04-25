@@ -25,7 +25,6 @@
   vertical-align: middle;
   white-space: nowrap;
   width: 95%;
-  height: 10rem;
   box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
@@ -51,7 +50,6 @@
   vertical-align: middle;
   white-space: nowrap;
   width: 100%;
-  height: 10rem;
   box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.5);
 }
 
@@ -91,7 +89,6 @@
   box-shadow: inset 0px 0px 10px 2px rgba(0, 0, 0, 0.6);
   font-weight: lighter;
   font-size: 1.5rem;
-  width: 30%;
   margin-left: 0px;
   border-radius: 5px;
   text-align: end;
@@ -206,7 +203,7 @@
 }
 
 .icon-btn {
-  height: 10rem;
+  height: 8rem;
   padding: 13px 17px;
   font-size: 14px;
   line-height: 21px;

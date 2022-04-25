@@ -91,7 +91,7 @@ const Order = () => {
         <h1>Table {ts.currentTableId} </h1>
       </Row>
       <Row>
-        <Col md={8}>
+        <Col md={9}>
           <Row>
             <DisplayCategories
               categories={categories}
@@ -111,7 +111,7 @@ const Order = () => {
             />
           </Row>
         </Col>
-        <Col>
+        <Col md={3}>
           <Row>
             <OrderDisplayOverView
               currentOrderItems={orderItems}
@@ -119,9 +119,9 @@ const Order = () => {
               amountChosen={AmountChosen}
               setAmount={setAmount}
               previousOrderItemsView={os.OrderViews}
+              currentTableId={ts.currentTableId}
             />
             <Col className="d-flex justify-content">
-              <Row style={{ paddingTop: "1rem" }}>
                 <Button
                   className="btn icon-btn azm-social button-PrintBill"
                   variant="outline-primary"
@@ -145,14 +145,11 @@ const Order = () => {
                   </i>{" "}
                   Tap Out
                 </Button>
-              </Row>
             </Col>
-            <Col>
               <OrderAmountPanel
                 amountChosen={AmountChosen}
                 setAmount={setAmount}
               />
-            </Col>
           </Row>
         </Col>
       </Row>

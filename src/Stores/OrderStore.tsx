@@ -32,6 +32,10 @@ class OrderStore {
   getOrder() {
     return this.order;
   }
+
+  getOrderInfoSpecific(){
+    return this.orderInfoSpecific
+  }
  
   setOrders = (orders: OrderModel[]) => {
     this.orders = orders;
@@ -61,35 +65,23 @@ class OrderStore {
     this.setOrderInfo(data);
   }
 
-  
+  postOrders = async (newOrders : ItemModel[], specificOrderInfoId : number) =>  {
 
-  postOrders = async (newOrders : ItemModel[], orderInfoId : number) =>  {
+  let newArray : Array <OrderModel> = [];  
 
-  console.log(newOrders[0].itemName)
-  console.log(newOrders[1].itemName)
+   newOrders.map((item) => {
 
-  this.setOrders([])
-  const convertedItems = this.getOrders();  
-  
-  if (convertedItems.length > 0 ){
-    console.log("WHY GOD WHY")
-  }
-
-    for (let i = 0; i < newOrders.length; i++) {
-    
-      console.log(i)
-      convertedItems[i].id = 0
-      convertedItems[i].itemId = 2
-      convertedItems[i].orderInfoId = orderInfoId     
+    const individualOrder : OrderModel = {
+      id : 0 , 
+      itemId : item.id , 
+      orderInfoId : specificOrderInfoId
     }
-
-    console.log(convertedItems[0].itemId)
-    console.log(convertedItems[1].itemId)
-
-    // await this.setOrders(convertedItems)
-
-    for (let i = 0; i < convertedItems.length; i++) {
-      await this.postIndividualOrders(convertedItems[i])
+    newArray.push(individualOrder)
+}) 
+   
+    for (let i = 0; i < newArray.length; i++) {
+      console.log(newArray[i])
+      await this.postIndividualOrders(newArray[i])
     }
   }
 
@@ -108,11 +100,9 @@ class OrderStore {
     const request = new Request(`${API_URL}/Order`, options)
     const response = await fetch(request);
     // const data = await response.json();
-
     if (response.status !== 204) {
         console.log(response);
     }
-
     return null
   }
 

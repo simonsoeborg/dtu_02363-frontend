@@ -68,7 +68,7 @@ const OrderDisplayOverView = (props: IProps) => {
 
   const handleDeleteItem = (item: ItemModel) => {
     props.setCurrentOrderItems(
-      props.currentOrderItems.filter((orderitem) => orderitem.id !== item.id)
+      props.currentOrderItems.filter((orderitem) => orderitem.counterId !== item.counterId)
     );
   };
 

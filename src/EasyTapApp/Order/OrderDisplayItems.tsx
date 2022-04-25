@@ -23,13 +23,14 @@ const DisplayItems = (props: IProps) => {
   const addItems = (newItem: ItemModel, amount: number) => {
     const items = [];
 
-    for (let i = 0; i < amount; i++) {
-      const newItemObject = {
-        id: currentItemId + i,
-        itemName: newItem.itemName,
-        price: newItem.price,
-        categoryName: newItem.categoryName,
-      };
+      for (let i = 0; i< amount; i++){
+        const newItemObject = {
+          id: newItem.id,
+          counterId : currentItemId+i,
+          itemName: newItem.itemName,
+          price: newItem.price,
+          categoryName: newItem.categoryName
+        };
 
       items.push(newItemObject);
     }

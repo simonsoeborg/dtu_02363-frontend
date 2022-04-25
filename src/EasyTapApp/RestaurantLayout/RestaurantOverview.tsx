@@ -12,8 +12,6 @@ import TableLayout from "./RestaurantLayoutPartials/TableLayout";
 import PlantLayout from "./RestaurantLayoutPartials/PlantLayout";
 import { ts } from "../../Stores/TableStore";
 import Loading from "../../Partials/Loading";
-import TableModel from "../../Models/TableModel";
-import { height } from "@mui/system";
 
 const RestaurantLayout = () => {
   // const [tables, setTables] = useState<TableModel[]>([]);
@@ -36,8 +34,9 @@ const RestaurantLayout = () => {
             tableIsInUse={ts.tables[index - 1].isInUse}
           />
       );
-    }
-  }
+    };
+  };
+
   if (!ts.tables) {
     return <Loading />;
   } else {

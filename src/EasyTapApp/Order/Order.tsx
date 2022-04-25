@@ -23,7 +23,7 @@ import { ts } from "../../Stores/TableStore";
 import { os } from "../../Stores/OrderStore";
 
 const Order = () => {
-  // Contains the different categories in the resturant
+  // Contains the different categories in the Restaurant
   const [categories, setCategories] = useState<CategoryModel[]>([]);
   // Tells which food-category is chosen.
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");

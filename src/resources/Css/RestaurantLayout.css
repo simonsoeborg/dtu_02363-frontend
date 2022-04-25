@@ -1,0 +1,83 @@
+.OverviewLayout {
+  background-color: rgba(142, 51, 33, 255);
+  background-image: url("../LayOutDesign/random-restaurant.jpg");
+  border-style: solid;
+  /** box-shadow: inset -64em -35em 100px -10px rgba(102, 56, 25); **/
+  border-radius: 10px;
+}
+
+.BarSize {
+  height: 18rem;
+  width: 18rem;
+}
+
+.TableSize {
+  height: 11rem;
+  width: 11rem;
+}
+
+.PlantSize {
+  height: 7rem;
+  width: 3rem;
+}
+
+.TableText {
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.TableAlignment {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.t1 {
+  position: relative;
+  left: 35em;
+  top: 20em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+}
+
+.t2 {
+  position: relative;
+  left: 38em;
+  top: 18em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+}
+
+.t3 {
+  position: relative;
+  left: 40em;
+  top: 16em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+}
+
+.t4 {
+  position: relative;
+  left: 33em;
+  top: 25em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+}
+
+.t5 {
+  position: relative;
+  left: 35em;
+  top: 26em;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(66, 66, 66, 0.479);
+}

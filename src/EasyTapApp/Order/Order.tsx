@@ -38,8 +38,8 @@ const Order = () => {
 
   const navigate = useNavigate();
 
-  const tapOutNavigate = () => {
-    //TODO Gem data --> PUT (og kun det nye og ikke det gamle loadede.)
+  const tapOutNavigate = async() => {
+    await os.postOrders(orderItems, os.orderInfoSpecific.id)
     navigate(`/EasyTap`);
   };
 

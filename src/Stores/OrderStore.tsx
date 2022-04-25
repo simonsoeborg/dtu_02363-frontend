@@ -3,6 +3,8 @@ import { API_URL } from "../Services/_services";
 import OrderModel from "../Models/OrderModel";
 import OrderInfoModel from "../Models/OrderInfoModel";
 import OrderOverviewViewModel from "../Models/OrderOverviewViewModel";
+import ItemModel from "../Models/ItemModel";
+import UserModel from "../Models/UserModel";
 
 class OrderStore {
   orders: OrderModel[] = [];
@@ -23,17 +25,18 @@ class OrderStore {
     });
   }
 
-  get Orders() {
+  getOrders() {
     return this.orders;
   }
 
-  get Order() {
+  getOrder() {
     return this.order;
   }
  
   setOrders = (orders: OrderModel[]) => {
     this.orders = orders;
   };
+
 
   setOrderViewList = (orderViewList : OrderOverviewViewModel[]) => {
       this.OrderViews = orderViewList;
@@ -58,8 +61,63 @@ class OrderStore {
     this.setOrderInfo(data);
   }
 
-  postOrderInfo = async (tableId : number) =>{
+  
 
+  postOrders = async (newOrders : ItemModel[], orderInfoId : number) =>  {
+
+  console.log(newOrders[0].itemName)
+  console.log(newOrders[1].itemName)
+
+  this.setOrders([])
+  const convertedItems = this.getOrders();  
+  
+  if (convertedItems.length > 0 ){
+    console.log("WHY GOD WHY")
+  }
+
+    for (let i = 0; i < newOrders.length; i++) {
+
+      convertedItems[i].id = 0
+      convertedItems[i].itemId === 2
+      convertedItems[i].orderInfoId === orderInfoId     
+    }
+
+    console.log(convertedItems[0].itemId)
+    console.log(convertedItems[1].itemId)
+
+    // await this.setOrders(convertedItems)
+
+    for (let i = 0; i < convertedItems.length; i++) {
+      await this.postIndividualOrders(convertedItems[i])
+    }
+  }
+
+  postIndividualOrders = async (model : OrderModel) =>  {
+
+    const headers = new Headers();
+    headers.append("Content-type", "application/json");
+    var options = {
+        method: "POST",
+        headers,
+        body: JSON.stringify(model) 
+    };
+
+    console.log(JSON.stringify(model))
+
+    const request = new Request(`${API_URL}/Order`, options)
+    const response = await fetch(request);
+    // const data = await response.json();
+
+    if (response.status !== 204) {
+        console.log(response);
+    }
+
+    return null
+  }
+
+
+
+  postOrderInfo = async (tableId : number) =>{
     const newOrderInfoObject = {
       id: 0,
       tableId: tableId,

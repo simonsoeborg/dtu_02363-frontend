@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaReceipt,FaHandPointer } from "react-icons/fa"
+import { FaReceipt, FaHandPointer } from "react-icons/fa";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
@@ -82,7 +82,6 @@ const Order = () => {
     // console.log(os.orderInfoSpecific.id)
   }, []);
 
-
   if (!hasLoaded) {
     return <Loading />;
   }
@@ -121,13 +120,17 @@ const Order = () => {
               setAmount={setAmount}
               previousOrderItemsView={os.OrderViews}
             />
-            <Col className="d-flex justify-content-center">
+            <Col className="d-flex justify-content">
+              <Row style={{ paddingTop: "1rem" }}>
                 <Button
                   className="btn icon-btn azm-social button-PrintBill"
                   variant="outline-primary"
                   onClick={() => PrintOutNavigation()}
                 >
-                  <i className="fa"><FaReceipt ></FaReceipt></i> Print Bill
+                  <i className="fa">
+                    <FaReceipt></FaReceipt>
+                  </i>{" "}
+                  Print Bill
                 </Button>
 
                 <Button
@@ -137,13 +140,19 @@ const Order = () => {
                     tapOutNavigate();
                   }}
                 >
-                  <i className="fa"><FaHandPointer></FaHandPointer></i> Tap Out
+                  <i className="fa">
+                    <FaHandPointer></FaHandPointer>
+                  </i>{" "}
+                  Tap Out
                 </Button>
+              </Row>
             </Col>
+            <Col>
               <OrderAmountPanel
                 amountChosen={AmountChosen}
                 setAmount={setAmount}
               />
+            </Col>
           </Row>
         </Col>
       </Row>

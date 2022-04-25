@@ -22,6 +22,7 @@ interface IProps {
   amountChosen: number;
   setAmount: Dispatch<SetStateAction<number>>;
   previousOrderItemsView: OrderOverviewViewModel[];
+  currentTableId: number;
 }
 
 const OrderDisplayOverView = (props: IProps) => {
@@ -105,7 +106,8 @@ const OrderDisplayOverView = (props: IProps) => {
       <Container>
         <Card >
           <Card.Header className="text-center">
-            <h2>Order Overview</h2>
+            <h4>Order Overview</h4>
+            <h5>Table {props.currentTableId}</h5>
           </Card.Header>
 
           <Card.Body className="customCard-Body">

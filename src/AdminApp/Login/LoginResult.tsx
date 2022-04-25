@@ -3,32 +3,36 @@ import { useNavigate } from "react-router-dom";
 import Loading from '../../Partials/Loading';
 import { Container } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 const LoginResult = () => {
     const navigate = useNavigate();
-
-    if(authentication.getRole() === undefined) {
-        return <Loading />
-    } else {
+    useEffect(() => {
         if(authentication.getRole() === "waiter") {
-            setTimeout(() => {            
+            console.log(authentication.getRole())    
+            setTimeout(() => {        
                 navigate(`/EasyTap`, { replace: false });    
           }, 1500);
         }
         if(authentication.getRole() === "user") {    
+            console.log(authentication.getRole())    
             setTimeout(() => {
                 navigate(`/`, { replace: false });
           }, 1500);
         }
-        if(authentication.getRole() === "admin") {    
+        if(authentication.getRole() === "admin") {
+            console.log(authentication.getRole())    
             setTimeout(() => {
                 navigate(`/AdminPanel`, { replace: false });
           }, 1500);
         }
+    })
+    if(authentication.getRole() === undefined) {
+        return <Loading />
+    } else {
         return (
-            <Container>
+            <Container style={{ textAlign: "center", marginTop: "10rem"}}>
                 <h1 className="text-success">Login Success</h1>
-                <h2 className="text-warning">Role: {authentication.RBACAuth.role}</h2>
             </Container>
         )
     }

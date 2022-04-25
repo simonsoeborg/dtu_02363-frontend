@@ -122,7 +122,6 @@ const Order = () => {
               currentTableId={ts.currentTableId}
             />
             <Col className="d-flex justify-content">
-              <Row style={{ paddingTop: "1rem" }}>
                 <Button
                   className="btn icon-btn azm-social button-PrintBill"
                   variant="outline-primary"
@@ -146,14 +145,11 @@ const Order = () => {
                   </i>{" "}
                   Tap Out
                 </Button>
-              </Row>
             </Col>
-            <Col>
               <OrderAmountPanel
                 amountChosen={AmountChosen}
                 setAmount={setAmount}
               />
-            </Col>
           </Row>
         </Col>
       </Row>

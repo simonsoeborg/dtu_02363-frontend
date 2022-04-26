@@ -3,6 +3,7 @@ import { useState } from "react";
 import Bar from "../../resources/LayOutDesign/bar.png";
 import Table from "../../resources/LayOutDesign/table.png";
 import TableUsing from "../../resources/LayOutDesign/TableUsing.png";
+import OccupiedTable from "../../resources/LayOutDesign/OccupiedTable.png";
 import Plant from "../../resources/LayOutDesign/plant.png";
 import "../../resources/Css/ResturantLayout.css";
 import BarLayout from "./ResturantLayoutPartials/BarLayout";
@@ -14,27 +15,32 @@ import TableModel from "../../Models/TableModel";
 import { height } from "@mui/system";
 
 const RestaurantLayout = () => {
-  const [tables, setTables] = useState<TableModel[]>([]);
+  // const [tables, setTables] = useState<TableModel[]>([]);
 
-
-  function displayTable(index : number){
-
-    if (!ts.tables[index-1].isInUse){
-   return(
-    <Col xs="2">
-    <TableLayout tableId={index} image={Table} tableIsInUse={ts.tables[index-1].isInUse}/>
-    </Col>
-   )
+  function displayTable(index: number) {
+    if (!ts.tables[index - 1].isInUse) {
+      return (
+        <Col xs="2">
+          <TableLayout
+            tableId={index}
+            image={Table}
+            tableIsInUse={ts.tables[index - 1].isInUse}
+          />
+        </Col>
+      );
+    } else {
+      return (
+        <Col xs="2">
+          <TableLayout
+            tableId={index}
+            image={OccupiedTable}
+            tableIsInUse={ts.tables[index - 1].isInUse}
+          />
+        </Col>
+      );
     }
-   else{
-     return(
-      <Col xs="2">
-      <TableLayout tableId={index} image={TableUsing} tableIsInUse={ts.tables[index-1].isInUse}/>
-      </Col>
-     )
-   }
-}
-  if (!ts.Tables) {
+  }
+  if (!ts.tables) {
     return <Loading />;
   } else {
     return (
@@ -47,7 +53,7 @@ const RestaurantLayout = () => {
             <BarLayout image={Bar} />
           </Col>
           <Col xs="1"></Col>
-         {displayTable(1)}
+          {displayTable(1)}
           <Col xs="1">
             <PlantLayout image={Plant} />
           </Col>
@@ -55,7 +61,8 @@ const RestaurantLayout = () => {
         </Row>
         <Row
           style={{ marginTop: "23rem" }}
-          className="d-flex align-items-end flex-Row justify-content-md-center">
+          className="d-flex align-items-end flex-Row justify-content-md-center"
+        >
           {displayTable(3)}
           <Col xs="1">
             <PlantLayout image={Plant} />

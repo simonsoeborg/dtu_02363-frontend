@@ -40,20 +40,24 @@ const App = () => {
   if(role !== "waiter") {
   return (
     <div className="App">
-      <GlobalNavbar />
+      <GlobalNavbar role={role} />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />}></Route>
-          <Route path="/AdminPanel/" element={<AdminPanel />}></Route>
-          <Route path="/User/:id" element={<UserById />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
-          <Route path="/Login/Register" element={<Register />}></Route>
-          <Route path="/Login/LoginResult" element={<LoginResult />}></Route>
-          <Route path="/Restaurant/:id" element={<RestaurantById />}></Route>
-          <Route path="/EasyTap" element={<EasyTap />}></Route>
-          <Route path="/EasyTap/TableTop" element={<TableTop />}></Route>
-          <Route path="/EasyTap/Order/:id" element={<Order />}></Route>
-          <Route path="/EasyTap/Layout" element={<Layout />}></Route>
+          <Route path="/" element={<LandingPage />}/>
+          <Route path="/AdminPanel/" element={<AdminPanel />}/>
+          <Route path="/User/:id" element={<UserById />}/>
+          <Route path="/Login" element={
+          <Login role={role} />
+          } />
+          <Route path="/Login/Register" element={<Register />}/>
+          <Route path="/Login/LoginResult" element={
+          <LoginResult role={role} setRole={setRole} pin={pin} setPin={setPin} />
+          }/>
+          <Route path="/Restaurant/:id" element={<RestaurantById />}/>
+          <Route path="/EasyTap" element={<EasyTap />}/>
+          <Route path="/EasyTap/TableTop" element={<TableTop />}/>
+          <Route path="/EasyTap/Order/:id" element={<Order />}/>
+          <Route path="/EasyTap/Layout" element={<Layout />}/>
         </Routes>
       </BrowserRouter>
     </div>
@@ -64,17 +68,22 @@ const App = () => {
         <NoNav/>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandingPage />}></Route>
-            <Route path="/AdminPanel/" element={<AdminPanel />}></Route>
-            <Route path="/User/:id" element={<UserById />}></Route>
-            <Route path="/Login" element={<Login />}></Route>
-            <Route path="/Login/Register" element={<Register />}></Route>
-            <Route path="/Login/LoginResult" element={<LoginResult />}></Route>
-            <Route path="/Restaurant/:id" element={<RestaurantById />}></Route>
-            <Route path="/EasyTap" element={<EasyTap />}></Route>
-            <Route path="/EasyTap/TableTop" element={<TableTop />}></Route>
-            <Route path="/EasyTap/Order/:id" element={<Order />}></Route>
-            <Route path="/EasyTap/Layout" element={<Layout />}></Route>
+            <Route path="/" element={<LandingPage />}/>
+            <Route path="/AdminPanel/" element={<AdminPanel />}/>
+            <Route path="/User/:id" element={<UserById />}/>
+            <Route path="/Login" element={
+            <Login role={role} />
+            }
+            />
+            <Route path="/Login/Register" element={<Register />}/>
+            <Route path="/Login/LoginResult" element={
+            <LoginResult role={role} setRole={setRole} pin={pin} setPin={setPin} />
+            }/>
+            <Route path="/Restaurant/:id" element={<RestaurantById />}/>
+            <Route path="/EasyTap" element={<EasyTap />}/>
+            <Route path="/EasyTap/TableTop" element={<TableTop />}/>
+            <Route path="/EasyTap/Order/:id" element={<Order />}/>
+            <Route path="/EasyTap/Layout" element={<Layout />}/>
           </Routes>
         </BrowserRouter>
       </div>

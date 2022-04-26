@@ -3,32 +3,43 @@ import { useNavigate } from "react-router-dom";
 import Loading from '../../Partials/Loading';
 import { Container } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
-const LoginResult = () => {
+interface IProps {
+    role : string,
+    pin : number,
+    setRole : Dispatch<SetStateAction<string>>;
+    setPin : Dispatch<SetStateAction<number>>;
+}
+
+const LoginResult = (props : IProps) => {
     const navigate = useNavigate();
-
-    if(authentication.getRole() === undefined) {
-        return <Loading />
-    } else {
+    useEffect(() => {
         if(authentication.getRole() === "waiter") {
-            setTimeout(() => {            
+            props.setRole(authentication.getRole())
+            setTimeout(() => {        
                 navigate(`/EasyTap`, { replace: false });    
-          }, 1500);
+          }, 2500);
         }
-        if(authentication.getRole() === "user") {    
+        if(authentication.getRole() === "user") {  
+            props.setRole(authentication.getRole())  
             setTimeout(() => {
                 navigate(`/`, { replace: false });
           }, 1500);
         }
-        if(authentication.getRole() === "admin") {    
+        if(authentication.getRole() === "admin") {
+            props.setRole(authentication.getRole())
             setTimeout(() => {
                 navigate(`/AdminPanel`, { replace: false });
           }, 1500);
         }
+    })
+    if(props.role === undefined) {
+        return <Loading />
+    } else {
         return (
-            <Container>
+            <Container style={{ textAlign: "center", marginTop: "10rem"}}>
                 <h1 className="text-success">Login Success</h1>
-                <h2 className="text-warning">Role: {authentication.RBACAuth.role}</h2>
             </Container>
         )
     }

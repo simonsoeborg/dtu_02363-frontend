@@ -30,8 +30,7 @@ import {
     };
   
     return (
-      <Row className="justify-content-center">
-        <Container style={{ maxWidth: "20rem", margin: "2rem" }}>
+         <Container style={{ marginTop: "0.5rem" }}>
           <Card className="calc-body card-shadow">
               <Card.Header className="calc-header">
                 {props.amountChosen.toString()} x
@@ -154,7 +153,6 @@ import {
             </Card.Body>
           </Card>
         </Container>
-      </Row>
     );
   };
   

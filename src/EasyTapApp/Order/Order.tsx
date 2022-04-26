@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaReceipt,FaHandPointer } from "react-icons/fa"
+import { FaReceipt, FaHandPointer } from "react-icons/fa";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
 import OrderDisplayOverView from "./OrderDisplayOverView";
@@ -82,7 +82,6 @@ const Order = () => {
     // console.log(os.orderInfoSpecific.id)
   }, []);
 
-
   if (!hasLoaded) {
     return <Loading />;
   }
@@ -92,7 +91,7 @@ const Order = () => {
         <h1>Table {ts.currentTableId} </h1>
       </Row>
       <Row>
-        <Col md={8}>
+        <Col md={9}>
           <Row>
             <DisplayCategories
               categories={categories}
@@ -112,7 +111,7 @@ const Order = () => {
             />
           </Row>
         </Col>
-        <Col>
+        <Col md={3}>
           <Row>
             <OrderDisplayOverView
               currentOrderItems={orderItems}
@@ -120,14 +119,18 @@ const Order = () => {
               amountChosen={AmountChosen}
               setAmount={setAmount}
               previousOrderItemsView={os.OrderViews}
+              currentTableId={ts.currentTableId}
             />
-            <Col className="d-flex justify-content-center">
+            <Col className="d-flex justify-content">
                 <Button
                   className="btn icon-btn azm-social button-PrintBill"
                   variant="outline-primary"
                   onClick={() => PrintOutNavigation()}
                 >
-                  <i className="fa"><FaReceipt ></FaReceipt></i> Print Bill
+                  <i className="fa">
+                    <FaReceipt></FaReceipt>
+                  </i>{" "}
+                  Print Bill
                 </Button>
 
                 <Button
@@ -137,7 +140,10 @@ const Order = () => {
                     tapOutNavigate();
                   }}
                 >
-                  <i className="fa"><FaHandPointer></FaHandPointer></i> Tap Out
+                  <i className="fa">
+                    <FaHandPointer></FaHandPointer>
+                  </i>{" "}
+                  Tap Out
                 </Button>
             </Col>
               <OrderAmountPanel

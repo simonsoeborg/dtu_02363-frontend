@@ -19,10 +19,9 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
-  const { isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const [role, setRole] = useState("");
   const [pin, setPin] = useState(0);
-  console.log("App | useState Role: " + role)
   if( isAuthenticated ) {
     if(pin === 0 || pin === undefined) {
       setInterval(() => {
@@ -31,7 +30,6 @@ const App = () => {
     }
 
     if(role === "" || role === undefined) {
-      console.log("Role Check Hi!")
         setInterval(() => {
           setRole(authentication.getRole());
         }, 2000)
@@ -46,7 +44,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage role={role} />}/>
           <Route path="/AdminPanel/" element={<AdminPanel />}/>
-          <Route path="/User/:id" element={<UserById />}/>
+          <Route path="/User/:email" element={<UserById />}/>
           <Route path="/Login" element={
           <Login role={role} />
           } />

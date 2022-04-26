@@ -3,11 +3,14 @@ import AdminRestaurant from './AdminRestaurant';
 import AdminIndex from './AdminIndex';
 import AdminUser from './AdminUserList';
 import { observer } from "mobx-react-lite";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { authentication } from '../../Stores/AuthenticationStore';
 
 const AdminPanel = () => {
     const [activeKey, setActiveKey] = useState(1);
-
+    useEffect(() => {
+        authentication.getAuthenticatedUsersAsync();
+    })
     return(
         <div>
             <Container style={{ paddingTop: "2rem" }}>
@@ -21,10 +24,13 @@ const AdminPanel = () => {
                                         <Nav.Link eventKey="1">Admin Home</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                        <Nav.Link eventKey="2">Manage Restaurants</Nav.Link>
+                                        <Nav.Link eventKey="2">Manage Items</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
                                         <Nav.Link eventKey="3">Manage Users</Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item>
+                                        <Nav.Link eventKey="4">Manage Orders</Nav.Link>
                                         </Nav.Item>
                                     </Nav>
                                 </Col>

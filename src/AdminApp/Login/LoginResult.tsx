@@ -15,17 +15,20 @@ interface IProps {
 const LoginResult = (props : IProps) => {
     const navigate = useNavigate();
     useEffect(() => {
-        if(props.role === "waiter") {
+        if(authentication.getRole() === "waiter") {
+            props.setRole(authentication.getRole())
             setTimeout(() => {        
                 navigate(`/EasyTap`, { replace: false });    
-          }, 1500);
+          }, 2500);
         }
-        if(props.role === "user") {    
+        if(authentication.getRole() === "user") {  
+            props.setRole(authentication.getRole())  
             setTimeout(() => {
                 navigate(`/`, { replace: false });
           }, 1500);
         }
-        if(props.role === "admin") {
+        if(authentication.getRole() === "admin") {
+            props.setRole(authentication.getRole())
             setTimeout(() => {
                 navigate(`/AdminPanel`, { replace: false });
           }, 1500);

@@ -8,6 +8,8 @@ import {
   FormControl, Modal, Alert
 } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 interface IProps {
   isLoggedIn: boolean;
@@ -16,12 +18,13 @@ interface IProps {
 }
 
 const LoginApp = (props: IProps) => {
+  const { logout } = useAuth0();
   const [firstEntry, setFirstEntry] = useState("");
   const [secondEntry, setSecondEntry] = useState("");
   const [thirdEntry, setThirdEntry] = useState("");
   const [forthEntry, setForthEntry] = useState("");
   const [activeKeys, setActiveKeys] = useState(false);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -69,9 +72,6 @@ const LoginApp = (props: IProps) => {
       forthEntry !== ""
     ) {
       let temp = `${firstEntry}${secondEntry}${thirdEntry}${forthEntry}`;
-      console.log(temp)
-      console.log(props.pin)
-
       if(props.pin === +temp) {
         console.log("Success")
         // Then set isLoggedIn to True
@@ -83,6 +83,14 @@ const LoginApp = (props: IProps) => {
   };
 
   return (
+    <Row className="justify-content-center">
+      <Container>
+        <Row className="justify-content-end">
+            <Button variant="outline-danger" style={{ width: "4rem", margin: "0.25rem"}}
+          onClick={() => logout({ returnTo: window.location.origin })}
+          ><LogoutIcon /></Button>
+        </Row>
+      </Container>
     <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
         <Modal show={show} onHide={handleClose}>
@@ -285,6 +293,7 @@ const LoginApp = (props: IProps) => {
           </Card.Body>
         </Card>
       </Container>
+    </Row>
     </Row>
   );
 };

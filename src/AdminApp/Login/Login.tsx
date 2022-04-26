@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Form, Image, Row } from "react-bootstrap";
 import {defaultImage} from '../../Services/_services';
@@ -57,10 +57,9 @@ const Login = (props : IProps) => {
           1,
           0,
         ));
-        if(authentication.getRole() === undefined) {
+        if(props.role === undefined || props.role === "") {
           authentication.postAuthentication(authentication.Auth);
-        }
-        if(authentication.getRole() !== undefined) {
+        } else {
           setInterval(() => {
             navigate(`/Login/LoginResult`, { replace: false });
           }, 5000)
@@ -85,6 +84,7 @@ const Login = (props : IProps) => {
     )
   } else {
     return (
+
       <Row className="justify-content-center">
         <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
           <Card>

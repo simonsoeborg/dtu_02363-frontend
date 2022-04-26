@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"; // Import css files to project
 import "./App.css";
 import GlobalNavbar from "./AdminApp/Navigation/Navigation";
-import {NoNav} from "./AdminApp/Navigation/Navigation";
 import LandingPage from "./LandingPage";
 import AdminPanel from "./AdminApp/AdminPanel/AdminPanel";
 import UserById from "./AdminApp/User/UserById";
@@ -20,10 +19,10 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
   const [role, setRole] = useState("");
   const [pin, setPin] = useState(0);
-  
+  console.log("App | useState Role: " + role)
   if( isAuthenticated ) {
     if(pin === 0 || pin === undefined) {
       setInterval(() => {
@@ -32,18 +31,20 @@ const App = () => {
     }
 
     if(role === "" || role === undefined) {
-      setInterval(() => {
-        setRole(authentication.getRole());
-      }, 2000)
+      console.log("Role Check Hi!")
+        setInterval(() => {
+          setRole(authentication.getRole());
+        }, 2000)
     }
   }
-  if(role !== "waiter") {
   return (
     <div className="App">
+      { role !== "waiter" && (
       <GlobalNavbar role={role} />
+      )}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />}/>
+          <Route path="/" element={<LandingPage role={role} />}/>
           <Route path="/AdminPanel/" element={<AdminPanel />}/>
           <Route path="/User/:id" element={<UserById />}/>
           <Route path="/Login" element={
@@ -54,7 +55,7 @@ const App = () => {
           <LoginResult role={role} setRole={setRole} pin={pin} setPin={setPin} />
           }/>
           <Route path="/Restaurant/:id" element={<RestaurantById />}/>
-          <Route path="/EasyTap" element={<EasyTap />}/>
+          <Route path="/EasyTap" element={<EasyTap role={role} pin={pin}/>}/>
           <Route path="/EasyTap/TableTop" element={<TableTop />}/>
           <Route path="/EasyTap/Order/:id" element={<Order />}/>
           <Route path="/EasyTap/Layout" element={<Layout />}/>
@@ -62,33 +63,6 @@ const App = () => {
       </BrowserRouter>
     </div>
   );
-  } else {
-    return (
-      <div className="App">
-        <NoNav/>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />}/>
-            <Route path="/AdminPanel/" element={<AdminPanel />}/>
-            <Route path="/User/:id" element={<UserById />}/>
-            <Route path="/Login" element={
-            <Login role={role} />
-            }
-            />
-            <Route path="/Login/Register" element={<Register />}/>
-            <Route path="/Login/LoginResult" element={
-            <LoginResult role={role} setRole={setRole} pin={pin} setPin={setPin} />
-            }/>
-            <Route path="/Restaurant/:id" element={<RestaurantById />}/>
-            <Route path="/EasyTap" element={<EasyTap />}/>
-            <Route path="/EasyTap/TableTop" element={<TableTop />}/>
-            <Route path="/EasyTap/Order/:id" element={<Order />}/>
-            <Route path="/EasyTap/Layout" element={<Layout />}/>
-          </Routes>
-        </BrowserRouter>
-      </div>
-    );
-  }
 };
 
 export default observer(App);

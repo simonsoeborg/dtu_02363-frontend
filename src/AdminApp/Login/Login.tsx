@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Form, Image, Row } from "react-bootstrap";
 import {defaultImage} from '../../Services/_services';
@@ -8,14 +8,17 @@ import { authentication } from '../../Stores/AuthenticationStore';
 import AuthenticationModel from "../../Models/AuthenticationModel";
 import { observer } from "mobx-react-lite";
 
-const Login = () => {
+interface IProps {
+  role : string,
+}
+
+const Login = (props : IProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formFilled, setFormFilled] = useState(false);
   const [emailFilled, setEmailFilled] = useState(false);
   const [passwordFilled, setPasswordFilled] = useState(false);
   const [userHasBeenChecked, setUserHasBeenChecked] = useState(false)
-  const [userRole, setUserRole] = useState("");
   const navigate = useNavigate();
   const {isAuthenticated, user, loginWithPopup} = useAuth0();
 
@@ -54,10 +57,9 @@ const Login = () => {
           1,
           0,
         ));
-        if(authentication.getRole() === undefined) {
+        if(props.role === undefined || props.role === "") {
           authentication.postAuthentication(authentication.Auth);
-        }
-        if(authentication.getRole() !== undefined) {
+        } else {
           setInterval(() => {
             navigate(`/Login/LoginResult`, { replace: false });
           }, 5000)
@@ -82,6 +84,7 @@ const Login = () => {
     )
   } else {
     return (
+
       <Row className="justify-content-center">
         <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
           <Card>

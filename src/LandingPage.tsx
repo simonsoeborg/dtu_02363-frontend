@@ -1,15 +1,23 @@
 import { Container } from "react-bootstrap";
+import NotAuthorized from "./Components/Global/NotAuthorized";
+import { authentication } from './Stores/AuthenticationStore';
 
-const LandingPage = () => {
+interface IProps {
+  role : string,
+}
+
+const LandingPage = (props : IProps) => {
   return (
     <Container>
-      <h1>Landing Page</h1>
-      <p>Testing stuff</p>
-      <p>Github Runner works!</p>
-      <p>This should update</p>
-      <p>This is actually working......... </p>
+      { props.role === "waiter" ? (
+        <NotAuthorized message="Waiters are restricted from viewing this page!" navUrl="/EasyTap"/>
+      ) : (
+      <Container>
+        <h1>Landing Page</h1>
+      </Container>
+      )}
     </Container>
-  );
+  )
 };
 
 export default LandingPage;

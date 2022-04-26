@@ -5,21 +5,28 @@ import {
   Col,
   Button,
   InputGroup,
-  FormControl,
+  FormControl, Modal, Alert
 } from "react-bootstrap";
 import { Dispatch, SetStateAction, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 interface IProps {
   isLoggedIn: boolean;
+  pin : number;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
 }
 
 const LoginApp = (props: IProps) => {
+  const { logout } = useAuth0();
   const [firstEntry, setFirstEntry] = useState("");
   const [secondEntry, setSecondEntry] = useState("");
   const [thirdEntry, setThirdEntry] = useState("");
   const [forthEntry, setForthEntry] = useState("");
   const [activeKeys, setActiveKeys] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleOnKeyClick = (value: string) => {
     if (firstEntry === "") {
@@ -64,16 +71,38 @@ const LoginApp = (props: IProps) => {
       thirdEntry !== "" &&
       forthEntry !== ""
     ) {
-      // Check Database for user that has this pin.
-
-      // Then set isLoggedIn to True
-      props.setIsLoggedIn(true);
+      let temp = `${firstEntry}${secondEntry}${thirdEntry}${forthEntry}`;
+      if(props.pin === +temp) {
+        console.log("Success")
+        // Then set isLoggedIn to True
+        props.setIsLoggedIn(true);
+      } else {
+        handleShow();
+      }
     }
   };
 
   return (
     <Row className="justify-content-center">
+      <Container>
+        <Row className="justify-content-end">
+            <Button variant="outline-danger" style={{ width: "4rem", margin: "0.25rem"}}
+          onClick={() => logout({ returnTo: window.location.origin })}
+          ><LogoutIcon /></Button>
+        </Row>
+      </Container>
+    <Row className="justify-content-center">
       <Container style={{ maxWidth: "20rem", margin: "10rem" }}>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Body>
+          <Alert variant="danger">
+            <Alert.Heading>Wrong Pin!</Alert.Heading>
+            <p>
+              The Pin you have entered is not correct!
+            </p>
+          </Alert>
+        </Modal.Body>
+      </Modal>
         <Card>
           <Card.Body>
             <Row className="justify-content-center">
@@ -264,6 +293,7 @@ const LoginApp = (props: IProps) => {
           </Card.Body>
         </Card>
       </Container>
+    </Row>
     </Row>
   );
 };

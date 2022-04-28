@@ -23,7 +23,7 @@ const AdminRestaurant = () => {
     } else {
     return (
         <Container>
-         <h1>List of all Restaurants</h1>
+         <h1>List of all resturants</h1>
             <Table> 
                 <thead> 
                     <tr>

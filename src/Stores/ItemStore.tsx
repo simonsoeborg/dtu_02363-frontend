@@ -5,7 +5,6 @@ import { API_URL } from '../Services/_services';
 class ItemStore {
     items: ItemModel[] = [];
     item: ItemModel = new ItemModel();
-    
 
     constructor() {
         makeAutoObservable(this);

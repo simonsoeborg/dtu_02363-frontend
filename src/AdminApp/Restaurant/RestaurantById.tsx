@@ -34,7 +34,7 @@ const RestaurantById = () => {
        /* rs.setRestaurantId(rs.restaurantView.id);*/ 
        /* console.log(rs.Restaurant.id + rs.Restaurant.name + rs.Restaurant.ownerID) */ 
         rs.setRestaurant(rs.restaurant) 
-        rs.putRestaurantAsync();
+        rs.putResturantAsync();
         as.setActiveKey(2) 
         navigate(`/AdminPanel`)
     }

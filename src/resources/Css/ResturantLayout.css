@@ -1,0 +1,30 @@
+.OverviewLayout {
+  background-color: rgb(174, 154, 154);
+  border-style: solid;
+}
+
+.BarSize {
+  height: 18rem;
+  width: 18rem;
+}
+
+.TableSize {
+  height: 11rem;
+  width: 11rem;
+}
+
+.PlantSize {
+  height: 7rem;
+  width: 3rem;
+}
+
+.TableText {
+  color: white;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.TableAlignment {
+  text-align: center;
+  margin-top: 2rem;
+}

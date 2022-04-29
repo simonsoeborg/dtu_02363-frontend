@@ -24,7 +24,7 @@ class Auth {
   }
 
   isLoggedIn() {
-    if (!this.Auth) {
+    if (this.Auth.email === "") {
       return false;
     } else {
       return true;

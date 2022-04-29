@@ -166,7 +166,6 @@ class AuthStore {
     instance.post("Authentication", JSON.stringify(auth)).then((res) => {
       const data = res.data;
       this.setJWT(data);
-      console.log(data);
       const decoded = jwt_decode(data);
       let newObj = JSON.stringify(decoded);
       this.setName(

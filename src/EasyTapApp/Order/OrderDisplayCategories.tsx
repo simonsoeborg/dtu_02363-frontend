@@ -1,6 +1,6 @@
 import { Container, Nav } from "react-bootstrap";
 import { Dispatch, SetStateAction } from "react";
-import { FaCocktail, FaCookie, FaMugHot, FaCheese, FaCookieBite, FaBirthdayCake, FaHamburger, FaJava, FaStar, FaConciergeBell, FaWineGlass } from "react-icons/fa"
+import { FaCocktail, FaMugHot, FaCheese, FaHamburger, FaStar, FaConciergeBell, FaWineGlass } from "react-icons/fa"
 import CategoryModel from "../../Models/CategoryModel";
 
 interface IProps {

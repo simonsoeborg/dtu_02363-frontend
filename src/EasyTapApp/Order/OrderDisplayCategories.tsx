@@ -42,7 +42,6 @@ const DisplayCategories = (props: IProps) => {
         //Warm drinks
         return <FaMugHot />
     }
-
   }
 
   return (

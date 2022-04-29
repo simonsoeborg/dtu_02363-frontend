@@ -17,43 +17,35 @@ import { authentication } from "./Stores/AuthenticationStore";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { authToken } from "./Stores/AuthTokenStore";
 
 const App = () => {
   const { isAuthenticated } = useAuth0();
-  const [role, setRole] = useState("");
-  const [pin, setPin] = useState(0);
-  if( isAuthenticated ) {
-    if(pin === 0 || pin === undefined) {
-      setInterval(() => {
-        setPin(authentication.getPin());
-      }, 2000)
-    }
 
-    if(role === "" || role === undefined) {
-        setInterval(() => {
-          setRole(authentication.getRole());
-        }, 2000)
+  if( isAuthenticated ) {
+    if(!authToken.isLoggedIn()) {
+      authToken.setAuth(authentication.RBACAuth);
     }
   }
   return (
     <div className="App">
-      { role !== "waiter" && (
-      <GlobalNavbar role={role} />
+      { authToken.getRole() !== "waiter" && (
+      <GlobalNavbar role={authToken.getRole()} />
       )}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage role={role} />}/>
+          <Route path="/" element={<LandingPage role={authToken.getRole()} />}/>
           <Route path="/AdminPanel/" element={<AdminPanel />}/>
           <Route path="/User/:email" element={<UserById />}/>
           <Route path="/Login" element={
-          <Login role={role} />
+          <Login role={authToken.getRole()} />
           } />
           <Route path="/Login/Register" element={<Register />}/>
           <Route path="/Login/LoginResult" element={
-          <LoginResult role={role} setRole={setRole} pin={pin} setPin={setPin} />
+          <LoginResult role={authToken.getRole()} pin={authToken.getPin()} />
           }/>
           <Route path="/Restaurant/:id" element={<RestaurantById />}/>
-          <Route path="/EasyTap" element={<EasyTap role={role} pin={pin}/>}/>
+          <Route path="/EasyTap" element={<EasyTap role={authToken.getRole()} pin={authToken.getPin()}/>}/>
           <Route path="/EasyTap/TableTop" element={<TableTop />}/>
           <Route path="/EasyTap/Order/:id" element={<Order />}/>
           <Route path="/EasyTap/Layout" element={<Layout />}/>

@@ -1,28 +1,33 @@
-import { Container, Row, Form, Button, Col } from "react-bootstrap";
+import { Container, Row, Form, Button, Col, Dropdown } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import { rs } from "../../Stores/RestaurantStore";
-import { as } from '../../Stores/AdminStore';
-import { us } from '../../Stores/UserStore';
+import { rs } from "../Stores/RestaurantStore";
+import { as } from '../Stores/AdminStore';
+import { us } from '../Stores/UserStore';
 import { observer } from "mobx-react-lite";
-import Loading from "../../Partials/Loading";
+import Loading from "../Partials/Loading";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const RestaurantById = () => {
 
     const { id } = useParams();
+
     const [hasLoaded, setHasLoaded] = useState(false);
+
     const [selectedOwner, setOwnerId] = useState(rs.RestaurantView.ownerID)
+
+    const [rName, setRName] = useState("")
     const[show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    
     if(!hasLoaded) {
         rs.getRestaurantByIdAsync(Number(id));
         setHasLoaded(true);
         setOwnerId(rs.RestaurantView.ownerID);
     }
-    
     
     if(rs.RestaurantView.id !== Number(id)) {
         rs.getRestaurantByIdAsync(Number(id))
@@ -31,13 +36,15 @@ const RestaurantById = () => {
     // Defines what happens when the user press the confirm/ submit button 
     const navigate = useNavigate();
     const handleOnSubmitFunction = () => {
-       /* rs.setRestaurantId(rs.restaurantView.id);*/ 
+        
+        rs.setRestaurantId(rs.restaurantView.id);
        /* console.log(rs.Restaurant.id + rs.Restaurant.name + rs.Restaurant.ownerID) */ 
         rs.setRestaurant(rs.restaurant) 
         rs.putRestaurantAsync();
         as.setActiveKey(2) 
         navigate(`/AdminPanel`)
     }
+
 
     // Defines what happens when the user press the delete button 
     const handleDeleteFunction = () => {
@@ -47,14 +54,12 @@ const RestaurantById = () => {
     
     // Rennderes the remaining users and puts them in a list (Everybody but the current owner)
     const renderOwnerOptions = () => {
-
         return (
             us.Users.filter(userfilt=>userfilt.id!==rs.RestaurantView.ownerID).map((user) => ( 
             <option value = {user.id}>{user.name}</option> )
         ))
     }
 
-     
     if(!rs.RestaurantView) {
         return (
             <Loading />
@@ -73,10 +78,13 @@ const RestaurantById = () => {
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Restaurant name</Form.Label>
-                                <Form.Control type="text" value={rs.RestaurantView.restaurantName}
-                                onChange={(e) => {
-                                    rs.setRestaurantName(e.target.value);
-                                }} />
+                                <Form.Control type="text"
+                                
+                                placeholder= {rs.restaurantView.restaurantName}
+                                onChange={(e : React.ChangeEvent<HTMLInputElement>) => {
+                                    const newVal = e.currentTarget.value;
+                                    rs.setRestaurantName(newVal);
+                                    }} />
                             </Form.Group>
 
                             <Form.Label>Restaurant ejer</Form.Label>

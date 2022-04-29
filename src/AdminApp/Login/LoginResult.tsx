@@ -8,27 +8,22 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 interface IProps {
     role : string,
     pin : number,
-    setRole : Dispatch<SetStateAction<string>>;
-    setPin : Dispatch<SetStateAction<number>>;
 }
 
 const LoginResult = (props : IProps) => {
     const navigate = useNavigate();
     useEffect(() => {
         if(authentication.getRole() === "waiter") {
-            props.setRole(authentication.getRole())
             setTimeout(() => {        
                 navigate(`/EasyTap`, { replace: false });    
           }, 2500);
         }
         if(authentication.getRole() === "user") {  
-            props.setRole(authentication.getRole())  
             setTimeout(() => {
                 navigate(`/`, { replace: false });
           }, 1500);
         }
         if(authentication.getRole() === "admin") {
-            props.setRole(authentication.getRole())
             setTimeout(() => {
                 navigate(`/AdminPanel`, { replace: false });
           }, 1500);

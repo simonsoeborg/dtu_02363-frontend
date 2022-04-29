@@ -1,4 +1,3 @@
-import { fabClasses } from "@mui/material";
 import { makeAutoObservable, runInAction } from "mobx";
 import AuthViewModel from "../Models/AuthViewModel";
 
@@ -39,4 +38,4 @@ class Auth {
   }
 }
 
-export const auth = new Auth();
+export const authToken = new Auth();

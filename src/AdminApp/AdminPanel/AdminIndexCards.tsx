@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { CardGroup, Card } from "react-bootstrap"
-import { us } from '../../Stores/UserStore';
-import { rs } from '../../Stores/RestaurantStore';
+import { authentication } from '../../Stores/AuthenticationStore';
 import { Dispatch, SetStateAction } from "react";
 
 interface IAdminProps {
@@ -17,27 +16,27 @@ const AdminIndexCards = (props : IAdminProps) => {
 
     return (
         <CardGroup>
-            <Card className="CardGroupCard" style={{ width: '18rem' }} onClick={() => handleOnCardClickEvent(3)} >
+            <Card className="CardGroupCard" onClick={() => handleOnCardClickEvent(3)} >
                 <Card.Body>
-                    <Card.Title>User Count</Card.Title>
+                    <Card.Title>Authenticated Users Count</Card.Title>
                     <Card.Text>
-                        We currently have { us.Users.length } users in our system!
+                        We currently have { authentication.RBACAuthFullList.length } users in our system!
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <Card className="CardGroupCard" style={{ width: '18rem' }} onClick={() => handleOnCardClickEvent(2)}>
+            <Card className="CardGroupCard" onClick={() => handleOnCardClickEvent(2)}>
                 <Card.Body>
-                    <Card.Title>Restaurants Count</Card.Title>
+                    <Card.Title>Items Count</Card.Title>
                     <Card.Text>
-                        We currently have { rs.RestaurantsView.length } restaurants in our system!
+                        We currently have { } items in our system!
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <Card className="CardGroupCard" style={{ width: '18rem' }}>
+            <Card className="CardGroupCard">
                 <Card.Body>
-                    <Card.Title>?? Count</Card.Title>
+                    <Card.Title>Orders Count</Card.Title>
                     <Card.Text>
-                        We currently have  ?? in our system!
+                        We currently have { } orders in our system!
                     </Card.Text>
                 </Card.Body>
             </Card>

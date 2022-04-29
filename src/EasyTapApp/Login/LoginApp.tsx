@@ -10,6 +10,7 @@ import {
 import { Dispatch, SetStateAction, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { authToken } from '../../Stores/AuthTokenStore';
 
 interface IProps {
   isLoggedIn: boolean;
@@ -72,9 +73,8 @@ const LoginApp = (props: IProps) => {
       forthEntry !== ""
     ) {
       let temp = `${firstEntry}${secondEntry}${thirdEntry}${forthEntry}`;
-      if(props.pin === +temp) {
-        console.log("Success")
-        // Then set isLoggedIn to True
+      if(authToken.getPin() === +temp) {
+        console.log("Login Success") // Can be removed
         props.setIsLoggedIn(true);
       } else {
         handleShow();

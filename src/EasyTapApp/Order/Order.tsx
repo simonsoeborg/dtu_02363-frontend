@@ -100,9 +100,6 @@ const Order = () => {
   }
   return (
     <Container fluid>
-      <Row md="auto">
-        <h1>Table {ts.currentTableId} </h1>
-      </Row>
       <Row>
         <Col md={9}>
           <Row>

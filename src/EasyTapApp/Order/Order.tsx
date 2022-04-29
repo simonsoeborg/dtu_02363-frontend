@@ -21,9 +21,10 @@ import { is } from "../../Stores/ItemStore";
 import { ts } from "../../Stores/TableStore";
 // os - order store
 import { os } from "../../Stores/OrderStore";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const Order = () => {
-  // Contains the different categories in the resturant
+  // Contains the different categories in the Restaurant
   const [categories, setCategories] = useState<CategoryModel[]>([]);
   // Tells which food-category is chosen.
   const [selectedCategory, setSelectedCategory] = useState<String>("Starters");
@@ -38,16 +39,27 @@ const Order = () => {
 
   const navigate = useNavigate();
 
-  const tapOutNavigate = () => {
-    //TODO Gem data --> PUT (og kun det nye og ikke det gamle loadede.)
+  const tapOutNavigate = async() => {
+
+    if (orderItems.length > 0){
+      await os.postOrders(orderItems, os.getOrderInfoSpecific().id)
+    }
+
+    os.setOrderViewList([])
     navigate(`/EasyTap`);
   };
 
   const PrintOutNavigation = async () => {
-    //TODO
-    // 2. Ændre OrderInfo - status: orderPayed til true!
+    //TODO: 
+    // Pop that shows price - mby a check: "Do you clear this table?"
+
+    if (orderItems.length > 0){
+      await os.postOrders(orderItems, os.getOrderInfoSpecific().id)
+    }
+   
+    await os.changeOrderInfoStatus(ts.currentTableId);
     await ts.changeTableOccupation();
-    await os.putOrderInfo(ts.currentTableId);
+    os.setOrderViewList([])
     navigate(`/EasyTap`);
   };
 
@@ -67,6 +79,7 @@ const Order = () => {
       // TODO: - opret en instans af orderInfo i database.
       await ts.changeTableOccupation();
       await os.postOrderInfo(ts.currentTableId);
+      await os.getSpecificOrderInfoAsync(ts.currentTableId);
       //await os.getSpecificOrderInfoAsync(ts.currentTableId);
     };
 

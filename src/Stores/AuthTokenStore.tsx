@@ -1,8 +1,10 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import AuthViewModel from "../Models/AuthViewModel";
+import { useAuth0 } from "@auth0/auth0-react";
+import { authentication } from './AuthenticationStore';
 
 class Auth {
-  auth: AuthViewModel = new AuthViewModel("", "", "", "");
+  auth : AuthViewModel = new AuthViewModel("", "", "", "");
   constructor() {
     makeAutoObservable(this);
   }

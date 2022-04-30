@@ -33,7 +33,7 @@ const AdminUser = () => {
                         <tr className="tableListItem" onClick={() => routeEditChange(user.email)} key={index}>
                             <td>{user.email}</td>
                             <td>{user.name}</td>
-                            <td>{user.role}</td>
+                            <td>{authentication.getRole(user.roleId)}</td>
                         </tr>
                     ))}
                 </tbody>

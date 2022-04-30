@@ -9,7 +9,8 @@ import { authentication } from '../../Stores/AuthenticationStore';
 const AdminPanel = () => {
     const [activeKey, setActiveKey] = useState(1);
     useEffect(() => {
-        authentication.getAuthenticatedUsersAsync();
+        if(authentication.RBACAuthFullList.length < 1)
+            authentication.getAuthenticatedUsersAsync();
     })
     return(
         <div>

@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction, toJS } from "mobx";
 import AuthenticationModel from "../Models/AuthenticationModel";
 import AuthViewModel from "../Models/AuthViewModel";
 import { API_URL } from "../Services/_services";
@@ -24,7 +24,7 @@ class AuthStore {
     "",
     ""
   );
-  fullList: AuthViewModel[] = [];
+  fullList: AuthenticationModel[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -102,8 +102,13 @@ class AuthStore {
     });
   };
 
-  getRole = () => {
-    return this.RBACAuth.role;
+  getRole = (id : number) => {
+    switch (id) {
+      case 1: return "user";
+      case 3: return "waiter";
+      case 7: return "admin";
+      default: return "user";
+    }
   };
 
   getPin = () => {
@@ -120,16 +125,16 @@ class AuthStore {
     return this.RBACAuth.rawJWT;
   };
 
-  setAuthList = (AuthList: AuthViewModel[]) => {
+  setAuthList = (AuthList: AuthenticationModel[]) => {
     this.fullList = AuthList;
   };
 
   getAuthenticatedUsersAsync = async () => {
     const response = await fetch(
-      API_URL + "/Authentication/AuthenticatedUsers/" + this.getJWT()
+      API_URL + "/Authentication/AuthenticatedUsers/" + authToken.getJWT()
     );
     const data = await response.json();
-    this.setAuthList(data);
+    this.setAuthList(toJS(data));
   };
 
   getAuthUserByEmailAsync = async (email: string) => {

@@ -6,6 +6,8 @@ import Loading from "../../Partials/Loading";
 import { useState } from "react";
 import { as } from '../../Stores/AdminStore';
 import { switchRoles } from '../../Services/_services';
+import AuthenticationModel from "../../Models/AuthenticationModel";
+import { runInAction } from "mobx";
 
 const UserById = () => {
 
@@ -13,7 +15,16 @@ const UserById = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
 
     if(!hasLoaded) {
-        authentication.getAuthUserByEmailAsync(String(email));
+        if(!authentication.AuthTemp) {
+            setTimeout(() => {
+                authentication.getAuthUserByEmailAsync(String(email));
+            }, 500)
+        } else {
+            authentication.setAuthTemp(new AuthenticationModel("",false,"","","",""))
+            setTimeout(() => {
+                authentication.getAuthUserByEmailAsync(String(email));
+            }, 500)
+        }
         setHasLoaded(true);
     }
 
@@ -39,13 +50,15 @@ const UserById = () => {
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="number" value={authentication.AuthTemp.email} disabled/>
+                                <Form.Control type="email" value={authentication.AuthTemp.email} disabled/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" defaultValue={authentication.AuthTemp.name}
+                                <Form.Control type="name" defaultValue={authentication.AuthTemp.name}
                                 onChange={(e) => {
-                                    authentication.setNameRBACTempUser(e.target.value);
+                                    runInAction(() => {
+                                        authentication.setNameRBACTempUser(e.target.value);
+                                    })
                                 }}  />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">

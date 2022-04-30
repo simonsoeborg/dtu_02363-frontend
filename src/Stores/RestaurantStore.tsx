@@ -63,14 +63,14 @@ class RestaurantStore {
         this.Restaurant.id = id
     }
 
-    // Get ResturantViewData for all resturants        
+    // Get RestaurantViewData for all Restaurants        
     getRestaurantsAsync = async () => {
         const response = await fetch(API_URL + "/Restaurant");
         const data = await response.json();
         this.setRestaurantsView(data);
     }
     
-    // Get ResturantViewData for a specific resturant.
+    // Get RestaurantViewData for a specific Restaurant.
     getRestaurantByIdAsync = async (id : number) => {
         const response = await fetch(`${API_URL}/Restaurant/${id}`);
         const data = await response.json();
@@ -80,7 +80,7 @@ class RestaurantStore {
     
 
     // Alters a user in the database, uses PUT HTTP Request
-    putResturantAsync = async () => {
+    putRestaurantAsync = async () => {
         const headers = new Headers();
         headers.append("Content-type", "application/json");
         var options = {
@@ -98,7 +98,7 @@ class RestaurantStore {
             console.log(response);
         }
 
-        this.putResturantAsync();
+        this.putRestaurantAsync();
         return response.status;
     }
 }

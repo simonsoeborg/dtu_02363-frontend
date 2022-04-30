@@ -1,8 +1,6 @@
-import { Nav, Card, Button } from "react-bootstrap";
-import "../../../resources/Css/RestaurantLayout.css";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ts } from "../../../Stores/TableStore";
-import { os } from "../../../Stores/OrderStore";
 interface IProps {
   tableId: number;
   tableIsInUse: boolean;

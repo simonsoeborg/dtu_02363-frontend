@@ -6,8 +6,6 @@ import AdminPanel from "./AdminApp/AdminPanel/AdminPanel";
 import UserById from "./AdminApp/User/UserById";
 import Login from "./AdminApp/Login/Login";
 import LoginResult from "./AdminApp/Login/LoginResult";
-import Register from "./AdminApp/Login/Register";
-import RestaurantById from "./AdminApp/Restaurant/RestaurantById";
 import Order from "./EasyTapApp/Order/Order";
 import TableTop from "./EasyTapApp/TableTop/TableTop";
 import EasyTap from "./EasyTapApp/EasyTap";
@@ -20,7 +18,6 @@ import { authToken } from "./Stores/AuthTokenStore";
 
 const App = () => {
   const { isAuthenticated } = useAuth0();
-
   if( isAuthenticated ) {
     setTimeout(() => {
       if(!authToken.isLoggedIn()) {
@@ -28,6 +25,7 @@ const App = () => {
       }
     }, 200)
   }
+
   return (
     <div className="App">
 
@@ -42,11 +40,9 @@ const App = () => {
           <Route path="/Login" element={
           <Login role={authToken.getRole()} />
           } />
-          <Route path="/Login/Register" element={<Register />}/>
           <Route path="/Login/LoginResult" element={
           <LoginResult role={authToken.getRole()} pin={authToken.getPin()} />
           }/>
-          <Route path="/Restaurant/:id" element={<RestaurantById />}/>
           <Route path="/EasyTap" element={<EasyTap role={authToken.getRole()} pin={authToken.getPin()}/>}/>
           <Route path="/EasyTap/TableTop" element={<TableTop />}/>
           <Route path="/EasyTap/Order/:id" element={<Order />}/>

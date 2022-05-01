@@ -13,7 +13,7 @@ const OrderById = () => {
     const navigate = useNavigate();
 
     const itemFromItemID = (id : number) => {
-        let res : ItemModel = new ItemModel()
+        let res : ItemModel = new ItemModel("", 0, "", "")
         is.Items.map((item) => {
             if(item.id === id) {
                 res = item;

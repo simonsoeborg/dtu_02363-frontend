@@ -8,6 +8,7 @@ import AdminPanel from "./AdminApp/AdminPanel/AdminPanel";
 import UserById from "./AdminApp/User/UserById";
 import CategoryById from "./AdminApp/Category/CategoryById";
 import ItemById from "./AdminApp/Items/ItemById";
+import NewItem from "./AdminApp/Items/NewItem";
 import OrderById from "./AdminApp/Order/OrderById";
 import Login from "./AdminApp/Login/Login";
 import LoginResult from "./AdminApp/Login/LoginResult";
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/User/:email" element={<UserById />}/>
           <Route path="/Category/:id" element={<CategoryById />}/>
           <Route path="/Item/:id" element={<ItemById />}/>
+          <Route path="/Item/Create" element={<NewItem />}/>
           <Route path="/Order/:id" element={<OrderById />}/>
           <Route path="/Login" element={
           <Login role={authToken.getRole()} />

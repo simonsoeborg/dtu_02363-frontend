@@ -28,6 +28,9 @@
   background-color: #EBEBEB;
 }
 
-.wrapTextTd {
-  white-space: normal !important;
+.LimitedTableTextEntry a {
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  word-wrap: break-word;
 }

@@ -1,5 +1,5 @@
 import { runInAction, makeAutoObservable } from "mobx";
-import { API_URL } from "../Services/_services";
+import { API_URL_ez_get, API_URL_admin_Create, API_URL_admin_Alter } from "../Services/_services";
 import OrderModel from "../Models/OrderModel";
 import OrderInfoModel from "../Models/OrderInfoModel";
 import OrderOverviewViewModel from "../Models/OrderOverviewViewModel";
@@ -50,7 +50,7 @@ class OrderStore {
 
 
   getOrdersAsync = async () => {
-    const response = await fetch(API_URL + "/Order");
+    const response = await fetch(API_URL_ez_get + "/Order");
     const data = await response.json();
     this.setOrders(data);
   };
@@ -58,7 +58,7 @@ class OrderStore {
 
   // Returns the id of the current order/receipt of the active table with 'id' 
   getSpecificOrderInfoAsync = async (id : number) =>{
-    const response = await fetch(API_URL + "/OrderInfo/"+id);
+    const response = await fetch(API_URL_ez_get + "/OrderInfo/"+id);
     const data = await response.json();
     this.setOrderInfo(data);
   }
@@ -95,7 +95,7 @@ class OrderStore {
 
     console.log(JSON.stringify(model))
 
-    const request = new Request(`${API_URL}/Order`, options)
+    const request = new Request(`${API_URL_admin_Create}/Order`, options)
     const response = await fetch(request);
     // const data = await response.json();
     if (response.status !== 204) {
@@ -121,7 +121,7 @@ class OrderStore {
     };
     //console.log(JSON.stringify(newOrderInfoObject));
 
-    const request = new Request(`${API_URL}/OrderInfo`, options)
+    const request = new Request(`${API_URL_admin_Create}/OrderInfo`, options)
     const response = await fetch(request);
     // const data = await response.json();
 
@@ -146,7 +146,7 @@ class OrderStore {
      console.log(JSON.stringify(tableId));
 
      
-    const request = new Request(`${API_URL}/OrderInfo/`+tableId, options)
+    const request = new Request(`${API_URL_admin_Alter}/OrderInfo/`+tableId, options)
     console.log(request)
     const response = await fetch(request);
     if (response.status !== 204) {
@@ -168,7 +168,7 @@ class OrderStore {
      console.log(JSON.stringify(tableId));
 
      
-    const request = new Request(`${API_URL}/OrderInfo/`+tableId, options)
+    const request = new Request(`${API_URL_admin_Alter}/OrderInfo/`+tableId, options)
     console.log(request)
     const response = await fetch(request);
     if (response.status !== 204) {
@@ -178,7 +178,7 @@ class OrderStore {
   }
 
   getOrderViewAsync = async (id : number) =>{
-    const response = await fetch(API_URL + "/OrderOverviewView/"+id);
+    const response = await fetch(API_URL_ez_get + "/OrderOverviewView/"+id);
     const data = await response.json();
     this.setOrderViewList(data);
   }

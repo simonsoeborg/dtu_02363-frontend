@@ -5,4 +5,18 @@ export default class ItemModel {
   price: number = 0;
   categoryName: string = "";
   imgUrl?: string = "";
+
+  constructor(
+    itemName : string,
+    price : number, 
+    categoryName : string,
+    imgUrl : string,
+    id ?: number
+) {
+    this.itemName = itemName;
+    this.price = price;
+    this.categoryName = categoryName;
+    this.imgUrl = imgUrl;
+    this.id = id!;
+}
 }

@@ -1,37 +1,69 @@
-import { Container, Table } from "react-bootstrap"
+import { Container, Row, Table, Image, Modal, Col, Button } from "react-bootstrap"
 import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
-import { cs } from '../../Stores/CategoryStore';
+import { is } from '../../Stores/ItemStore';
+import { useState } from "react";
 
 const AdminItemList = () => {
     const navigate = useNavigate();
+    const [onHover, setOnHover] = useState(false);
+    const [imageUrl, setImageUrl] = useState("");
+    const handleClose = () => setOnHover(false);
+
+    const displayImage = (imgUrl ?: string) => {
+        setOnHover(true);
+        setImageUrl(imgUrl!!);
+    }
 
     const routeEditChange = (id : number) => {
-        navigate(`/Category/${id}`, {replace: false})
+        navigate(`/Item/${id}`, {replace: false})
     };
 
-    if(!cs.Categories) {
+    const routeNewItem = () => {
+        navigate(`/Item/Create`, {replace: false})
+    };
+
+    if(!is.Items) {
         return <Loading />
     } else {
         return (
             <Container>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { cs.Categories.map((category, index) => (
-                            <tr className="tableListItem" onClick={() => routeEditChange(category.id)} key={index}>
-                                <td>{category.id}</td>
-                                <td>{category.name}</td>
+                <Row className="justify-content-center">
+                    <Col md="10">
+                    <h1>Item List</h1>
+                    </Col>
+                    <Col>
+                        <Button variant="outline-success" onClick={() => routeNewItem()}>Add Item</Button>
+                    </Col>
+                    <Modal show={onHover} onHide={handleClose}>
+                        <Modal.Body>
+                            <Image src={imageUrl} fluid/>
+                        </Modal.Body>
+                    </Modal>
+                </Row>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Image URL</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody>
+                            { is.Items.map((item, index) => (
+                                <tr className="tableListItem"key={index}>
+                                    <td onClick={() => routeEditChange(item.id)} >{item.id}</td>
+                                    <td onClick={() => routeEditChange(item.id)} >{item.itemName}</td>
+                                    <td onClick={() => routeEditChange(item.id)} >{item.categoryName}</td>
+                                    <td onClick={() => routeEditChange(item.id)} >{item.price}</td>
+                                    <td className="LimitedTableTextEntry" onClick={() => displayImage(item.imgUrl)}><a className="LimitedTableTextEntry">Click for Image Preview</a></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
             </Container>
         )
     }

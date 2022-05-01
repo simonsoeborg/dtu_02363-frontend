@@ -1,6 +1,6 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import CategoryModel from "../Models/CategoryModel";
-import { API_URL } from '../Services/_services';
+import { API_URL_ez_get } from '../Services/_services';
 
 class CategoryStore {
     categories: CategoryModel[] = [];
@@ -35,7 +35,7 @@ class CategoryStore {
     }
 
     getCategoriesAsync = async () => {
-        const response = await fetch(API_URL + "/Category");
+        const response = await fetch(API_URL_ez_get + "/Category");
         const data = await response.json();
         this.setCategories(data);
     }

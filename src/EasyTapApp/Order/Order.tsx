@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaReceipt, FaHandPointer } from "react-icons/fa";
 import DisplayCategories from "./OrderDisplayCategories";
 import OrderDisplayItems from "./OrderDisplayItems";
@@ -10,7 +10,6 @@ import ItemModel from "../../Models/ItemModel";
 import Loading from "../../Partials/Loading";
 import { observer } from "mobx-react-lite";
 import OrderAmountPanel from "./OrderAmountPanel";
-import "../../resources/Css/OrderLayout.css";
 
 // stores
 // cs - category store

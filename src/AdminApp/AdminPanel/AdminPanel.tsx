@@ -1,5 +1,4 @@
 import { Col, Row, Container, Tab, Nav } from 'react-bootstrap';
-import AdminRestaurant from './AdminRestaurant';
 import AdminIndex from './AdminIndex';
 import AdminUser from './AdminUserList';
 import { observer } from "mobx-react-lite";
@@ -41,7 +40,6 @@ const AdminPanel = () => {
                                             <AdminIndex activeKey={activeKey} setActiveKey={setActiveKey} />
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="2">
-                                            <AdminRestaurant />
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="3">
                                             <AdminUser />

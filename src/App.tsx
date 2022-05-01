@@ -1,5 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"; // Import css files to project
 import "./App.css";
+import "./resources/CSS/OrderLayout.css";
+import "./resources/CSS/RestaurantLayout.css";
 import GlobalNavbar from "./AdminApp/Navigation/Navigation";
 import LandingPage from "./LandingPage";
 import AdminPanel from "./AdminApp/AdminPanel/AdminPanel";

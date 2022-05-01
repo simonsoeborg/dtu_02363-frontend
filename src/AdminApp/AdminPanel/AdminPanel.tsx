@@ -1,5 +1,4 @@
 import { Col, Row, Container, Tab, Nav } from 'react-bootstrap';
-import AdminRestaurant from './AdminRestaurant';
 import AdminIndex from './AdminIndex';
 import AdminUser from './AdminUserList';
 import { observer } from "mobx-react-lite";
@@ -9,7 +8,8 @@ import { authentication } from '../../Stores/AuthenticationStore';
 const AdminPanel = () => {
     const [activeKey, setActiveKey] = useState(1);
     useEffect(() => {
-        authentication.getAuthenticatedUsersAsync();
+        if(authentication.RBACAuthFullList.length < 1)
+            authentication.getAuthenticatedUsersAsync();
     })
     return(
         <div>
@@ -40,7 +40,6 @@ const AdminPanel = () => {
                                             <AdminIndex activeKey={activeKey} setActiveKey={setActiveKey} />
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="2">
-                                            <AdminRestaurant />
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="3">
                                             <AdminUser />

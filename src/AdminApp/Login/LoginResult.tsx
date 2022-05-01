@@ -1,4 +1,5 @@
 import { authentication } from "../../Stores/AuthenticationStore";
+import { authToken } from "../../Stores/AuthTokenStore";
 import { useNavigate } from "react-router-dom";
 import Loading from '../../Partials/Loading';
 import { Container } from "react-bootstrap";
@@ -13,17 +14,17 @@ interface IProps {
 const LoginResult = (props : IProps) => {
     const navigate = useNavigate();
     useEffect(() => {
-        if(authentication.getRole() === "waiter") {
+        if(authToken.getRole() === "waiter") {
             setTimeout(() => {        
                 navigate(`/EasyTap`, { replace: false });    
           }, 2500);
         }
-        if(authentication.getRole() === "user") {  
+        if(authToken.getRole() === "user") {  
             setTimeout(() => {
                 navigate(`/`, { replace: false });
           }, 1500);
         }
-        if(authentication.getRole() === "admin") {
+        if(authToken.getRole() === "admin") {
             setTimeout(() => {
                 navigate(`/AdminPanel`, { replace: false });
           }, 1500);

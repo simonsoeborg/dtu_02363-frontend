@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, runInAction, toJS } from "mobx";
 import AuthenticationModel from "../Models/AuthenticationModel";
 import AuthViewModel from "../Models/AuthViewModel";
 import { API_URL } from "../Services/_services";
@@ -24,7 +24,7 @@ class AuthStore {
     "",
     ""
   );
-  fullList: AuthViewModel[] = [];
+  fullList: AuthenticationModel[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -102,8 +102,13 @@ class AuthStore {
     });
   };
 
-  getRole = () => {
-    return this.RBACAuth.role;
+  getRole = (id : number) => {
+    switch (id) {
+      case 1: return "user";
+      case 3: return "waiter";
+      case 7: return "admin";
+      default: return "user";
+    }
   };
 
   getPin = () => {
@@ -120,16 +125,16 @@ class AuthStore {
     return this.RBACAuth.rawJWT;
   };
 
-  setAuthList = (AuthList: AuthViewModel[]) => {
+  setAuthList = (AuthList: AuthenticationModel[]) => {
     this.fullList = AuthList;
   };
 
   getAuthenticatedUsersAsync = async () => {
     const response = await fetch(
-      API_URL + "/Authentication/AuthenticatedUsers/" + this.getJWT()
+      API_URL + "/Authentication/AuthenticatedUsers/" + authToken.getJWT()
     );
     const data = await response.json();
-    this.setAuthList(data);
+    this.setAuthList(toJS(data));
   };
 
   getAuthUserByEmailAsync = async (email: string) => {
@@ -162,79 +167,84 @@ class AuthStore {
       baseURL: `${API_URL}/`,
       headers: { "Content-Type": "application/json" },
     });
-
-    instance.post("Authentication", JSON.stringify(auth)).then((res) => {
+    await instance.post("Authentication", JSON.stringify(auth)).then((res) => {
       const data = res.data;
       this.setJWT(data);
-      const decoded = jwt_decode(data);
-      let newObj = JSON.stringify(decoded);
-      this.setName(
-        newObj
-          .replace(
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
-            "name"
-          )
-          .split(":")[1]
-          .split(",")[0]
-          .split('"')[1]
-      );
-      this.setEmail(
-        newObj
-          .replace(
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
-            "email"
-          )
-          .split(":")[3]
-          .split(",")[0]
-          .split('"\\')[0]
-          .split('"')[1]
-      );
-      this.setRole(
-        newObj
-          .replace(
-            "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-            "role"
-          )
-          .split(":")[5]
-          .split(",")[0]
-          .split('"\\')[0]
-          .split('"')[1]
-      );
-      this.setPicture(
-        newObj
-          .replace(
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/uri",
-            "picture"
-          )
-          .split(",")[4]
-          .split('":')[1]
-          .split('\\"')[0]
-          .split('"')[1]
-      );
-      this.setSub(
-        newObj
-          .replace(
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
-            "sub"
-          )
-          .split(":")[7]
-          .split(",")[0]
-          .split('"\\')[0]
-          .split('"')[1]
-      );
-      this.setPin(
-        +newObj
-          .replace(
-            "http://schemas.microsoft.com/ws/2008/06/identity/claims/serialnumber",
-            "pin"
-          )
-          .split(":")[12]
-          .split(",")[0]
-          .split('"\\')[0]
-          .split('"')[1]
-      );
+      this.decodeJWT(data);
     });
   };
+
+  decodeJWT = (data: string) => {
+    const decoded = jwt_decode(data);
+    let newObj = JSON.stringify(decoded);
+    this.setName(
+      newObj
+        .replace(
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+          "name"
+        )
+        .split(":")[1]
+        .split(",")[0]
+        .split('"')[1]
+    );
+    this.setEmail(
+      newObj
+        .replace(
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
+          "email"
+        )
+        .split(":")[3]
+        .split(",")[0]
+        .split('"\\')[0]
+        .split('"')[1]
+    );
+    this.setRole(
+      newObj
+        .replace(
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+          "role"
+        )
+        .split(":")[5]
+        .split(",")[0]
+        .split('"\\')[0]
+        .split('"')[1]
+    );
+    this.setPicture(
+      newObj
+        .replace(
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/uri",
+          "picture"
+        )
+        .split(",")[4]
+        .split('":')[1]
+        .split('\\"')[0]
+        .split('"')[1]
+    );
+    this.setSub(
+      newObj
+        .replace(
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+          "sub"
+        )
+        .split(":")[7]
+        .split(",")[0]
+        .split('"\\')[0]
+        .split('"')[1]
+    );
+    this.setPin(
+      +newObj
+        .replace(
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/serialnumber",
+          "pin"
+        )
+        .split(":")[12]
+        .split(",")[0]
+        .split('"\\')[0]
+        .split('"')[1]
+    );
+    
+    localStorage.setItem("authValues", JSON.stringify(this.RBACAuth.rawJWT))
+  }
 }
 
 export const authentication = new AuthStore();

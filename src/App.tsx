@@ -6,6 +6,9 @@ import GlobalNavbar from "./AdminApp/Navigation/Navigation";
 import LandingPage from "./LandingPage";
 import AdminPanel from "./AdminApp/AdminPanel/AdminPanel";
 import UserById from "./AdminApp/User/UserById";
+import CategoryById from "./AdminApp/Category/CategoryById";
+import ItemById from "./AdminApp/Items/ItemById";
+import OrderById from "./AdminApp/Order/OrderById";
 import Login from "./AdminApp/Login/Login";
 import LoginResult from "./AdminApp/Login/LoginResult";
 import Order from "./EasyTapApp/Order/Order";
@@ -39,6 +42,9 @@ const App = () => {
           <Route path="/" element={<LandingPage />}/>
           <Route path="/AdminPanel/" element={<AdminPanel />}/>
           <Route path="/User/:email" element={<UserById />}/>
+          <Route path="/Category/:id" element={<CategoryById />}/>
+          <Route path="/Item/:id" element={<ItemById />}/>
+          <Route path="/Order/:id" element={<OrderById />}/>
           <Route path="/Login" element={
           <Login role={authToken.getRole()} />
           } />

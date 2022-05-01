@@ -41,7 +41,7 @@ const Order = () => {
   const tapOutNavigate = async() => {
 
     if (orderItems.length > 0){
-      await os.postOrders(orderItems, os.getOrderInfoSpecific().id)
+      await os.postOrders(orderItems, os.OrderInfoSpecific.id)
     }
 
     os.setOrderViewList([])
@@ -53,7 +53,7 @@ const Order = () => {
     // Pop that shows price - mby a check: "Do you clear this table?"
 
     if (orderItems.length > 0){
-      await os.postOrders(orderItems, os.getOrderInfoSpecific().id)
+      await os.postOrders(orderItems, os.OrderInfoSpecific.id)
     }
    
     await os.changeOrderInfoStatus(ts.currentTableId);

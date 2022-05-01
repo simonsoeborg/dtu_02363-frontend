@@ -1,12 +1,13 @@
 import { Col, Row, Container, Tab, Nav } from 'react-bootstrap';
 import AdminIndex from './AdminIndex';
-import AdminUser from './AdminUserList';
+import AdminUser from '../User/AdminUserList';
+import AdminCategoryList from '../Category/AdminCategoryList';
+import AdminOrderList from '../Order/AdminOrderList';
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from 'react';
 import { authentication } from '../../Stores/AuthenticationStore';
 
 const AdminPanel = () => {
-    const [activeKey, setActiveKey] = useState(1);
     useEffect(() => {
         if(authentication.RBACAuthFullList.length < 1)
             authentication.getAuthenticatedUsersAsync();
@@ -16,33 +17,42 @@ const AdminPanel = () => {
             <Container style={{ paddingTop: "2rem" }}>
                 <Row>
                     <Container>
-                        <Tab.Container id="left-tabs-example" defaultActiveKey={activeKey}>
+                        <Tab.Container id="left-tabs-example" defaultActiveKey={1}>
                             <Row>
-                                <Col sm={4}>
+                                <Col sm={2}>
                                     <Nav className="flex-column">
                                         <Nav.Item>
-                                        <Nav.Link eventKey="1">Admin Home</Nav.Link>
+                                            <Nav.Link eventKey="1">Admin Home</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                        <Nav.Link eventKey="2">Manage Items</Nav.Link>
+                                            <Nav.Link eventKey="2">Manage Items</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                        <Nav.Link eventKey="3">Manage Users</Nav.Link>
+                                            <Nav.Link eventKey="3">Manage Categories</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                        <Nav.Link eventKey="4">Manage Orders</Nav.Link>
+                                            <Nav.Link eventKey="4">Manage Users</Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item>
+                                            <Nav.Link eventKey="5">Manage Orders</Nav.Link>
                                         </Nav.Item>
                                     </Nav>
                                 </Col>
-                                <Col sm={8}>
+                                <Col sm={10}>
                                     <Tab.Content>
                                         <Tab.Pane eventKey="1">
-                                            <AdminIndex activeKey={activeKey} setActiveKey={setActiveKey} />
+                                            <AdminIndex />
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="2">
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="3">
+                                            <AdminCategoryList />
+                                        </Tab.Pane>
+                                        <Tab.Pane eventKey="4">
                                             <AdminUser />
+                                        </Tab.Pane>
+                                        <Tab.Pane eventKey="5">
+                                            <AdminOrderList />
                                         </Tab.Pane>
                                     </Tab.Content>
                                 </Col>

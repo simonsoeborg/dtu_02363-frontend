@@ -32,7 +32,7 @@ class OrderStore {
     return this.order;
   }
  
-  getOrderInfoSpecific(){
+  get OrderInfoSpecific(){
     return this.orderInfoSpecific
   }
 

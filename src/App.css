@@ -28,3 +28,6 @@
   background-color: #EBEBEB;
 }
 
+.wrapTextTd {
+  white-space: normal !important;
+}

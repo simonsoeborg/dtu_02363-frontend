@@ -5,7 +5,7 @@ import AdminCategoryList from '../Category/AdminCategoryList';
 import AdminOrderList from '../Order/AdminOrderList';
 import AdminItemList from '../Items/AdminItemList';
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { authentication } from '../../Stores/AuthenticationStore';
 
 const AdminPanel = () => {

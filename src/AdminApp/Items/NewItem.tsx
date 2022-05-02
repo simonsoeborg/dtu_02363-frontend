@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useState } from "react"
 import { Col, Container, Form, Row, Image, InputGroup, Button, Modal } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import ItemPostModel from "../../Models/ItemPostModel"
 import { cs } from '../../Stores/CategoryStore'
 import { is } from "../../Stores/ItemStore"
@@ -9,18 +10,23 @@ const NewItem = () => {
     const [imageUrl, setImageUrl] = useState("https://www.happyeater.com/images/default-food-image.jpg");
     const [itemName, setItemName] = useState("");
     const [itemPrice, setItemPrice] = useState(0);
-    const [category, setCategory] = useState(0);
+    const [category, setCategory] = useState(-1);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [hasLoaded, setHasLoaded] = useState(false);
-
+    const navigate = useNavigate();
+    
     const handleImagePreview = () => {
         if(imageUrl !== null || imageUrl !== "") {
             handleShow()
         }
     }
 
+    const handleCategorySelect = (val : number) => {
+        setCategory(val);
+    }
+    
     const onSubmit = () => {
         if(!hasLoaded) {
             // Pack to ItemPostModel
@@ -33,6 +39,7 @@ const NewItem = () => {
             ));
             is.postItemModel(is.PostItem);
             setHasLoaded(true);
+            navigate(-1);
         }
     }
 
@@ -80,8 +87,9 @@ const NewItem = () => {
                             <Form.Group className="mb-3" controlId="newItemCategory">
                                 <Form.Label>Category</Form.Label>
                                 <Form.Control as="select" onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                        const newVal = e.currentTarget.value;
-                                        setCategory(Number(newVal));
+                                        const newVal : number = Number(e.currentTarget.value);
+                                        handleCategorySelect(newVal)
+                                        console.log(newVal);
                                       }}>
                                     { cs.Categories.map((category, index) => (
                                         <option key={index} value={category.id}>{category.name}</option>

@@ -2,12 +2,12 @@ import axios from 'axios';
 import {runInAction, makeAutoObservable } from 'mobx';
 import ItemModel from "../Models/ItemModel";
 import ItemPostModel from '../Models/ItemPostModel';
-import { API_URL_ez_get, API_URL_admin_Create, API_URL_admin_Alter } from '../Services/_services';
+import { API_URL_ez_get, API_URL_admin_Create, API_URL_admin_Alter, API_URL_admin_Delete } from '../Services/_services';
 
 class ItemStore {
     items: ItemModel[] = [];
     item: ItemModel = new ItemModel("", 0, "", "");
-    postItem: ItemPostModel = new ItemPostModel(0, "", 0, 0, "");
+    postItem: ItemPostModel = new ItemPostModel(0, "", 0, 1, "");
 
     constructor() {
         makeAutoObservable(this);
@@ -106,6 +106,14 @@ class ItemStore {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
+        })
+        console.log(res.status);
+        this.getItemsAsync();
+    }
+
+    deleteItem = async (id : number) => {
+        const res = await fetch(API_URL_admin_Delete + "/Item/" + Number(id), {
+            method: "DELETE"
         })
         console.log(res.status);
         this.getItemsAsync();

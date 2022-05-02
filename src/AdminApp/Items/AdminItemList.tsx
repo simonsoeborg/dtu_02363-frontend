@@ -9,7 +9,13 @@ const AdminItemList = () => {
     const navigate = useNavigate();
     const [onHover, setOnHover] = useState(false);
     const [imageUrl, setImageUrl] = useState("");
+    const [hasLoaded, setHasLoaded] = useState(false);
     const handleClose = () => setOnHover(false);
+
+    if(!hasLoaded) {
+        is.getItemsAsync();
+        setHasLoaded(true);
+    }
 
     const displayImage = (imgUrl ?: string) => {
         setOnHover(true);
@@ -50,6 +56,7 @@ const AdminItemList = () => {
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>Image URL</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,6 +67,7 @@ const AdminItemList = () => {
                                     <td onClick={() => routeEditChange(item.id)} >{item.categoryName}</td>
                                     <td onClick={() => routeEditChange(item.id)} >$ {item.price}</td>
                                     <td className="LimitedTableTextEntry" onClick={() => displayImage(item.imgUrl)}><a className="LimitedTableTextEntry">Click for Image Preview</a></td>
+                                    <td><Button variant="outline-danger" onClick={() => is.deleteItem(item.id)}>Delete</Button></td>
                                 </tr>
                             ))}
                         </tbody>

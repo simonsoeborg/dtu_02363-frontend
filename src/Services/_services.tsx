@@ -2,7 +2,7 @@ const API_URL = "https://api.uglyrage.com/api";
 const API_URL_admin = "https://api.uglyrage.com/api/Admin";
 const API_URL_admin_Alter = "https://api.uglyrage.com/api/Admin/Alter";
 const API_URL_admin_Create = "https://api.uglyrage.com/api/Admin/Create";
-const API_URL_admin_Delete = "https://api.uglyrage.com/api/Admin/Create";
+const API_URL_admin_Delete = "https://api.uglyrage.com/api/Admin/Delete";
 const API_URL_ez_get = "https://api.uglyrage.com/api/EasyTap/get";
 
 const defaultImage =

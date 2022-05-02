@@ -58,7 +58,7 @@ const AdminItemList = () => {
                                     <td onClick={() => routeEditChange(item.id)} >{item.id}</td>
                                     <td onClick={() => routeEditChange(item.id)} >{item.itemName}</td>
                                     <td onClick={() => routeEditChange(item.id)} >{item.categoryName}</td>
-                                    <td onClick={() => routeEditChange(item.id)} >{item.price}</td>
+                                    <td onClick={() => routeEditChange(item.id)} >$ {item.price}</td>
                                     <td className="LimitedTableTextEntry" onClick={() => displayImage(item.imgUrl)}><a className="LimitedTableTextEntry">Click for Image Preview</a></td>
                                 </tr>
                             ))}

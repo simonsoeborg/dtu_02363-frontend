@@ -3,12 +3,7 @@ const API_URL_admin = "https://api.uglyrage.com/api/Admin";
 const API_URL_admin_Alter = "https://api.uglyrage.com/api/Admin/Alter";
 const API_URL_admin_Create = "https://api.uglyrage.com/api/Admin/Create";
 const API_URL_admin_Delete = "https://api.uglyrage.com/api/Admin/Create";
-const API_URL_ez = "https://api.uglyrage.com/api/EasyTap";
 const API_URL_ez_get = "https://api.uglyrage.com/api/EasyTap/get";
-
-
-// private api = "https://localhost:5001/api";
-// "https://api.uglyrage.com/api";
 
 const defaultImage =
   "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg";
@@ -43,6 +38,6 @@ const switchRoles = (id ?: number, roleName ?: string) => {
   }
 }
 
-export { API_URL, API_URL_admin, API_URL_admin_Alter, API_URL_admin_Create, API_URL_admin_Delete, API_URL_ez, API_URL_ez_get,
+export { API_URL, API_URL_admin, API_URL_admin_Alter, API_URL_admin_Create, API_URL_admin_Delete, API_URL_ez_get,
   defaultImage, 
   switchRoles };

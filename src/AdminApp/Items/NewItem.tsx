@@ -95,7 +95,7 @@ const NewItem = () => {
                                     <Form.Control type="text" placeholder="Insert Image URL" 
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         const newVal = e.currentTarget.value;
-                                    setImageUrl(newVal);
+                                        setImageUrl(newVal);
                                       }}></Form.Control>
                                     <Button variant="outline-secondary" onClick={() => handleImagePreview()}>Preview</Button>
                                 </InputGroup>

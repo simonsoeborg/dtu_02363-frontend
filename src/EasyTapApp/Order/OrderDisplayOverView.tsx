@@ -106,8 +106,8 @@ const OrderDisplayOverView = (props: IProps) => {
       <Container>
         <Card >
           <Card.Header className="text-center">
-            <h4>Order Overview</h4>
-            <h5>Table {props.currentTableId}</h5>
+  
+            <h4>Table {props.currentTableId}</h4>
           </Card.Header>
 
           <Card.Body className="customCard-Body">

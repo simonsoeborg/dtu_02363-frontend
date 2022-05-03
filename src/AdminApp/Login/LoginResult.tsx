@@ -1,4 +1,5 @@
 import { authentication } from "../../Stores/AuthenticationStore";
+import { authToken } from "../../Stores/AuthTokenStore";
 import { useNavigate } from "react-router-dom";
 import Loading from '../../Partials/Loading';
 import { Container } from "react-bootstrap";
@@ -8,27 +9,22 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 interface IProps {
     role : string,
     pin : number,
-    setRole : Dispatch<SetStateAction<string>>;
-    setPin : Dispatch<SetStateAction<number>>;
 }
 
 const LoginResult = (props : IProps) => {
     const navigate = useNavigate();
     useEffect(() => {
-        if(authentication.getRole() === "waiter") {
-            props.setRole(authentication.getRole())
+        if(authToken.getRole() === "waiter") {
             setTimeout(() => {        
                 navigate(`/EasyTap`, { replace: false });    
           }, 2500);
         }
-        if(authentication.getRole() === "user") {  
-            props.setRole(authentication.getRole())  
+        if(authToken.getRole() === "user") {  
             setTimeout(() => {
                 navigate(`/`, { replace: false });
           }, 1500);
         }
-        if(authentication.getRole() === "admin") {
-            props.setRole(authentication.getRole())
+        if(authToken.getRole() === "admin") {
             setTimeout(() => {
                 navigate(`/AdminPanel`, { replace: false });
           }, 1500);

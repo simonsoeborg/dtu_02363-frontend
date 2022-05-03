@@ -1,5 +1,4 @@
 import { Container, Table } from "react-bootstrap"
-import { urs } from "../../Stores/UserRolesStore";
 import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,7 @@ const AdminUser = () => {
         navigate(`/User/${email}`, {replace: false})
     };
 
-    if(!urs.Users) {
+    if(!authentication.RBACAuthFullList) {
         return (
             <Loading />
         )
@@ -33,7 +32,7 @@ const AdminUser = () => {
                         <tr className="tableListItem" onClick={() => routeEditChange(user.email)} key={index}>
                             <td>{user.email}</td>
                             <td>{user.name}</td>
-                            <td>{user.role}</td>
+                            <td>{authentication.getRole(user.roleId)}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -28,3 +28,9 @@
   background-color: #EBEBEB;
 }
 
+.LimitedTableTextEntry a {
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  word-wrap: break-word;
+}

@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import TableModel from "../Models/TableModel";
-import { API_URL } from "../Services/_services";
+import { API_URL_ez_get, API_URL_admin_Alter } from "../Services/_services";
 
 class TableStore {
   tables: TableModel[] = [];
@@ -45,7 +45,7 @@ class TableStore {
       
       //console.log(JSON.stringify(this.tables.filter(x=>x.id===this.currentTableId)[0]));
 
-      const request = new Request(`${API_URL}/SeatingTable/${this.currentTableId}`, options)
+      const request = new Request(`${API_URL_admin_Alter}/SeatingTable/${this.currentTableId}`, options)
       const response = await fetch(request);
 
       if (response.status !== 204) {
@@ -55,7 +55,7 @@ class TableStore {
   }
 
   getTablesAsync = async () => {
-    const response = await fetch(API_URL + "/SeatingTable");
+    const response = await fetch(API_URL_ez_get + "/SeatingTable");
     const data = await response.json();
     this.setTables(data);
   };

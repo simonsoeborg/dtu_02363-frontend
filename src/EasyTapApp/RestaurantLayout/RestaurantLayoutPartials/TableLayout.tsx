@@ -16,19 +16,30 @@ const TableLayout = (props: IProps) => {
     
 
     navigate(`/EasyTap/Order/${props.tableId}`);
+  }
+
+    if (!props.tableIsInUse){
+      return(
+        <Button variant={`${props.outline}`}
+          
+          className={`t${props.tableId} border-0 transparent`}
+          onClick={() => {
+            toOrderPage();
+          }}
+        >{props.tableId}
+        </Button>
+        );
+    } else {
+      return(
+        <Button variant={`${props.outline}`}
+
+          className={`t${props.tableId} border-0 transparent-inUse`}
+          onClick={() => {
+            toOrderPage();
+          }}
+        >{props.tableId}
+        </Button>
+        );
+    }
   };
-
-    return(
-    <Button variant={`${props.outline}`}
-
-      className={`t${props.tableId} border-0`}
-      onClick={() => {
-        toOrderPage();
-      }}
-    >{props.tableId}
-    </Button>
-    );
-  };
-
 export default TableLayout;
-

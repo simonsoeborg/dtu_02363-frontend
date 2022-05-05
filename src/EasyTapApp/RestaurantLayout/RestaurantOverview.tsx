@@ -12,7 +12,7 @@ const RestaurantLayout = () => {
       return (
           <TableLayout
             tableId={index}
-            outline={"outline-light"}
+            outline={"light"}
             tableIsInUse={ts.tables[index - 1].isInUse}
           />
       );
@@ -20,7 +20,7 @@ const RestaurantLayout = () => {
       return (
           <TableLayout
             tableId={index}
-            outline={"outline-warning"}
+            outline={"warning"}
             tableIsInUse={ts.tables[index - 1].isInUse}
           />
       );

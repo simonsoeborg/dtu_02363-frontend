@@ -28,6 +28,11 @@ class AuthStore {
 
   constructor() {
     makeAutoObservable(this);
+    if(authToken.getJWT() !== "") {
+      runInAction(() => {
+        this.getAuthenticatedUsersAsync();
+      })
+    }
   }
 
   get Auth() {

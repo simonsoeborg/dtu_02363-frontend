@@ -3,10 +3,17 @@ import Loading from '../../Partials/Loading';
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import { authentication } from '../../Stores/AuthenticationStore';
+import { useState } from "react";
 
 const AdminUser = () => {
 
     const navigate = useNavigate();
+    const [hasLoaded, setHasLoaded] = useState(false);
+
+    if(!hasLoaded) {
+        authentication.getAuthenticatedUsersAsync();
+        setHasLoaded(true);
+    }
 
     const routeEditChange = (email : string) => {
         navigate(`/User/${email}`, {replace: false})
